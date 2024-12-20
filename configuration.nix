@@ -214,7 +214,6 @@
   # Overclocking
   programs.corectrl.enable = true;
   programs.corectrl.gpuOverclock.enable = true;
-  
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
