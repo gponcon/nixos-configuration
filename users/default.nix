@@ -1,0 +1,5 @@
+{
+  imports = [
+    ./admins.nix
+  ];
+}

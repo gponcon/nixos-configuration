@@ -1,4 +1,4 @@
-# NE FONCTIONNE PAS :(
+# NE FONCTIONNE PAS
 
 { lib, pkgs, config, ... }:
 let
@@ -18,7 +18,7 @@ in
       locations."/".proxyPass = "http://localhost:${toString srv.HTTP_PORT}";
     };
   };
-  #services.sshd.enable = true;
+
   services.forgejo = {
     enable = true;
     #database.type = "sqlite3"; # Default sqlite3
@@ -46,5 +46,12 @@ in
       };
     };
   };
+
   users.users.gponcon.extraGroups = [ "forgejo" ];
+
+  # Paquetages spécifiques forgejo
+  environment.systemPackages = with pkgs; [
+    sqlite
+    forgejo-cli
+  ];
 }
