@@ -2,13 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      #./forgejo.nix
+      ./features
     ];
   
   # La ramdisk n'est pas compatible avec XEN
@@ -16,8 +16,12 @@
   #boot.initrd.enable = false;
 
   # Bootloader
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
+    tmp.cleanOnBoot = true;
+    kernelPackages = pkgs.linuxPackages_zen;
+  };
 
   networking.hostName = "nixos"; # Define your hostname.
   networking.firewall = {
@@ -39,9 +43,22 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "fr_FR.UTF-8";
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "fr_FR.UTF-8";
+    LC_IDENTIFICATION = "fr_FR.UTF-8";
+    LC_MEASUREMENT = "fr_FR.UTF-8";
+    LC_MONETARY = "fr_FR.UTF-8";
+    LC_NAME = "fr_FR.UTF-8";
+    LC_NUMERIC = "fr_FR.UTF-8";
+    LC_PAPER = "fr_FR.UTF-8";
+    LC_TELEPHONE = "fr_FR.UTF-8";
+    LC_TIME = "fr_FR.UTF-8";
+  };
+
 
   # Optimisation SSD
-  services.fstrim.enable = true;  
+  services.fstrim.enable = true;
+  services.fstrim.interval = "daily";
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -52,23 +69,31 @@
 
   # Suppression des paquets gnome inutiles
   environment.gnome.excludePackages = with pkgs; [
+    atomix
+    epiphany
     geary
     gnome-backgrounds
-    gnome-tour
-    gnome-user-docs
-    epiphany
     gnome-calendar
     gnome-clocks
     gnome-contacts
+    gnome-font-viewer
     gnome-logs
     gnome-maps
     gnome-music
+    gnome-packagekit
+    gnome-software
+    gnome-tour
+    gnome-user-docs
     gnome-weather
+    hitori
+    iagno
     loupe
+    packagekit
     simple-scan
+    tali
     totem
     yelp
-    gnome-software
+    xterm
   ];
 
   # Configure keymap in X11
@@ -120,7 +145,7 @@
     shell = pkgs.zsh;
     packages = with pkgs; [
       thunderbird
-      libreoffice
+      libreoffice-fresh
       vscode
       obsidian
       zsh
@@ -144,6 +169,8 @@
       asciidoc-full
       asciidoctor
       aspellDicts.fr
+      hunspell
+      hunspellDicts.fr-moderne
       bat
       gparted
       less
@@ -170,10 +197,19 @@
       {
         lockAll = true; # prevents overriding
         settings = {
+          "org/gnome/desktop/wm/preferences" = {
+            button-layout = "appmenu:minimize,maximize,close";
+            theme = "adw-gtk3";
+            focus-mode = "click";
+            visual-bell = false;
+          };
           "org/gnome/desktop/interface" = {
-            color-scheme = "prefer-dark";
-            monospace-font-name = "JetBrainsMono NF";
-            enable-hot-corners = false;
+            cursor-theme = "Adwaita";
+            gtk-theme = "adw-gtk3";
+            icon-theme = "Tela-circle";
+            color-scheme = "prefer-dark"; # Dark par défaut
+            monospace-font-name = "JetBrainsMono NF"; # Fonte mono par défaut
+            enable-hot-corners = false; # Suppression des actions quand le curseur arrive dans un coin
           };
           "org/gnome/desktop/background" = {
             picture-uri-dark = "file:///nix/store/ipcpsgpsam4y3d6krciwri59q1ghxq2k-simple-blue-2016-02-19/share/backgrounds/nixos/nix-wallpaper-simple-blue.png";
@@ -184,9 +220,53 @@
             switch-windows = [ "<Alt>Tab" ];
             switch-windows-backward = [ "<Shift><Alt>Tab" ];
           };
+          "org/gnome/desktop/peripherals/touchpad" = {
+            click-method = "areas";
+            tap-to-click = true;
+            two-finger-scrolling-enabled = true;
+          };
+          "org/gnome/desktop/peripherals/keyboard" = {
+            numlock-state = true;
+          };
+          "org/gnome/shell" = {
+            disable-user-extensions = false;
+            enabled-extensions = [
+              "caffeine@patapon.info"
+              "gsconnect@andyholmes.github.io"
+              "appindicatorsupport@rgcjonas.gmail.com"
+              "dash-to-dock@micxgx.gmail.com"
+            ];
+            favorite-apps = [
+              "firefox.desktop"
+              #"thunderbird.desktop"
+              "org.gnome.Nautilus.desktop"
+            ];
+          };
+          "org/gnome/shell/extensions/dash-to-dock" = {
+            click-action = "minimize-or-overview";
+            disable-overview-on-startup = true;
+            dock-position = "BOTTOM";
+            running-indicator-style = "DOTS";
+            isolate-monitor = false;
+            multi-monitor = true;
+            show-mounts-network = true;
+            always-center-icons = true;
+            custom-theme-shrink = true;
+          };
+          "org/gnome/mutter" = {
+            check-alive-timeout = lib.gvariant.mkUint32 30000;
+            dynamic-workspaces = true;
+            edge-tiling = true;
+          };
         };
       }
     ];
+  };
+
+  # Communication avec les devices
+  programs.kdeconnect = {
+    enable = true;
+    package = pkgs.gnomeExtensions.gsconnect;
   };
 
   # ZSH
@@ -221,7 +301,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    vim
     wget
     neofetch
     #sqlite # forgejo
@@ -236,11 +316,29 @@
     htop
     man-pages
     man-pages-posix
+
+    # gnome: theme
+    adw-gtk3
+    graphite-gtk-theme
+    tela-circle-icon-theme
+
+    # gnome: personnalisation
+    gnome-tweaks
+    
+    # gnome: Extension
+    gnomeExtensions.caffeine
+    gnomeExtensions.gsconnect
+    gnomeExtensions.appindicator
+    gnomeExtensions.dash-to-dock
   ];
 
   # Pages de manuel
   documentation = {
     enable = true;
+    doc.enable = false;
+    dev.enable = false;
+    info.enable = false;
+    nixos.enable = true;
 
     man = {
       enable = true;
@@ -285,6 +383,12 @@
 
   # Utilisation de la commande nix et des flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];    
+
+  # Accélération du switch (perl -> rust)
+  system.switch = {
+    enable = false;
+    enableNg = true;
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
