@@ -101,9 +101,9 @@
 #            tap-to-click = true;
 #            two-finger-scrolling-enabled = true;
 #          };
-#          "org/gnome/desktop/peripherals/keyboard" = {
-#            numlock-state = true;
-#          };
+          "org/gnome/desktop/peripherals/keyboard" = {
+            numlock-state = true;
+          };
           "org/gnome/shell" = {
 #            disable-user-extensions = false;
 #            enabled-extensions = [

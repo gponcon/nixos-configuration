@@ -8,6 +8,8 @@
   boot = {
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
+
+    # Problèmes matériels avec ça (souris qui s'éteint...)
     #tmp.cleanOnBoot = true;
     #kernelPackages = pkgs.linuxPackages_zen;
   };
