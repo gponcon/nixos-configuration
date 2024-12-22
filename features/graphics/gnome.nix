@@ -54,17 +54,17 @@
     #gnome-tweaks
     
     # gnome: Extension
-    gnomeExtensions.caffeine
-    gnomeExtensions.gsconnect
-    gnomeExtensions.appindicator
-    gnomeExtensions.dash-to-dock
+    #gnomeExtensions.caffeine
+    #gnomeExtensions.gsconnect
+    #gnomeExtensions.appindicator
+    #gnomeExtensions.dash-to-dock
   ];
 
   # Communication avec les devices
-  programs.kdeconnect = {
-    enable = true;
-    package = pkgs.gnomeExtensions.gsconnect;
-  };
+  #programs.kdeconnect = {
+  #  enable = true;
+  #  package = pkgs.gnomeExtensions.gsconnect;
+  #};
 
   # Personnalisation de gnome
   programs.dconf = {
@@ -96,22 +96,22 @@
             switch-windows = [ "<Alt>Tab" ];
             switch-windows-backward = [ "<Shift><Alt>Tab" ];
           };
-          "org/gnome/desktop/peripherals/touchpad" = {
-            click-method = "areas";
-            tap-to-click = true;
-            two-finger-scrolling-enabled = true;
-          };
-          "org/gnome/desktop/peripherals/keyboard" = {
-            numlock-state = true;
-          };
+#          "org/gnome/desktop/peripherals/touchpad" = {
+#            click-method = "areas";
+#            tap-to-click = true;
+#            two-finger-scrolling-enabled = true;
+#          };
+#          "org/gnome/desktop/peripherals/keyboard" = {
+#            numlock-state = true;
+#          };
           "org/gnome/shell" = {
-            disable-user-extensions = false;
-            enabled-extensions = [
-              "caffeine@patapon.info"
-              "gsconnect@andyholmes.github.io"
-              "appindicatorsupport@rgcjonas.gmail.com"
-              "dash-to-dock@micxgx.gmail.com"
-            ];
+#            disable-user-extensions = false;
+#            enabled-extensions = [
+#              "caffeine@patapon.info"
+#              "gsconnect@andyholmes.github.io"
+#              "appindicatorsupport@rgcjonas.gmail.com"
+#              "dash-to-dock@micxgx.gmail.com"
+#            ];
             favorite-apps = [
               "firefox.desktop"
               "org.gnome.TextEditor.desktop"
@@ -135,11 +135,11 @@
             always-center-icons = true;
             custom-theme-shrink = true;
           };
-          "org/gnome/mutter" = {
-            check-alive-timeout = lib.gvariant.mkUint32 30000;
-            dynamic-workspaces = true;
-            edge-tiling = true;
-          };
+#          "org/gnome/mutter" = {
+#            check-alive-timeout = lib.gvariant.mkUint32 30000;
+#            dynamic-workspaces = true;
+#            edge-tiling = true;
+#          };
         };
       }
     ];

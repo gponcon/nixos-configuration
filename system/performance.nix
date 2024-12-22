@@ -4,8 +4,8 @@
   #programs.corectrl.gpuOverclock.enable = true;
 
   # Accélération du switch (perl -> rust)
-  system.switch = {
-    enable = false;
-    enableNg = true;
-  };
+  #system.switch = {
+  #  enable = false;
+  #  enableNg = true;
+  #};
 }

@@ -11,7 +11,7 @@
     ./i18n.nix
     ./disks.nix
     ./performance.nix
-    ./power.nix
+    #./power.nix
     ./documentation.nix
   ];
 }

@@ -2,7 +2,7 @@
   imports = [
     ./console.nix
     ./shell.nix
-    ./nh.nix
+    #./nh.nix
     ./packages.nix
   ];
 }
