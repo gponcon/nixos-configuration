@@ -8,7 +8,7 @@
   boot = {
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
-    tmp.cleanOnBoot = true;
-    kernelPackages = pkgs.linuxPackages_zen;
+    #tmp.cleanOnBoot = true;
+    #kernelPackages = pkgs.linuxPackages_zen;
   };
 }
