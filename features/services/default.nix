@@ -3,7 +3,7 @@
     ./audio.nix
     ./printing.nix
     #./forgejo.nix
-    ./packages.nix
+    #./packages.nix
     ./ssh.nix
     ./httpd.nix
     ./virt.nix
