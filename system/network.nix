@@ -1,5 +1,5 @@
 {
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "nlt"; # Define your hostname.
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [ 22 ];
