@@ -1,5 +1,5 @@
 {
   imports = [
-    ./admins.nix
+    ./gponcon
   ];
 }

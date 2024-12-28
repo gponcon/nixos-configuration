@@ -1,8 +1,9 @@
 {
   imports = [
+    ./packages.nix
     ./console.nix
     ./shell.nix
     ./nh.nix
-    ./packages.nix
+    ./pandoc.nix
   ];
 }
