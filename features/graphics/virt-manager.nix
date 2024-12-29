@@ -1,4 +1,6 @@
-{ pkgs , ... }:
+{ pkgs , hostname , ... }:
+
+if hostname == "nlt" then
 {
   # Dependencies
   environment.systemPackages = with pkgs; [
@@ -27,3 +29,4 @@
   };
   services.spice-vdagentd.enable = true;
 }
+else {}

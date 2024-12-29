@@ -14,6 +14,7 @@
     # "nlt" est mon hostname
     nixosConfigurations.nlt = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
+      specialArgs = { hostname = "nlt"; };
       modules = [
         ./configuration.nix
 
@@ -29,5 +30,21 @@
           }
       ];
     };
+
+    # VM de test
+    nixosConfigurations.test = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = { hostname = "test"; };
+      modules = [
+        ./configuration.nix
+        home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.gponcon = import ./users/gponcon/home.nix;
+          }
+      ];
+    };
+
   };
 }
