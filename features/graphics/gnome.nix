@@ -44,7 +44,6 @@
 
   # Gnome packages
   environment.systemPackages = with pkgs; [
-
     # gnome: theme
     #adw-gtk3
     #graphite-gtk-theme

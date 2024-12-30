@@ -1,10 +1,10 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-      zsh
-      zsh-powerlevel10k
-      zsh-forgit
-      zsh-fzf-tab
+    zsh
+    zsh-powerlevel10k
+    zsh-forgit
+    zsh-fzf-tab
   ];
   
   # ZSH
