@@ -49,6 +49,10 @@
     geeqie
     gimp
     evince
+
+    # Tweak
+    powerline
+    powerline-fonts
   ];
 
   services.gpg-agent = {
@@ -61,7 +65,22 @@
   # Conf complète : https://github.com/jagajaga/my_configs/blob/master/.nixpkgs/vimrc.nix
   programs.vim = {
     enable = true;
-    plugins = with pkgs.vimPlugins; [ vim-airline vim-nix vim-lastplace ];
+    plugins = with pkgs.vimPlugins; [
+      ctrlp-vim
+      emmet-vim
+      fzf-vim
+      fzfWrapper
+      gruvbox
+      lightline-vim
+      lightline-gruvbox-vim
+      mini-completion
+      nerdtree
+      nerdtree-git-plugin
+      #vim-airline
+      vim-gitgutter
+      vim-lastplace
+      vim-nix
+    ];
     settings = { ignorecase = true; };
     extraConfig = ''
       set mouse=a
@@ -97,7 +116,28 @@
       set laststatus=2
 
       " Format the status line
-      set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
+      "set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
+
+      " Gruvbox (theme)
+      set termguicolors
+      set background=dark
+      let g:gruvbox_italic=1
+      colorscheme gruvbox
+
+      " Airline options
+      "let g:airline#extensions#tabline#enabled = 1 
+      "let g:airline_powerline_fonts = 1
+
+      let g:lightline = {
+      \ 'colorscheme': 'jellybeans',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ }
    '';
   };
 
