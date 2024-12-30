@@ -11,4 +11,6 @@
     man-pages-posix
     less
   ];
+
+  environment.variables = { EDITOR = "vim"; };
 }
