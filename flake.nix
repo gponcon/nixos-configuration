@@ -36,12 +36,12 @@
       system = "x86_64-linux";
       specialArgs = { hostname = "test"; };
       modules = [
-        ./configuration.nix
+        ./hosts/test.nix
         home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.gponcon = import ./users/gponcon/home.nix;
+            home-manager.users.gponcon = import ./users/gponcon/home-lite.nix;
           }
       ];
     };
