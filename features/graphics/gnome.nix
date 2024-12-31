@@ -87,7 +87,9 @@
             enable-hot-corners = false; # Suppression des actions quand le curseur arrive dans un coin
           };
           "org/gnome/desktop/background" = {
-            picture-uri-dark = "file:///nix/store/ipcpsgpsam4y3d6krciwri59q1ghxq2k-simple-blue-2016-02-19/share/backgrounds/nixos/nix-wallpaper-simple-blue.png";
+            # Référence à un fichier dans le store :
+            # https://github.com/NixOS/nixpkgs/blob/18bcb1ef6e5397826e4bfae8ae95f1f88bf59f4f/nixos/modules/services/x11/desktop-managers/gnome.nix#L36
+            picture-uri-dark = "${pkgs.nixos-artwork.wallpapers.simple-blue.gnomeFilePath}";
           };
           "org/gnome/desktop/wm/keybindings" = {
             switch-applications = [ "<Super>Tab" ];
