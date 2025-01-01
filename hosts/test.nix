@@ -6,6 +6,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./test/hardware.nix
+      ./../system/settings.nix
       ./../system/boot.nix
       ./../system/home-manager.nix
       ./../system/i18n.nix
@@ -13,6 +14,8 @@
       ./../system/performance.nix
       ./../system/security.nix
       ./../features/services/ssh.nix
+      ./../features/console/packages.nix
+      ./../features/console/console.nix
       ./../features/console/shell.nix
       ./../users/gponcon
     ];
