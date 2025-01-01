@@ -5,5 +5,6 @@
     ./shell.nix
     ./nh.nix
     ./pandoc.nix
+    ./builder.nix
   ];
 }
