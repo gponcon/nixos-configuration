@@ -16,6 +16,8 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    deploy-rs.url = "github:serokell/deploy-rs";
+
 # NE FONCTIONNE PAS POUR LE MOMENT
 #    colmena.url = "github:zhaofengli/colmena";
 #    colmena.inputs.nixpkgs.follows = "nixpkgs";
@@ -57,6 +59,26 @@
           }
       ];
     };
+
+    deploy.nodes.nlt = {
+      hostname = "localhost";
+      profiles.system = {
+        user = "root";
+        path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.nlt;
+      };
+    };
+
+    deploy.nodes.test = {
+      hostname = "test";
+      profiles.system = {
+        user = "root";
+        sshUser = "root";
+        remoteBuild = false;
+        path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.test;
+      };
+    };
+
+    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) inputs.deploy-rs.lib;
 
 # NE FONCTIONNE PAS POUR LE MOMENT
 #
