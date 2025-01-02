@@ -3,48 +3,48 @@
   home.packages = with pkgs; [
 
     # Bureautique graphique
-    libreoffice
-    obsidian
+    #ghostscript
+    #gv
+    #thunderbird
     hunspell
     hunspellDicts.fr-moderne
-    #thunderbird
-    #gv
-    #ghostscript
+    libreoffice
+    obsidian
 
     # Outils CLI
-    presenterm
     asciidoc-full
     asciidoctor
     aspellDicts.fr
+    presenterm
     ranger
 
     # Développement, administration
+    bat
+    btop
+    ccrypt
+    duf
+    findutils # locate
+    gparted
+    python3Full
     vscode
     zellij
-    python3Full
-    ccrypt
-    btop
-    duf
-    bat
-    gparted
-    findutils # locate
 
     # Réseau
-    nmap
-    filezilla
     #nettools
+    filezilla
+    nmap
 
     # Outils Bac Pro
-    klavaro
     fritzing
+    klavaro
     ngspice # Simulateur elec
     qucs-s # Schéma elec + simulation
 
     # Productivité, multimédia
-    inkscape
+    evince
     geeqie
     gimp
-    evince
+    inkscape
 
     # Tweak
     powerline

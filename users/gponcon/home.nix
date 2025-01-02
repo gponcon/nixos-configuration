@@ -6,6 +6,7 @@
   home.homeDirectory = "/home/gponcon";
 
   imports = [
+    ./home/git.nix
     ./home/programs.nix
     ./home/vim.nix
   ];

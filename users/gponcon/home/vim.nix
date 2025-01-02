@@ -4,17 +4,17 @@
   programs.vim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
+      #vim-airline
       ctrlp-vim
       emmet-vim
       fzf-vim
       fzfWrapper
       gruvbox
-      lightline-vim
       lightline-gruvbox-vim
+      lightline-vim
       mini-completion
       nerdtree
       nerdtree-git-plugin
-      #vim-airline
       vim-gitgutter
       vim-lastplace
       vim-nix

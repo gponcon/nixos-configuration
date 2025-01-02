@@ -8,6 +8,4 @@
     ./httpd.nix
     ./virt.nix
   ];
-
-  programs.git.enable = true;
 }
