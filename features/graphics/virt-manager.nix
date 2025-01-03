@@ -1,11 +1,11 @@
-{ pkgs , hostname , ... }:
+{ pkgs, hostname, ... }:
 
-if hostname == "nlt" then
-{
+if hostname == "nlt" then {
   # Dependencies
   environment.systemPackages = with pkgs; [
     virt-viewer
-    spice spice-gtk
+    spice
+    spice-gtk
     spice-protocol
     win-virtio
     win-spice
@@ -28,5 +28,5 @@ if hostname == "nlt" then
     spiceUSBRedirection.enable = true;
   };
   services.spice-vdagentd.enable = true;
-}
-else {}
+} else
+  { }

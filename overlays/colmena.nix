@@ -1,8 +1,8 @@
-{ config, pkgs, lib, ... }:
+{ ... }:
 
 {
   nixpkgs.overlays = [
-    (self: super: {
+    (_self: super: {
       colmena = super.callPackage (super.fetchFromGitHub {
         owner = "zhaofengli";
         repo = "colmena";

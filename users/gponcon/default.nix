@@ -1,8 +1,7 @@
 # Chargé par la conf globale
 # Pour définir le user gponcon
 
-{ config, lib, pkgs, ... }:
-{
+{ pkgs, ... }: {
   users.users.gponcon = {
     isNormalUser = true;
     description = "gponcon";

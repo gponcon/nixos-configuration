@@ -1,5 +1,4 @@
-{ config, lib, pkgs, ...}:
-{
+{ pkgs, ... }: {
   # Conf complète : https://github.com/jagajaga/my_configs/blob/master/.nixpkgs/vimrc.nix
   programs.vim = {
     enable = true;
@@ -40,7 +39,7 @@
       set tabstop=2
       set shiftround                  "Round spaces to nearest shiftwidth multiple
       set nojoinspaces                "Don't convert spaces to tabs
- 
+
       set ai "Auto indent
       set si "Smart indent
       set wrap "Wrap lines
@@ -76,22 +75,22 @@
       \   'gitbranch': 'FugitiveHead'
       \ },
       \ }
-   '';
+    '';
   };
 
   # VIM spell files
-#  let
-#    nvim-spell-fr-utf8-dictionary = builtins.fetchurl {
-#      url = "http://ftp.vim.org/vim/runtime/spell/fr.utf-8.spl";
-#      sha256 = "abfb9702b98d887c175ace58f1ab39733dc08d03b674d914f56344ef86e63b61";
-#    };
-#    nvim-spell-fr-utf8-suggestions = builtins.fetchurl {
-#      url = "http://ftp.vim.org/vim/runtime/spell/fr.utf-8.sug";
-#      sha256 = "0294bc32b42c90bbb286a89e23ca3773b7ef50eff1ab523b1513d6a25c6b3f58";
-#    };
-#  in
-#  {
-#    home.file."${config.xdg.configHome}/nvim/spell/fr.utf-8.spl".source = nvim-spell-fr-utf8-dictionary;
-#    home.file."${config.xdg.configHome}/nvim/spell/fr.utf-8.sug".source = nvim-spell-fr-utf8-suggestions;
-#  }
+  #  let
+  #    nvim-spell-fr-utf8-dictionary = builtins.fetchurl {
+  #      url = "http://ftp.vim.org/vim/runtime/spell/fr.utf-8.spl";
+  #      sha256 = "abfb9702b98d887c175ace58f1ab39733dc08d03b674d914f56344ef86e63b61";
+  #    };
+  #    nvim-spell-fr-utf8-suggestions = builtins.fetchurl {
+  #      url = "http://ftp.vim.org/vim/runtime/spell/fr.utf-8.sug";
+  #      sha256 = "0294bc32b42c90bbb286a89e23ca3773b7ef50eff1ab523b1513d6a25c6b3f58";
+  #    };
+  #  in
+  #  {
+  #    home.file."${config.xdg.configHome}/nvim/spell/fr.utf-8.spl".source = nvim-spell-fr-utf8-dictionary;
+  #    home.file."${config.xdg.configHome}/nvim/spell/fr.utf-8.sug".source = nvim-spell-fr-utf8-suggestions;
+  #  }
 }

@@ -6,14 +6,13 @@
     adminAddr = "gponcon@sn-pm.lan";
     virtualHosts.localhost.documentRoot = "/var/www";
     virtualHosts.localhost.enableUserDir = true;
-    extraConfig = 
-    ''
-    <Directory "/var/www">
-    	DirectoryIndex index.php index.htm index.html
-      	Allow from *
-        Options FollowSymLinks
-        AllowOverride All
-    </Directory>
-    ''; 
+    extraConfig = ''
+      <Directory "/var/www">
+      	DirectoryIndex index.php index.htm index.html
+        	Allow from *
+          Options FollowSymLinks
+          AllowOverride All
+      </Directory>
+    '';
   };
 }

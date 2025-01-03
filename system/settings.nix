@@ -6,5 +6,5 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # On fait confiance à une machine distante pour lui envoyer une conf
-  nix.settings.trusted-users = [ "@wheel" ];  
+  nix.settings.trusted-users = [ "@wheel" ];
 }

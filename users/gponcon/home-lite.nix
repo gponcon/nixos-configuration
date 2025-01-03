@@ -1,13 +1,10 @@
 # Chargé par le flake dans la section home-manager
 
-{ config, lib, pkgs, ...}:
-{
+{ ... }: {
   home.username = "gponcon";
   home.homeDirectory = "/home/gponcon";
 
-  imports = [
-    ./home/vim.nix
-  ];
+  imports = [ ./home/vim.nix ];
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage

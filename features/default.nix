@@ -1,7 +1,1 @@
-{
-  imports = [
-    ./services
-    ./console
-    ./graphics
-  ];
-}
+{ imports = [ ./services ./console ./graphics ]; }

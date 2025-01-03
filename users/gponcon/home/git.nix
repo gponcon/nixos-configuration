@@ -1,5 +1,4 @@
-{ config, lib, pkgs, ...}:
-{
+{ ... }: {
   programs.git = {
     enable = true;
     userName = "Guillaume Ponçon";
@@ -11,20 +10,17 @@
     aliases = {
       amend = "!git add . && git commit --amend --no-edit && git push --force";
     };
-    ignores = [
-      "*~"
-      "*.swp"
-    ];
-#    extraConfig = {};
-#    userName = "Darkone Linux";
-#    userEmail = "darkone@darkone.yt";
-#    signing.key = "B9B56B3937952BC41ABA3570A6A45734C77AC5F2";
-#    commit = {
-#      gpgsign = true;
-#    };
-#    core = {
-#      sshCommand = "ssh -i ~/.ssh/id_ed25519_darkone_yt";
-#    };
+    ignores = [ "*~" "*.swp" ];
+    #extraConfig = {};
+    #userName = "Darkone Linux";
+    #userEmail = "darkone@darkone.yt";
+    #signing.key = "B9B56B3937952BC41ABA3570A6A45734C77AC5F2";
+    #commit = {
+    #  gpgsign = true;
+    #};
+    #core = {
+    #  sshCommand = "ssh -i ~/.ssh/id_ed25519_darkone_yt";
+    #};
   };
 }
 

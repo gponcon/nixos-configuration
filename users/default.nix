@@ -1,5 +1,1 @@
-{
-  imports = [
-    ./gponcon
-  ];
-}
+{ imports = [ ./gponcon ]; }

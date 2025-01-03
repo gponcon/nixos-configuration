@@ -3,13 +3,12 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./system
-      ./features
-      ./users
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./system
+    ./features
+    ./users
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

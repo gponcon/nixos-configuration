@@ -1,10 +1,5 @@
 {
-  imports = [
-    ./gnome.nix
-    ./fonts.nix
-    ./packages.nix
-    ./virt-manager.nix
-  ];
+  imports = [ ./gnome.nix ./fonts.nix ./packages.nix ./virt-manager.nix ];
 
   programs.firefox.enable = true;
 
