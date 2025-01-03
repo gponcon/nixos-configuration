@@ -17,6 +17,8 @@
       ./../features/console/packages.nix
       ./../features/console/console.nix
       ./../features/console/shell.nix
+      ./../features/graphics/fonts.nix
+      ./../features/graphics/gnome.nix
       ./../users/gponcon
     ];
 

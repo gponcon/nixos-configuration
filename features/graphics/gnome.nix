@@ -83,7 +83,7 @@
             cursor-size = "48";
             icon-theme = "Papirus-Dark";
             color-scheme = "prefer-dark"; # Dark par défaut
-            monospace-font-name = "JetBrainsMono NF"; # Fonte mono par défaut
+            monospace-font-name = "JetBrainsMono Nerd Font Mono 16"; # Fonte mono par défaut
             enable-hot-corners = false; # Suppression des actions quand le curseur arrive dans un coin
           };
           "org/gnome/desktop/background" = {
