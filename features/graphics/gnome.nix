@@ -13,6 +13,13 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
+  # Disable the GNOME3/GDM auto-suspend feature that cannot be disabled in GUI!
+  # If no user is logged in, the machine will power down after 20 minutes.
+  systemd.targets.sleep.enable = false;
+  systemd.targets.suspend.enable = false;
+  systemd.targets.hibernate.enable = false;
+  systemd.targets.hybrid-sleep.enable = false;
+
   # Suppression des paquets gnome inutiles
   environment.gnome.excludePackages = with pkgs; [
     atomix
@@ -44,26 +51,19 @@
 
   # Gnome packages
   environment.systemPackages = with pkgs; [
-    # gnome: theme
-    #adw-gtk3
-    #graphite-gtk-theme
-    #tela-circle-icon-theme
-
-    # gnome: personnalisation
-    #gnome-tweaks
-    
-    # gnome: Extension
-    #gnomeExtensions.caffeine
-    #gnomeExtensions.gsconnect
-    #gnomeExtensions.appindicator
-    #gnomeExtensions.dash-to-dock
+    bibata-cursors
+    papirus-icon-theme
+    gnomeExtensions.appindicator
+    gnomeExtensions.caffeine
+#    gnomeExtensions.dash-to-dock
+    gnomeExtensions.gsconnect
   ];
 
   # Communication avec les devices
-  #programs.kdeconnect = {
-  #  enable = true;
-  #  package = pkgs.gnomeExtensions.gsconnect;
-  #};
+  programs.kdeconnect = {
+    enable = true;
+    package = pkgs.gnomeExtensions.gsconnect;
+  };
 
   # Personnalisation de gnome
   programs.dconf = {
@@ -74,14 +74,14 @@
         settings = {
           "org/gnome/desktop/wm/preferences" = {
             button-layout = "appmenu:minimize,maximize,close";
-#            theme = "adw-gtk3";
+            theme = "adw-gtk3";
             focus-mode = "click";
             visual-bell = false;
           };
           "org/gnome/desktop/interface" = {
-#            cursor-theme = "Adwaita";
-#            gtk-theme = "adw-gtk3";
-#            icon-theme = "Tela-circle";
+            cursor-theme = "Bibata-Modern-Classic";
+            cursor-size = "48";
+            icon-theme = "Papirus-Dark";
             color-scheme = "prefer-dark"; # Dark par défaut
             monospace-font-name = "JetBrainsMono NF"; # Fonte mono par défaut
             enable-hot-corners = false; # Suppression des actions quand le curseur arrive dans un coin
@@ -97,23 +97,24 @@
             switch-windows = [ "<Alt>Tab" ];
             switch-windows-backward = [ "<Shift><Alt>Tab" ];
           };
-#          "org/gnome/desktop/peripherals/touchpad" = {
-#            click-method = "areas";
-#            tap-to-click = true;
-#            two-finger-scrolling-enabled = true;
-#          };
+          "org/gnome/desktop/peripherals/touchpad" = {
+            click-method = "areas";
+            tap-to-click = true;
+            two-finger-scrolling-enabled = true;
+          };
           "org/gnome/desktop/peripherals/keyboard" = {
             numlock-state = true;
           };
           "org/gnome/shell" = {
-#            disable-user-extensions = false;
-#            enabled-extensions = [
-#              "caffeine@patapon.info"
-#              "gsconnect@andyholmes.github.io"
-#              "appindicatorsupport@rgcjonas.gmail.com"
-#              "dash-to-dock@micxgx.gmail.com"
-#            ];
+            disable-user-extensions = false;
+            enabled-extensions = [
+              "caffeine@patapon.info"
+              "gsconnect@andyholmes.github.io"
+              "appindicatorsupport@rgcjonas.gmail.com"
+              #"dash-to-dock@micxgx.gmail.com"
+            ];
             favorite-apps = [
+              "org.gnome.Console.desktop"
               "firefox.desktop"
               "org.gnome.TextEditor.desktop"
               "obsidian.desktop"
@@ -136,11 +137,26 @@
             always-center-icons = true;
             custom-theme-shrink = true;
           };
-#          "org/gnome/mutter" = {
-#            check-alive-timeout = lib.gvariant.mkUint32 30000;
-#            dynamic-workspaces = true;
-#            edge-tiling = true;
-#          };
+          "org/gnome/settings-daemon/plugins/media-keys" = {
+            custom-keybindings = [
+              "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+            ];
+          };
+          "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+            binding = "<Ctrl><Alt>t";
+            command = "kgx";
+            name = "open-terminal";
+          };
+          "org/gnome/settings-daemon/plugins/power" = {
+            sleep-inactive-ac-timeout = lib.gvariant.mkUint32 1800;
+            sleep-inactive-ac-type = "nothing";
+            sleep-inactive-battery-timeout = lib.gvariant.mkUint32 1800;
+            sleep-inactive-battery-type = "suspend";
+          };
+          "org/gnome/mutter" = {
+            check-alive-timeout = lib.gvariant.mkUint32 30000;
+            edge-tiling = true;
+          };
         };
       }
     ];

@@ -1,15 +1,16 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    vim
-    wget
-    neofetch
-    tree
+    fzf
     git
     htop
+    less
     man-pages
     man-pages-posix
-    less
+    neofetch
+    tree
+    vim
+    wget
   ];
 
   environment.variables = { EDITOR = "vim"; };

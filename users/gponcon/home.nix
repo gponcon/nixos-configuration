@@ -9,6 +9,7 @@
     ./home/git.nix
     ./home/programs.nix
     ./home/vim.nix
+    #./home/gtk.nix
   ];
 
   # Déjà dans la conf globale, à étudier
