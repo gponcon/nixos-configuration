@@ -16,14 +16,12 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    deploy-rs.url = "github:serokell/deploy-rs";
-
 # NE FONCTIONNE PAS POUR LE MOMENT
-#    colmena.url = "github:zhaofengli/colmena";
-#    colmena.inputs.nixpkgs.follows = "nixpkgs";
+    colmena.url = "github:zhaofengli/colmena";
+    colmena.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, colmena, ... }@inputs: {
 
     # "nlt" est mon hostname
     nixosConfigurations.nlt = nixpkgs.lib.nixosSystem {
@@ -60,74 +58,53 @@
       ];
     };
 
-    deploy.nodes.nlt = {
-      hostname = "localhost";
-      profiles.system = {
-        user = "root";
-        path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.nlt;
+    colmenaHive = colmena.lib.makeHive self.outputs.colmena;
+
+    # https://github.com/zhaofengli/colmena/issues/60#issuecomment-1510496861
+    colmena = let conf = self.nixosConfigurations; in {
+      meta = {
+        description = "Arthur Network";
+        nixpkgs = import nixpkgs {
+          system = "x86_64-linux";
+          #stateVersion = "25.05";
+          allowUnfree = true;
+          overlays = [];
+        };
+        nodeNixpkgs = builtins.mapAttrs (name: value: value.pkgs) conf;
+        nodeSpecialArgs = builtins.mapAttrs (name: value: value._module.specialArgs) conf;
+      }; 
+      
+      # Conf déploiement colmena
+      defaults.deployment = {
+        buildOnTarget = nixpkgs.lib.mkDefault false;
+        allowLocalDeployment = nixpkgs.lib.mkDefault false;
+        targetUser = null;
       };
-    };
 
-    deploy.nodes.test = {
-      hostname = "test";
-      profiles.system = {
-        user = "root";
-        sshUser = "root";
-        remoteBuild = false;
-        path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.test;
+      # Laptop
+      nlt = {
+        deployment = {
+          tags = [ "desktop" "admin" "local" ];
+          allowLocalDeployment = true;
+          #targetHost = "192.168.1.1";
+          buildOnTarget = true;
+        };
       };
-    };
+  
+      # Test vm
+      test = {
+        deployment = {
+          tags = [ "test" "admin" ];
+          allowLocalDeployment = false;
+          targetHost = "test";
+          buildOnTarget = false;
+        };
+      };
 
-    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) inputs.deploy-rs.lib;
+#      rpi = { pkgs, ... }: {
+#        nixpkgs.system = "aarch64-linux";
+#      };
 
-# NE FONCTIONNE PAS POUR LE MOMENT
-#
-#    colmenaHive = colmena.lib.makeHive self.outputs.colmena;
-#
-#    # https://github.com/zhaofengli/colmena/issues/60#issuecomment-1510496861
-#    colmena = let conf = self.nixosConfigurations; in {
-#      meta = {
-#        description = "Mes hosts";
-#        nixpkgs = import nixpkgs {
-#          system = "x86_64-linux";
-#          #stateVersion = "25.05";
-#          allowUnfree = true;
-#        };
-#        nodeNixpkgs = builtins.mapAttrs (name: value: value.pkgs) conf;
-#        nodeSpecialArgs = builtins.mapAttrs (name: value: value._module.specialArgs) conf;
-#      } // builtins.mapAttrs (name: value: { imports = value._module.args.modules; }) conf;
-#      
-#      # Conf déploiement colmena
-#      defaults.deployment = {
-#        buildOnTarget = nixpkgs.lib.mkDefault false;
-#        allowLocalDeployment = nixpkgs.lib.mkDefault false;
-#        targetUser = null;
-#      };
-#
-#      # Laptop
-#      nlt = {
-#        deployment = {
-#          tags = [ "desktop" "admin" "local" ];
-#          allowLocalDeployment = true;
-#          #targetHost = "192.168.1.1";
-#          buildOnTarget = true;
-#        };
-#      };
-#
-#      # Test vm
-#      test = {
-#        deployment = {
-#          tags = [ "test" "admin" ];
-#          allowLocalDeployment = false;
-#          #targetHost = "192.168.1.1";
-#          #buildOnTarget = true;
-#        };
-#      };
-#
-##      rpi = { pkgs, ... }: {
-##        nixpkgs.system = "aarch64-linux";
-##      };
-#    };
-
+    } // builtins.mapAttrs (name: value: { imports = value._module.args.modules; }) conf;
   }; # outputs
 }
