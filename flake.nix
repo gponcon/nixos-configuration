@@ -29,15 +29,18 @@
         ./configuration.nix
 
         # Utilisation de home manager comme module flake
-        home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.gponcon = import ./users/gponcon/home.nix;
+        home-manager.nixosModules.home-manager {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.gponcon = import ./users/gponcon/home.nix;
 
-            # Optionally, use home-manager.extraSpecialArgs to pass
-            # arguments to home.nix
-          }
+          # Optionally, use home-manager.extraSpecialArgs to pass
+          # arguments to home.nix
+        }
+
+        # Version de colmena compatible avec celle utilisée par colmenaHive
+        # Ne fonctione pas...
+        #(import ./overlays/colmena.nix)
       ];
     };
 
@@ -47,16 +50,16 @@
       specialArgs = { hostname = "test"; };
       modules = [
         ./hosts/test.nix
-        home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.gponcon = import ./users/gponcon/home-lite.nix;
-          }
+        home-manager.nixosModules.home-manager {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.gponcon = import ./users/gponcon/home-lite.nix;
+        }
       ];
     };
 
-    colmenaHive = colmena.lib.makeHive self.outputs.colmena;
+    # Not working with that
+    #colmenaHive = colmena.lib.makeHive self.outputs.colmena;
 
     # https://github.com/zhaofengli/colmena/issues/60#issuecomment-1510496861
     colmena = let conf = self.nixosConfigurations; in {
