@@ -1,22 +1,20 @@
 {
   description = "Main NixOS Flake";
 
-# Sera utile avec colmena
-#  nixConfig = {
-#    extra-trusted-substituters = [
-#      "https://cache.garnix.io"
-#      "https://nix-community.cachix.org"
-#    ];
-#  };
+  # Usefull cache for colmena
+  nixConfig = {
+    extra-trusted-substituters = [
+      "https://cache.garnix.io"
+      "https://nix-community.cachix.org"
+    ];
+  };
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     
-    # Utilisation de home manager comme module flake
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-# NE FONCTIONNE PAS POUR LE MOMENT
     colmena.url = "github:zhaofengli/colmena";
     colmena.inputs.nixpkgs.follows = "nixpkgs";
   };
