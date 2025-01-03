@@ -74,7 +74,7 @@
         settings = {
           "org/gnome/desktop/wm/preferences" = {
             button-layout = "appmenu:minimize,maximize,close";
-            theme = "adw-gtk3";
+            #theme = "adw-gtk3";
             focus-mode = "click";
             visual-bell = false;
           };
@@ -82,6 +82,7 @@
             cursor-theme = "Bibata-Modern-Classic";
             cursor-size = "48";
             icon-theme = "Papirus-Dark";
+            gtk-theme = "Adw-dark";
             color-scheme = "prefer-dark"; # Dark par défaut
             monospace-font-name = "JetBrainsMono Nerd Font Mono 16"; # Fonte mono par défaut
             enable-hot-corners = false; # Suppression des actions quand le curseur arrive dans un coin
