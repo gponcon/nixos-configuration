@@ -1,6 +1,8 @@
 { lib, config, ... }:
-let cfg = config.darkone.ssd;
-in {
+let
+  cfg = config.darkone.ssd;
+in
+{
   options = {
     darkone.ssd.enable = lib.mkEnableOption "Enable SSD optimisation";
   };

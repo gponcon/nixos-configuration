@@ -1,5 +1,5 @@
 {
-  # Installe les paquetages dans /etc/profiles plutôt que 
+  # Installe les paquetages dans /etc/profiles plutôt que
   # dans $HOME/.nix-profile (comportement par défaut)
   home-manager.useUserPackages = true;
 

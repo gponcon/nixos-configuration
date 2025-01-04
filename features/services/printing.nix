@@ -1,10 +1,9 @@
 { config, pkgs, ... }:
 let
   all-users = builtins.attrNames config.users.users;
-  normal-users =
-    builtins.filter (user: config.users.users.${user}.isNormalUser == true)
-    all-users;
-in {
+  normal-users = builtins.filter (user: config.users.users.${user}.isNormalUser == true) all-users;
+in
+{
   # Configure printer
   services.printing = {
     enable = true;
@@ -38,5 +37,7 @@ in {
   #  users.groups.scanner = {
   #    members = normal-users;
   #  };
-  users.groups.lp = { members = normal-users; };
+  users.groups.lp = {
+    members = normal-users;
+  };
 }

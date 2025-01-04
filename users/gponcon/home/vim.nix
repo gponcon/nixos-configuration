@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   # Conf complète : https://github.com/jagajaga/my_configs/blob/master/.nixpkgs/vimrc.nix
   programs.vim = {
     enable = true;
@@ -18,7 +19,9 @@
       vim-lastplace
       vim-nix
     ];
-    settings = { ignorecase = true; };
+    settings = {
+      ignorecase = true;
+    };
     extraConfig = ''
       set mouse=a
 

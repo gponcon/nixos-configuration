@@ -3,24 +3,24 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./test/hardware.nix
-      ./../system/settings.nix
-      ./../system/boot.nix
-      ./../system/home-manager.nix
-      ./../system/i18n.nix
-      ./../system/network.nix
-      ./../system/performance.nix
-      ./../system/security.nix
-      ./../features/services/ssh.nix
-      ./../features/console/packages.nix
-      ./../features/console/console.nix
-      ./../features/console/shell.nix
-      ./../features/graphics/fonts.nix
-      ./../features/graphics/gnome.nix
-      ./../users/gponcon
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./test/hardware.nix
+    ./../system/settings.nix
+    ./../system/boot.nix
+    ./../system/home-manager.nix
+    ./../system/i18n.nix
+    ./../system/network.nix
+    ./../system/performance.nix
+    ./../system/security.nix
+    ./../features/services/ssh.nix
+    ./../features/console/packages.nix
+    ./../features/console/console.nix
+    ./../features/console/shell.nix
+    ./../features/graphics/fonts.nix
+    ./../features/graphics/gnome.nix
+    ./../users/gponcon
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

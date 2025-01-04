@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   fonts.packages = with pkgs; [
     gentium
     meslo-lgs-nf

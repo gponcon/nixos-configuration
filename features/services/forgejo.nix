@@ -4,7 +4,8 @@
 let
   cfg = config.services.forgejo;
   srv = cfg.settings.server;
-in {
+in
+{
   services.nginx = {
     enable = true;
     recommendedGzipSettings = true;
@@ -26,7 +27,9 @@ in {
     stateDir = "/home/gponcon/Forgejo";
     lfs.enable = true;
     settings = {
-      DEFAULT = { APP_NAME = "Une forge pédagogique"; };
+      DEFAULT = {
+        APP_NAME = "Une forge pédagogique";
+      };
       server = {
         DOMAIN = "localhost";
         ROOT_URL = "http://${srv.DOMAIN}/";
@@ -34,7 +37,9 @@ in {
         LANDING_PAGE = "explore";
         APP_DATA_PATH = "settings.server.APP_DATA_PATH";
       };
-      "service.explore" = { DISABLE_USERS_PAGE = true; };
+      "service.explore" = {
+        DISABLE_USERS_PAGE = true;
+      };
       "ui.meta" = {
         AUTHOR = "G. Ponçon";
         DESCRIPTION = "Une forge pédagogique";
@@ -45,5 +50,8 @@ in {
   users.users.gponcon.extraGroups = [ "forgejo" ];
 
   # Paquetages spécifiques forgejo
-  environment.systemPackages = with pkgs; [ sqlite forgejo-cli ];
+  environment.systemPackages = with pkgs; [
+    sqlite
+    forgejo-cli
+  ];
 }

@@ -1,6 +1,7 @@
 # Chargé par le flake dans la section home-manager
 
-{ ... }: {
+{ ... }:
+{
   home.username = "gponcon";
   home.homeDirectory = "/home/gponcon";
 

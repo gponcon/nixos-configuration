@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   programs.git = {
     enable = true;
     userName = "Guillaume Ponçon";
@@ -10,7 +11,10 @@
     aliases = {
       amend = "!git add . && git commit --amend --no-edit && git push --force";
     };
-    ignores = [ "*~" "*.swp" ];
+    ignores = [
+      "*~"
+      "*.swp"
+    ];
     #extraConfig = {};
     #userName = "Darkone Linux";
     #userEmail = "darkone@darkone.yt";
@@ -23,4 +27,3 @@
     #};
   };
 }
-

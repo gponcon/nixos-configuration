@@ -1,11 +1,16 @@
 # Chargé par la conf globale
 # Pour définir le user gponcon
 
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   users.users.gponcon = {
     isNormalUser = true;
     description = "gponcon";
-    extraGroups = [ "networkmanager" "wheel" "corectrl" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "corectrl"
+    ];
     shell = pkgs.zsh;
   };
 }

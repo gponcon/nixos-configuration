@@ -1,4 +1,5 @@
-{ hostname, ... }: {
+{ hostname, ... }:
+{
   #networking.hostName = "nlt"; # Define your hostname.
   networking.hostName = hostname; # Define your hostname.
   networking.firewall = {
