@@ -7,7 +7,6 @@
     ./i18n.nix
     ./performance.nix
     ./power.nix
-    ./documentation.nix
     ./home-manager.nix
   ];
 }

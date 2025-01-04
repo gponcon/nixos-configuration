@@ -12,11 +12,20 @@
     ./../users
   ];
 
-  # Hardware
-  darkone.system.ssd-optims.enable = true;
+  # Darkone modules
+  darkone = {
 
-  # System admin
-  darkone.admin.nix.enable = true;
+    # Hardware & System
+    system = {
+      ssd-optims.enable = true;
+      documentation.enable = true;
+    };
+
+    # System admin
+    admin = {
+      nix.enable = true;
+    };
+  };
 
   system.stateVersion = "24.05"; # Did you read the comment?
 }
