@@ -24,7 +24,7 @@
       system = "x86_64-linux";
       specialArgs = { hostname = "nlt"; };
       modules = [
-        ./configuration.nix
+        ./hosts/nlt.nix
 
         # Utilisation de home manager comme module flake
         home-manager.nixosModules.home-manager
