@@ -3,6 +3,7 @@
   # Conf complète : https://github.com/jagajaga/my_configs/blob/master/.nixpkgs/vimrc.nix
   programs.vim = {
     enable = true;
+    defaultEditor = true;
     plugins = with pkgs.vimPlugins; [
       #vim-airline
       ctrlp-vim
@@ -80,6 +81,8 @@
       \ }
     '';
   };
+
+  environment.variables.EDITOR = "vim";
 
   # VIM spell files
   #  let
