@@ -11,7 +11,11 @@
     ./../users
   ];
 
+  # Hardware
   darkone.ssd.enable = true;
+
+  # System admin
+  darkone.nix-builder.enable = true;
 
   system.stateVersion = "24.05"; # Did you read the comment?
 }
