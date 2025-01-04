@@ -5,18 +5,19 @@
   ...
 }:
 let
-  cfg = config.darkone.nix-builder;
+  cfg = config.darkone.admin.nix;
 in
 {
   options = {
-    darkone.nix-builder.enable = lib.mkEnableOption "Enable NIX configuration builder tools";
+    darkone.admin.nix.enable = lib.mkEnableOption "Enable NIX configuration builder tools";
   };
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       colmena
-      nixfmt-rfc-style
       deadnix
+      gnumake
+      nixfmt-rfc-style
     ];
   };
 }

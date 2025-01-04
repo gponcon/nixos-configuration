@@ -1,6 +1,6 @@
 {
   imports = [
-    ./system/ssd.nix
-    ./admin/nix-builder.nix
+    ./admin/nix.nix
+    ./system/ssd-optims.nix
   ];
 }

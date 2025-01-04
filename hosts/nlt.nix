@@ -13,10 +13,10 @@
   ];
 
   # Hardware
-  darkone.ssd.enable = true;
+  darkone.system.ssd-optims.enable = true;
 
   # System admin
-  darkone.nix-builder.enable = true;
+  darkone.admin.nix.enable = true;
 
   system.stateVersion = "24.05"; # Did you read the comment?
 }
