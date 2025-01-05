@@ -36,7 +36,7 @@
           hostname = "nlt";
         };
         modules = [
-          ./hosts/nlt.nix
+          ./hosts/nlt
 
           # Utilisation de home manager comme module flake
           home-manager.nixosModules.home-manager
@@ -62,7 +62,7 @@
           hostname = "test";
         };
         modules = [
-          ./hosts/test.nix
+          ./hosts/test
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;

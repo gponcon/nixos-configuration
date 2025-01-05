@@ -1,9 +1,13 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 let
   cfg = config.darkone.host.server;
   cfgLimit = 10;
 in
 {
+  imports = [
+    ./minimal.nix
+  ];
+
   options = {
     darkone.host.server = {
       enable = lib.mkEnableOption "Server host minimal configuration";
@@ -28,13 +32,17 @@ in
 
   config = lib.mkIf cfg.enable {
 
+    # Load minimal configuration
+    darkone.host.minimal.enable = true;
+
     # Darkone modules
-    config.darkone.system.documentation.enable = lib.mkDefault true;
+    darkone.system.documentation.enable = lib.mkDefault true;
 
     # Default apps
     environment.systemPackages = map lib.lowPrio [
       #pkgs.dnsutils
       pkgs.curl
+      pkgs.wget
       pkgs.htop
       pkgs.vim
       pkgs.zellij
@@ -49,10 +57,10 @@ in
     programs.vim.defaultEditor = lib.mkDefault true;
 
     # Firewall is enabled
-    networking.firewall.enable = true;
+    darkone.system.core.enableFirewall = true;
 
     # Delegate the hostname setting to dhcp/cloud-init by default.
-    networking.hostName = lib.mkOverride 1337 ""; # lower prio than lib.mkDefault
+    #networking.hostName = lib.mkOverride 1337 ""; # lower prio than lib.mkDefault
 
     # If the user is in @wheel they are trusted.
     nix.settings.trusted-users = [

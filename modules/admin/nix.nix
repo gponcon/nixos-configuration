@@ -1,3 +1,5 @@
+# NixOS configuration administrator
+
 {
   lib,
   config,
@@ -13,11 +15,35 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+
+    # Nix / Darkone management packages
     environment.systemPackages = with pkgs; [
       colmena
       deadnix
       gnumake
       nixfmt-rfc-style
     ];
+
+    # Optimized switch (perl -> rust)
+    system.switch = {
+      enable = false;
+      enableNg = true;
+    };
+
+    # Allow unfree packages
+    nixpkgs.config.allowUnfree = true;
+
+    # Utilisation de la commande nix et des flakes
+    nix.settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+
+    # On fait confiance à une machine distante pour lui envoyer une conf
+    nix.settings.trusted-users = [
+      "root"
+      "@wheel"
+    ];
+
   };
 }

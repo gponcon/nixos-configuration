@@ -1,4 +1,9 @@
-{ lib, pkgs, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 {
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -19,6 +24,9 @@
   systemd.targets.suspend.enable = false;
   systemd.targets.hibernate.enable = false;
   systemd.targets.hybrid-sleep.enable = false;
+
+  # Enable networking with networkmanager
+  networking.networkmanager.enable = true;
 
   # Suppression des paquets gnome inutiles
   environment.gnome.excludePackages = with pkgs; [
