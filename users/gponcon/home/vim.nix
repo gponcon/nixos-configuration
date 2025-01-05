@@ -3,7 +3,7 @@
   # Conf complète : https://github.com/jagajaga/my_configs/blob/master/.nixpkgs/vimrc.nix
   programs.vim = {
     enable = true;
-    defaultEditor = true;
+    defaultEditor = true; # Define EDITOR envvar
     plugins = with pkgs.vimPlugins; [
       #vim-airline
       ctrlp-vim
@@ -79,10 +79,55 @@
       \   'gitbranch': 'FugitiveHead'
       \ },
       \ }
+
+      " Line numbers
+      set number relativenumber
+
+      " Highlight cursor line
+      hi CursorLineNr term=bold guifg=#fabd2f guibg=NONE
+      set cursorline
+      set cursorlineopt=number
+
+      " Git gutter colors
+      highlight clear SignColumn
+      highlight GitGutterAdd ctermfg=142 ctermbg=237 guifg=#b8bb26 guibg=NONE
+      highlight GitGutterDelete ctermfg=167 ctermbg=237 guifg=#fb4934 guibg=NONE
+      highlight GitGutterChange ctermfg=108 ctermbg=237 guifg=#8ec07c guibg=NONE
+
+      " Use system clipboard
+      set clipboard=unnamedplus
+
+      " Start NERDTree when Vim is started without file arguments.
+      autocmd StdinReadPre * let s:std_in=1
+      autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+
+      " Start NERDTree when Vim starts with a directory argument.
+      autocmd StdinReadPre * let s:std_in=1
+      autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
+          \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
+
+      " Exit Vim if NERDTree is the only window remaining in the only tab.
+      autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | call feedkeys(":quit\<CR>:\<BS>") | endif
+
+      " Nix format
+      nnoremap <F2> :%!nixfmt<cr>
+
+      " Map <Space> to / (search) and <Ctrl>+<Space> to ? (backwards search)
+      map <space> /
+      map <C-space> ?
+
+      " Visual mode pressing - or + searches for the current selection
+      " (only with nvim?)
+      "vnoremap <silent> - :call VisualSelection('f')<CR>
+      "vnoremap <silent> + :call VisualSelection('b')<CR>
+
+      " Nerd tree
+      nnoremap <leader>n :NERDTreeFocus<CR>
+      nnoremap <C-n> :NERDTree<CR>
+      nnoremap <C-t> :NERDTreeToggle<CR>
+      nnoremap <C-f> :NERDTreeFind<CR>
     '';
   };
-
-  environment.variables.EDITOR = "vim";
 
   # VIM spell files
   #  let

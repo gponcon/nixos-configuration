@@ -15,6 +15,10 @@
     syntaxHighlighting.enable = true;
     shellAliases = {
       ll = "ls -l";
+      vz = "vim `fzf`";
+      nx = "cd /etc/nixos";
+      nf = "nixfmt";
+      nd = "deadnix";
       update = "sudo nixos-rebuild switch";
     };
     promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
