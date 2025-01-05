@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   cfg = config.darkone.host.server;
   cfgLimit = 10;
@@ -11,14 +16,6 @@ in
   options = {
     darkone.host.server = {
       enable = lib.mkEnableOption "Server host minimal configuration";
-
-      # Securefull configuration
-      moreSecurity = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        example = true;
-        description = "Prefer more secure option than comfort";
-      };
 
       # Enable systemd watchdog
       watchdog = lib.mkOption {
@@ -53,9 +50,6 @@ in
     boot.loader.grub.configurationLimit = lib.mkDefault cfgLimit;
     boot.loader.systemd-boot.configurationLimit = lib.mkDefault cfgLimit;
 
-    # Editor
-    programs.vim.defaultEditor = lib.mkDefault true;
-
     # Firewall is enabled
     darkone.system.core.enableFirewall = true;
 
@@ -67,12 +61,6 @@ in
       "root"
       "@wheel"
     ];
-
-    # Turn false to
-    security.sudo.wheelNeedsPassword = lib.mkDefault (!cfg.moreSecurity);
-
-    # Possibility to manage users with useradd, usermod...
-    users.mutableUsers = lib.mkDefault (!cfg.moreSecurity);
 
     # Given that our systems are headless, emergency mode is useless.
     # We prefer the system to attempt to continue booting so

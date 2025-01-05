@@ -1,12 +1,16 @@
 {
-  # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  # Whether to enable the RealtimeKit system service, which hands out realtime scheduling
+  # priority to user processes on demand. PipeWire use this to acquire realtime priority.
   security.rtkit.enable = true;
+
+  # Enable sound with pipewire.
+  services.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
 
