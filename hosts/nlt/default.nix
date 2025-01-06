@@ -18,6 +18,7 @@
     # System admin
     admin = {
       nix.enable = true;
+      nix.enableNh = false;
     };
 
     # Daemons
@@ -32,7 +33,6 @@
     # Console applications
     console = {
       git.enable = true;
-      nh.enable = false;
       packages.enable = true;
       packages.enableAdditional = true;
       pandoc.enable = true;

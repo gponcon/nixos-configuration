@@ -12,6 +12,7 @@ in
 {
   options = {
     darkone.admin.nix.enable = lib.mkEnableOption "Enable NIX configuration builder tools";
+    darkone.admin.nix.enableNh = lib.mkEnableOption "Enable nix helper (nh) management tool";
   };
 
   config = lib.mkIf cfg.enable {
@@ -33,17 +34,30 @@ in
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
 
-    # Utilisation de la commande nix et des flakes
+    # Using experimental flakes and nix
     nix.settings.experimental-features = [
       "nix-command"
       "flakes"
     ];
 
-    # On fait confiance à une machine distante pour lui envoyer une conf
+    # We trust users to allow send configurations
     nix.settings.trusted-users = [
       "root"
       "@wheel"
     ];
+
+    # Nix helper tool
+    programs.nh = lib.mkIf cfg.enable {
+      enable = true;
+      clean = {
+        enable = true;
+        dates = "weekly";
+        extraArgs = "--keep-since 7d --keep 3";
+      };
+    };
+    environment.shellAliases = lib.mkIf cfg.enable {
+      rebuild = "nh os switch /etc/nixos/";
+    };
 
   };
 }

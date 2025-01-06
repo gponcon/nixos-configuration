@@ -18,6 +18,5 @@
     ./console/zsh.nix
     ./console/packages.nix
     ./console/git.nix
-    ./console/nh.nix
   ];
 }

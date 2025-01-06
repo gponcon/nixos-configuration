@@ -161,7 +161,7 @@ colmena apply --on gateway switch
 - [ ] Homepage automatique en fonction des services activés (wip).
 - [ ] Configuration transversale générale (wip).
 - [ ] Chaîne CI / CD pour la gestion de ce développement (wip).
-- [ ] Passerelle type (dhcp, dns, ap, firewall, adguard, AD).
+- [ ] Passerelle type (dhcp, dns, ap, firewall, adguard, AD, VPN).
 - [ ] Postes types (bureautique, développeur, administrateur, enfant).
 - [ ] Services pré-configurés pour serveurs (nextcloud, etc.).
 - [ ] Gestion centralisée des utilisateurs avec [lldap](https://github.com/lldap/lldap).
