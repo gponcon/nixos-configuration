@@ -1,0 +1,76 @@
+# Graphical & education packages for kids
+# TODO: anki / WIP
+
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.darkone.graphic.education;
+in
+{
+  options = {
+    darkone.graphic.education = {
+      enable = lib.mkEnableOption "Default useful packages";
+      enableBaby = lib.mkEnableOption "Sofwares for childs <= 6-8 yo";
+      enableAdo = lib.mkEnableOption "Sofwares for childs >= 12-14 yo";
+      enableGames = lib.mkEnableOption "Additional games packages";
+    };
+  };
+
+  config = lib.mkIf cfg.enable {
+
+    # Packages
+    environment.systemPackages =
+      with pkgs;
+      (
+        # 0-6(-12) yo
+        if cfg.enableBaby && !cfg.enableAdo then
+          [
+            gcompris
+            tuxpaint
+            tuxtype
+          ]
+          ++ (if cfg.enableGames then [ rili ] else [ ])
+
+        # 6-12 yo
+        else if !cfg.enableBaby && !cfg.enableAdo then
+          [
+            #childsplay (not found)
+            #tuxblocs (not found)
+          ]
+
+        # (6-)12-18+ yo
+        else if !cfg.enableBaby && cfg.enableAdo then
+          [
+            #scratch (not found)
+            #tuxmath (not found)
+            avogadro2 # molecules
+            geogebra6 # math
+            googleearth-pro
+            idle # python
+            klavaro
+            lenmus
+            libreoffice-fresh
+            maxima # math
+            obsidian
+            octaveFull # math
+            sage # math
+            scilab-bin # math
+            solfege
+            stellarium
+            verbiste
+          ]
+          ++ (if cfg.enableGames then [ chessx ] else [ ])
+
+        # 0-18+ yo
+        else
+          [
+            celestia
+            leocad
+          ]
+      );
+  };
+}
