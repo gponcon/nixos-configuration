@@ -32,7 +32,7 @@ in
     };
   };
 
-  config.environment = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
 
     # Packages
     environment.systemPackages =

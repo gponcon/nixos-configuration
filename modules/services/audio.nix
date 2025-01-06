@@ -8,7 +8,7 @@ let
 in
 {
   options = {
-    darkone.graphic.services.audio = lib.mkEnableOption "Enable sound system";
+    darkone.services.audio.enable = lib.mkEnableOption "Enable sound system";
   };
 
   config = lib.mkIf cfg.enable {

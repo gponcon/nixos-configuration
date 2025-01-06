@@ -8,7 +8,7 @@ let
 in
 {
   options = {
-    darkone.graphic.services.httpd = lib.mkEnableOption "Enable httpd (apache)";
+    darkone.services.httpd.enable = lib.mkEnableOption "Enable httpd (apache)";
   };
 
   config = lib.mkIf cfg.enable {

@@ -64,7 +64,7 @@ in
       gnome-weather
       hitori
       iagno
-      loupecaffein
+      loupe
       simple-scan
       tali
       totem

@@ -1,7 +1,6 @@
 {
   imports = [
     ./../common.nix
-    ./../../features
     ./../../users
   ];
 
@@ -21,14 +20,31 @@
       nix.enable = true;
     };
 
-    # Console
+    # Daemons
+    services = {
+      audio.enable = true;
+      httpd.enable = true;
+      printing.enable = true;
+      printing.loadAll = false;
+      printing.enableHpPrinters = true;
+    };
+
+    # Console applications
     console = {
       git.enable = true;
-      nh.enable = true;
+      nh.enable = false;
       packages.enable = true;
       packages.enableAdditional = true;
       pandoc.enable = true;
       zsh.enable = true;
+    };
+
+    # Graphical applications
+    graphic = {
+      gnome.enable = true;
+      packages.enable = true;
+      packages.enableEmail = false;
+      virt-manager.enable = true;
     };
   };
 

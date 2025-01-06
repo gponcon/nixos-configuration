@@ -15,7 +15,7 @@ in
     darkone.services.printing.enable = lib.mkEnableOption "Default useful packages";
 
     # Full
-    darkone.services.printing.enableFull = lib.mkOption {
+    darkone.services.printing.loadAll = lib.mkOption {
       type = lib.types.bool;
       default = false;
       example = true;
@@ -56,7 +56,7 @@ in
       drivers =
         with pkgs;
         (
-          if cfg.enableFull then
+          if cfg.loadAll then
             [
               brgenml1cupswrapper
               brgenml1lpr
@@ -72,7 +72,7 @@ in
             [ ]
         )
         ++ (
-          if cfg.enableFull || cfg.enableHpPrinters then
+          if cfg.loadAll || cfg.enableHpPrinters then
             [
               hplip
               hplipWithPlugin
@@ -83,7 +83,7 @@ in
     };
 
     # To install printers manually
-    programs.system-config-printer = mkIf cfg.enableManualInstall {
+    programs.system-config-printer = lib.mkIf cfg.enableManualInstall {
       enable = true;
     };
 
