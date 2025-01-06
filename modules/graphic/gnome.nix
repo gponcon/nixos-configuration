@@ -19,6 +19,7 @@ in
     services.xserver.enable = true;
 
     # Configure keymap in X11
+    # TODO: get theses informations in i18n configuration
     services.xserver.xkb = {
       layout = "fr";
       variant = "azerty";

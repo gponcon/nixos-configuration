@@ -1,7 +1,6 @@
 { hostname, ... }:
 {
   imports = [
-    # Include the results of the hardware scan.
     ./${hostname}/hardware-configuration.nix
     ./../modules
   ];

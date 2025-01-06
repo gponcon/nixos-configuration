@@ -165,5 +165,8 @@ colmena apply --on gateway switch
 - [ ] Postes types (bureautique, développeur, administrateur, enfant).
 - [ ] Services pré-configurés pour serveurs (nextcloud, etc.).
 - [ ] Gestion centralisée des utilisateurs avec [lldap](https://github.com/lldap/lldap).
-- [ ] Builder d'ISO minimale pour les machines à intégrer.
-- [ ] Documentation (wip).
+- [ ] Builder d'[ISOs d'installation](https://github.com/nix-community/nixos-generators) pour les machines à intégrer.
+- [ ] Refactoring des commentaires de code en anglais.
+- [ ] Documentation FR et EN (wip).
+- [ ] Intégration de [nixvim](https://nix-community.github.io/nixvim/).
+- [ ] Gestion du secureboot avec [lanzaboote](https://github.com/nix-community/lanzaboote).
