@@ -8,7 +8,7 @@
     #thunderbird
     hunspell
     hunspellDicts.fr-moderne
-    libreoffice
+    libreoffice-fresh
     obsidian
 
     # Outils CLI

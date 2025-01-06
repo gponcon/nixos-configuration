@@ -77,5 +77,8 @@ in
     # au niveau système, plutôt qu'une instance privée, qu'on
     # pourrait configurer dans home-manager.users.<name>.nixpkgs
     home-manager.useGlobalPkgs = true;
+
+    # To manage nodes, openssh must be activated
+    services.openssh.enable = true;
   };
 }

@@ -1,7 +1,21 @@
-{ pkgs, hostname, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.darkone.graphic.virt-manager;
+  all-users = builtins.attrNames config.users.users;
+  normal-users = builtins.filter (user: config.users.users.${user}.isNormalUser == true) all-users;
+in
+{
+  options = {
+    darkone.graphic.virt-manager.enable = lib.mkEnableOption "Virt manager with dependencies";
+  };
 
-if hostname == "nlt" then
-  {
+  config = lib.mkIf cfg.enable {
+
     # Dependencies
     environment.systemPackages = with pkgs; [
       virt-viewer
@@ -10,12 +24,11 @@ if hostname == "nlt" then
       spice-protocol
       win-virtio
       win-spice
-      adwaita-icon-theme
     ];
 
     # Virt Manager module
     programs.virt-manager.enable = true;
-    users.groups.libvirtd.members = [ "gponcon" ];
+    users.groups.libvirtd.members = normal-users;
     virtualisation = {
       libvirtd = {
         enable = true;
@@ -29,6 +42,5 @@ if hostname == "nlt" then
       spiceUSBRedirection.enable = true;
     };
     services.spice-vdagentd.enable = true;
-  }
-else
-  { }
+  };
+}
