@@ -6,6 +6,9 @@ all: fix defaults check
 check:
 	find . -name "*.nix" -exec deadnix {} \;
 
+flake-check:
+	nix flake check
+
 fix: fmt optimize
 
 fmt:

@@ -6,8 +6,10 @@
     ./system/core.nix
     ./system/hardware.nix
     ./graphic/gnome.nix
+    ./graphic/education.nix
     ./graphic/virt-manager.nix
     ./graphic/packages.nix
+    ./graphic/obsidian.nix
     ./host/laptop.nix
     ./host/server.nix
     ./host/minimal.nix

@@ -55,7 +55,6 @@ in
             lenmus
             libreoffice-fresh
             maxima # math
-            obsidian
             octaveFull # math
             sage # math
             scilab-bin # math
@@ -72,5 +71,8 @@ in
             leocad
           ]
       );
+
+    darkone.graphic.obsidian = lib.mkIf (!cfg.enableBaby) { enable = true; };
+
   };
 }

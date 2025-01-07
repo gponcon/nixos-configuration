@@ -34,14 +34,13 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    # Packages
+    # TODO: Packages
     environment.systemPackages =
       with pkgs;
       (
         if cfg.enableOffice then
           [
             libreoffice-fresh
-            obsidian
           ]
         else
           [ ]

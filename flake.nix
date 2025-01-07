@@ -29,7 +29,7 @@
     }:
     {
 
-      # "nlt" est mon hostname
+      # A laptop
       nixosConfigurations.nlt = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
