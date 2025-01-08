@@ -23,62 +23,69 @@ Les configurations NixOS sont parfois un peu complexes à mettre en place. Ce fr
 
 ## Organisation
 
+Framework (modules & déclarations communes distantes) :
+
 ```
 flake.nix  <-- Main flake
 Makefile   <-- Nix sources management
-framework  <-- Framework sources
-├── modules/
-│   ├── default.nix       <-- Auto-generated default (by Makefile)
-│   ├── system/           <-- System / Hardware configurations
-│   │   ├── core.nix      <-- Core features (activated by default)
-│   │   ├── i18n.nix      <-- Lang / Region settings
-│   │   └── doc.nix       <-- Technical doc
-│   ├── console/(...)     <-- CLI applications
-│   ├── graphic/(...)     <-- X applications
-│   ├── service/(...)     <-- Daemons
-│   ├── admin/            <-- Nix administration settings
-│   │   ├── nix.nix       <-- Nix tools
-│   │   └── identity.nix  <-- Identities and groups (profiles) with LDAP
-│   ├── host/             <-- Host profiles (macro-modules)
-│   │   ├── minimal.nix
-│   │   ├── server/
-│   │   │   ├── gateway.nix
-│   │   │   ├── backup.nix
-│   │   │   ├── homelab.nix
-│   │   │   └── builder.nix
-│   │   ├── desktop/
-│   │   │   ├── office.nix
-│   │   │   └── administrator.nix
-│   │   ├── container/
-│   │   │   ├── docker.nix
-│   │   │   └── nix.nix
-│   │   └── vm/
-│   │       ├── virtualbox.nix
-│   │       └── xen.nix
-│   ├── home/(...)            <-- Home-manager common modules
-│   └── user/                 <-- Home-manager abstract user profiles
-│       ├── common/
-│       │   ├── default.nix
-│       │   └── home/(...)
-│       ├── developper/(...)  <-- Advanced user with development tools
-│       ├── beginner/(...)    <-- Easy environment
-│       ├── regular/(...)     <-- Non-technical user
-│       ├── gamer/(...)       <-- Optimized environment for gamers
-│       ├── admin/(...)       <-- System Admin
-│       └── child/(...)       <-- Kids softwares and settings
-├── users/               <-- System concrete users
-│   └── nix/             <-- A specific user for nodes management
-└── hosts/               <-- Hosts and host-templates declarations
-    └── builder.nix      <-- A desktop host
-local                    <-- Local sources (local git project here)
-├── modules/(...)        <-- Local modules
-├── users/(...)          <-- Static users
-└── hosts/(...)          <-- Static hosts
+modules/
+├── default.nix       <-- Auto-generated default (by Makefile)
+├── system/           <-- System / Hardware configurations
+│   ├── core.nix      <-- Core features (activated by default)
+│   ├── i18n.nix      <-- Lang / Region settings
+│   └── doc.nix       <-- Technical doc
+├── console/(...)     <-- CLI applications
+├── graphic/(...)     <-- X applications
+├── service/(...)     <-- Daemons
+├── admin/            <-- Nix administration settings
+│   ├── nix.nix       <-- Nix tools
+│   └── identity.nix  <-- Identities and groups (profiles) with LDAP
+├── host/             <-- Host profiles (macro-modules)
+│   ├── minimal.nix
+│   ├── server/
+│   │   ├── gateway.nix
+│   │   ├── backup.nix
+│   │   ├── homelab.nix
+│   │   └── builder.nix
+│   ├── desktop/
+│   │   ├── office.nix
+│   │   └── administrator.nix
+│   ├── container/
+│   │   ├── docker.nix
+│   │   └── nix.nix
+│   └── vm/
+│       ├── virtualbox.nix
+│       └── xen.nix
+├── home/(...)            <-- Home-manager common modules
+└── user/                 <-- Home-manager abstract user profiles
+    ├── common/
+    │   ├── default.nix
+    │   └── home/(...)
+    ├── developper/(...)  <-- Advanced user with development tools
+    ├── beginner/(...)    <-- Easy environment
+    ├── regular/(...)     <-- Non-technical user
+    ├── gamer/(...)       <-- Optimized environment for gamers
+    ├── admin/(...)       <-- System Admin
+    └── child/(...)       <-- Kids softwares and settings
+users/                    <-- System concrete users
+└── nix/                  <-- A specific user for nodes management
+hosts/                    <-- Hosts and host-templates declarations
+└── builder.nix           <-- A desktop host
+```
+
+Sources locales (issues d'un boilerplate) :
+
+```
+flake.nix      <-- Local flake
+Makefile       <-- Nix sources management
+modules/(...)  <-- Local modules
+users/(...)    <-- Static users
+hosts/(...)    <-- Static hosts
 var/
 ├── log/
-└── generated/            <-- Generated files
-    ├── hosts/            <-- <users>-<groups>-<host> from LDAP
-    └── flake-hosts.nix   <-- Hosts déclarations
+└── generated/           <-- Generated files
+    ├── hosts/           <-- <users>-<groups>-<host> from LDAP
+    └── flake-hosts.nix  <-- Hosts déclarations
 ```
 
 ## Exemples
@@ -89,7 +96,7 @@ var/
 Configurer un poste bureautique complet se fera très simplement :
 
 ```nix
-# local/hosts/patrick/default.nix
+# hosts/patrick/default.nix
 {
   darkone.host.desktop = {
     enable = true;
@@ -139,7 +146,7 @@ Pour X postes monotypes qui ont Y utilisateurs :
 Version minimale :
 
 ```nix
-# local/hosts/server-gateway.nix
+# hosts/server-gateway.nix
 darkone.host.gateway = {
   enable = true;
   wan.interface = "eth0";
@@ -150,7 +157,7 @@ darkone.host.gateway = {
 Version plus complète :
 
 ```nix
-# local/hosts/server-gateway.nix
+# hosts/server-gateway.nix
 darkone.host.gateway = {
   enable = true;
   wan = {
