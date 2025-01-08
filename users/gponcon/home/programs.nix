@@ -28,6 +28,8 @@
     python3Full
     vscode
     zellij
+    php
+    nodejs_23
 
     # Réseau
     #nettools
