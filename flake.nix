@@ -27,54 +27,48 @@
       colmena,
       ...
     }:
-    {
-
-      # A laptop
-      nixosConfigurations.nlt = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
+    let
+      hosts = [
+        {
           hostname = "nlt";
-        };
-        modules = [
-          ./modules
-          ./local/hosts/nlt
-
-          # Utilisation de home manager comme module flake
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.gponcon = import ./local/users/gponcon/home.nix;
-
-            # Optionally, use home-manager.extraSpecialArgs to pass
-            # arguments to home.nix
-          }
-
-          # Version de colmena compatible avec celle utilisée par colmenaHive
-          # Ne fonctione pas...
-          #(import ./overlays/colmena.nix)
-        ];
-      };
-
-      # VM de test
-      nixosConfigurations.test = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
+          users = [ "gponcon" ];
+        }
+        {
           hostname = "test";
-        };
-        modules = [
-          ./local/hosts/test
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.gponcon = import ./local/users/gponcon/home-lite.nix;
-          }
-        ];
-      };
-
-      # Not working with that
-      #colmenaHive = colmena.lib.makeHive self.outputs.colmena;
+          users = [ "gponcon" ];
+        }
+      ];
+    in
+    {
+      nixosConfigurations = builtins.listToAttrs (
+        map (
+          host:
+          nixpkgs.lib.nameValuePair host.hostname (
+            nixpkgs.lib.nixosSystem {
+              system = "x86_64-linux";
+              specialArgs = {
+                hostname = host.hostname;
+              };
+              modules = [
+                ./modules
+                ./local/hosts/${host.hostname}
+                home-manager.nixosModules.home-manager
+                {
+                  home-manager.useGlobalPkgs = true;
+                  home-manager.useUserPackages = true;
+                  home-manager.users =
+                    let
+                      users = host.users;
+                    in
+                    builtins.listToAttrs (
+                      map (user: nixpkgs.lib.nameValuePair user (import ./local/users/${user}/home.nix)) users
+                    );
+                }
+              ];
+            }
+          )
+        ) hosts
+      );
 
       # https://github.com/zhaofengli/colmena/issues/60#issuecomment-1510496861
       colmena =
