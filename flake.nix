@@ -27,48 +27,68 @@
       colmena,
       ...
     }:
+
     let
+      system = "x86_64-linux";
+
+      mkNixosHost = host: {
+        name = host.hostname;
+        value = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            hostname = host.hostname;
+          };
+          modules = [
+            ./modules
+            ./local/hosts/${host.hostname}
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users = nixpkgs.lib.genAttrs host.users (user: import ./local/users/${user}/home.nix);
+              };
+            }
+          ];
+        };
+      };
+
+      mkColmenaHost = host: {
+        name = host.hostname;
+        value = {
+          deployment = host.deployment;
+        };
+      };
+
       hosts = [
         {
           hostname = "nlt";
           users = [ "gponcon" ];
+          deployment = {
+            tags = [
+              "desktop"
+              "admin"
+              "local"
+            ];
+            allowLocalDeployment = true;
+            targetHost = "nlt";
+          };
         }
         {
           hostname = "test";
           users = [ "gponcon" ];
+          deployment = {
+            tags = [
+              "test"
+              "admin"
+            ];
+            targetHost = "test";
+          };
         }
       ];
     in
     {
-      nixosConfigurations = builtins.listToAttrs (
-        map (
-          host:
-          nixpkgs.lib.nameValuePair host.hostname (
-            nixpkgs.lib.nixosSystem {
-              system = "x86_64-linux";
-              specialArgs = {
-                hostname = host.hostname;
-              };
-              modules = [
-                ./modules
-                ./local/hosts/${host.hostname}
-                home-manager.nixosModules.home-manager
-                {
-                  home-manager.useGlobalPkgs = true;
-                  home-manager.useUserPackages = true;
-                  home-manager.users =
-                    let
-                      users = host.users;
-                    in
-                    builtins.listToAttrs (
-                      map (user: nixpkgs.lib.nameValuePair user (import ./local/users/${user}/home.nix)) users
-                    );
-                }
-              ];
-            }
-          )
-        ) hosts
-      );
+      nixosConfigurations = builtins.listToAttrs (map mkNixosHost hosts);
 
       # https://github.com/zhaofengli/colmena/issues/60#issuecomment-1510496861
       colmena =
@@ -127,5 +147,7 @@
 
         }
         // builtins.mapAttrs (_name: value: { imports = value._module.args.modules; }) conf;
+      #// builtins.listToAttrs (map mkColmenaHost hosts);
+
     }; # outputs
 }
