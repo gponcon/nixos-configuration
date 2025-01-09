@@ -60,18 +60,18 @@
         };
       };
 
+      # List of hosts
       hosts = [
         {
-          hostname = "nlt";
-          users = [ "gponcon" ];
-          deployment = {
+          hostname = "nlt"; # static or generated host
+          users = [ "gponcon" ]; # static or generated users
+          deployment = { # the "deployment" section of colmena
             tags = [
               "desktop"
               "admin"
               "local"
             ];
             allowLocalDeployment = true;
-            targetHost = "nlt";
           };
         }
         {
@@ -82,7 +82,6 @@
               "test"
               "admin"
             ];
-            targetHost = "test";
           };
         }
       ];
@@ -115,39 +114,41 @@
             targetUser = null;
           };
 
-          # Laptop
-          nlt = {
-            deployment = {
-              tags = [
-                "desktop"
-                "admin"
-                "local"
-              ];
-              allowLocalDeployment = true;
-              buildOnTarget = true;
-            };
-          };
+          #builtins.listToAttrs (map mkColmenaHosts hosts);
 
-          # Test vm
-          test = {
-            deployment = {
-              tags = [
-                "test"
-                "admin"
-              ];
-              allowLocalDeployment = false;
-              targetHost = "test";
-              buildOnTarget = false;
-            };
-          };
+          ## Laptop
+          #nlt = {
+          #  deployment = {
+          #    tags = [
+          #      "desktop"
+          #      "admin"
+          #      "local"
+          #    ];
+          #    allowLocalDeployment = true;
+          #    buildOnTarget = true;
+          #  };
+          #};
+
+          ## Test vm
+          #test = {
+          #  deployment = {
+          #    tags = [
+          #      "test"
+          #      "admin"
+          #    ];
+          #    allowLocalDeployment = false;
+          #    targetHost = "test";
+          #    buildOnTarget = false;
+          #  };
+          #};
 
           #rpi = { pkgs, ... }: {
           #  nixpkgs.system = "aarch64-linux";
           #};
 
         }
+        // builtins.listToAttrs (map mkColmenaHost hosts)
         // builtins.mapAttrs (_name: value: { imports = value._module.args.modules; }) conf;
-      #// builtins.listToAttrs (map mkColmenaHost hosts);
 
     }; # outputs
 }
