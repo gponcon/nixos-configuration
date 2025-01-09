@@ -36,14 +36,15 @@
           hostname = "nlt";
         };
         modules = [
-          ./hosts/nlt
+          ./modules
+          ./local/hosts/nlt
 
           # Utilisation de home manager comme module flake
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.gponcon = import ./users/gponcon/home.nix;
+            home-manager.users.gponcon = import ./local/users/gponcon/home.nix;
 
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
@@ -62,12 +63,12 @@
           hostname = "test";
         };
         modules = [
-          ./hosts/test
+          ./local/hosts/test
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.gponcon = import ./users/gponcon/home-lite.nix;
+            home-manager.users.gponcon = import ./local/users/gponcon/home-lite.nix;
           }
         ];
       };
