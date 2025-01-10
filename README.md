@@ -1,11 +1,11 @@
 # Darkone NixOS Framework
 
-Une configuration NixOS destinée à devenir un framework pour la création et la gestion d'un réseau multi-host et multi-utilisateur avec NixOS.
+Une configuration NixOS pensée pour devenir à terme un framework pour la création et la gestion d'un réseau multi-host et multi-utilisateur avec NixOS.
 
 > [!WARNING]  
 > Ce projet est en cours de développement, il est utilisable en l'état, mais incomplet. En outre, il comporte des éléments de personnalisation issus de mes configurations, qui seront retirés de la version utilisable.
 
-Les configurations NixOS sont parfois un peu complexes à mettre en place. Ce framework simplifie les choses grâce à&nbsp;:
+Ce framework simplifie les choses grâce à&nbsp;:
 
 - Une structure cohérente et modulaire.
 - Des outils préconfigurés et fonctionnels.
@@ -13,80 +13,79 @@ Les configurations NixOS sont parfois un peu complexes à mettre en place. Ce fr
 
 ## Fonctionnalités
 
-- **Déploiements multi-hosts** et multi-utilisateurs avec [colmena](https://github.com/zhaofengli/colmena).
+- **Déploiements multi-hosts** et multi-utilisateurs avec [colmena](https://github.com/zhaofengli/colmena) et [just](https://github.com/casey/just).
 - **Configurations types** pour serveurs, containers et machines de travail.
 - **Modules complets** et 100% fonctionnels avec un simple `.enable = true`.
-- **Architecture extensible** et personnalisable.
-- **Gestion des dotfiles** de chaque utilisateur avec [home manager](https://github.com/nix-community/home-manager).
+- **Architecture extensible**, facile à aborder, personnalisable.
+- **Gestion des paramètres** utilisateur avec [home manager](https://github.com/nix-community/home-manager) + pré-configurations.
 - **[Homepage](https://github.com/gethomepage/homepage) automatique** en fonction des services activés.
 - **Configuration transversale** pour assurer la cohérence du réseau.
+- **Sécurisation facile et fiable**, un seul mdp pour déverouiller, avec [sops](https://github.com/Mic92/sops-nix).
 
 ## Organisation
 
-Framework (modules & déclarations communes distantes) :
+A la racine :
+
+- `lib` -> modules, users, hosts du framework
+- `usr` -> Projet local (en écriture)
+- `var` -> Fichiers générés et logs
 
 ```
 flake.nix  <-- Main flake
-Makefile   <-- Nix sources management
-modules/
-├── default.nix       <-- Auto-generated default (by Makefile)
-├── system/           <-- System / Hardware configurations
-│   ├── core.nix      <-- Core features (activated by default)
-│   ├── i18n.nix      <-- Lang / Region settings
-│   └── doc.nix       <-- Technical doc
-├── console/(...)     <-- CLI applications
-├── graphic/(...)     <-- X applications
-├── service/(...)     <-- Daemons
-├── admin/            <-- Nix administration settings
-│   ├── nix.nix       <-- Nix tools
-│   └── identity.nix  <-- Identities and groups (profiles) with LDAP
-├── host/             <-- Host profiles (macro-modules)
-│   ├── minimal.nix
-│   ├── server/
-│   │   ├── gateway.nix
-│   │   ├── backup.nix
-│   │   ├── homelab.nix
-│   │   └── builder.nix
-│   ├── desktop/
-│   │   ├── office.nix
-│   │   └── administrator.nix
-│   ├── container/
-│   │   ├── docker.nix
-│   │   └── nix.nix
-│   └── vm/
-│       ├── virtualbox.nix
-│       └── xen.nix
-├── home/(...)            <-- Home-manager common modules
-└── user/                 <-- Home-manager abstract user profiles
-    ├── common/
-    │   ├── default.nix
-    │   └── home/(...)
-    ├── developper/(...)  <-- Advanced user with development tools
-    ├── beginner/(...)    <-- Easy environment
-    ├── regular/(...)     <-- Non-technical user
-    ├── gamer/(...)       <-- Optimized environment for gamers
-    ├── admin/(...)       <-- System Admin
-    └── child/(...)       <-- Kids softwares and settings
-users/                    <-- System concrete users
-└── nix/                  <-- A specific user for nodes management
-hosts/                    <-- Hosts and host-templates declarations
-└── builder.nix           <-- A desktop host
-```
-
-Sources locales (issues d'un boilerplate) :
-
-```
-flake.nix      <-- Local flake
-Makefile       <-- Nix sources management
-modules/(...)  <-- Local modules
-users/(...)    <-- Static users
-hosts/(...)    <-- Static hosts
+Justfile   <-- Project management
+lib/       <-- Projet library
+├── modules/
+|   ├── default.nix       <-- Auto-generated default (by Makefile)
+|   ├── system/           <-- System / Hardware configurations
+|   │   ├── core.nix      <-- Core features (activated by default)
+|   │   ├── i18n.nix      <-- Lang / Region settings
+|   │   └── doc.nix       <-- Technical doc
+|   ├── console/(...)     <-- CLI applications
+|   ├── graphic/(...)     <-- X applications
+|   ├── service/(...)     <-- Daemons
+|   ├── admin/            <-- Nix administration settings
+|   │   ├── nix.nix       <-- Nix tools
+|   │   └── identity.nix  <-- Identities and grocomplet du réseau local
+|   │   │   ├── backup.nix
+|   │   │   ├── homelab.nix
+|   │   │   └── builder.nix
+|   │   ├── desktop/
+|   │   │   ├── office.nix
+|   │   │   └── administrator.nix
+|   │   ├── container/
+|   │   │   ├── docker.nix
+|   │   │   └── nix.nix
+|   │   └── vm/
+|   │       ├── virtualbox.nix
+|   │       └── xen.nix
+|   └── user/                 <-- Home-manager abstract user profiles
+|       ├── common/
+|       │   ├── default.nix
+|       │   └── home/(...)
+|       ├── developper/(...)  <-- Advanced user with development tools
+|       ├── beginner/(...)    <-- Easy environment
+|       ├── regular/(...)     <-- Non-technical user
+|       ├── gamer/(...)       <-- Optimized environment for gamers
+|       ├── admin/(...)       <-- System Admin
+|       └── child/(...)       <-- Kids softwares and settings
+├── users/                    <-- System concrete users
+|   └── nix/                  <-- A special user for nodes management
+└── hosts/                    <-- Hosts and host-templates declarations
+    └── builder.nix           <-- A desktop host
+usr/               <-- Writable zone for local network project
+├── modules/(...)  <-- Local modules
+├── secrets/(...)  <-- Local secrets file
+├── users/(...)    <-- Static users
+└── hosts/(...)    <-- Static hosts
 var/
 ├── log/
-└── generated/           <-- Generated files
-    ├── hosts/           <-- <users>-<groups>-<host> from LDAP
-    └── flake-hosts.nix  <-- Hosts déclarations
+└── generated/  <-- Generated files
+    ├── hosts/  <-- Hosts to deploy
+    └── users/  <-- Users to deploy
 ```
+
+> [!NOTE]
+> Pour le moment il est prévu que le framework soit cloné et que le projet de l'utilisateur soit situé dans `usr`, qui peut recevoir un projet git indépendant. Avoir une séparation entre le projet local et le framework (qui serait un simple input du flake local) est en cours d'étude.
 
 ## Exemples
 
@@ -96,18 +95,31 @@ var/
 Configurer un poste bureautique complet se fera très simplement :
 
 ```nix
-# hosts/patrick/default.nix
+# hosts/pc01/default.nix
 {
-  darkone.host.desktop = {
-    enable = true;
-    hostname = "patrick";
+  darkone.host.desktop.pc01 = {
     username = "patrick";
   };
 }
 ```
 
 > [!NOTE]
-> Création du poste et mises à jour :
+> Pour créer un poste, le plus simple est d'installer l'iso d'initialisation, même si ça fonctionne avec un poste contenant déjà un linux.
+> 
+> Création du poste et mises à jour (commandes simplifiées et optimisées) :
+>
+> ```sh
+> # Création du host "pc01"
+> just apply pc01 <ip-du-poste>
+> 
+> # Mise à jour
+> just apply pc01
+> 
+> # Mise à jour de tous les "desktop"
+> just apply @desktop
+> ```
+>
+> On peut aussi utiliser des commandes régulières :
 > 
 > ```sh
 > # Injection de la conf de patrick dans un poste physique
@@ -128,10 +140,14 @@ Pour X postes monotypes qui ont Y utilisateurs :
 ```nix
 # hosts/desktop-office.nix
 {
-  darkone.host.officeDesktop = {
-    enable = true;
+  # "office-room" comme mot clé / préfixe de hostname
+  # Nom des postes par défaut : office-room-01, etc.
+  # sauf si déclarés dans un attrSet (mac -> nom).
+  darkone.host.officeDesktop.office-room = {
+
+    # Tous les users de ces groupes seront déclarés
+    # dans les hosts créés.
     hosts.groups = [ "students" "trainers" ];
-    hosts.prefix = "office-room"; # optional
   };
 }
 ```
@@ -147,8 +163,7 @@ Version minimale :
 
 ```nix
 # hosts/server-gateway.nix
-darkone.host.gateway = {
-  enable = true;
+darkone.host.gateway.my-gateway = {
   wan.interface = "eth0";
   lan.interfaces = [ "eth1" "eth2" ];
 };
@@ -158,8 +173,7 @@ Version plus complète :
 
 ```nix
 # hosts/server-gateway.nix
-darkone.host.gateway = {
-  enable = true;
+darkone.host.gateway.my-other-gateway = {
   wan = {
     interface = "eth0";
     gateway = "192.168.0.1"; # optional
@@ -189,20 +203,24 @@ darkone.host.gateway = {
 };
 ```
 
-On peut déployer de 2 manières :
+Déploiement (3 possibilités) :
 
 ```sh
-# Regular
-nixos-rebuild switch --flake path:.#gateway --target-host admin@gateway --build-host gateway --fast --use-remote-sudo
+# Simple and optimal
+just apply gateway
 
 # Colmena
 colmena apply --on gateway switch
+
+# Regular
+nixos-rebuild switch --flake path:.#gateway --target-host admin@gateway --build-host gateway --fast --use-remote-sudo
 ```
 
 ## Liste TODO
 
 - [x] Architecture modulaire.
-- [x] Déploiements avec Colmena.
+- [x] Configuration colmena.
+- [ ] Déploiements avec Just (build regular + apply colmena).
 - [x] Modules système de base (hardware, i18n, doc, network, performances).
 - [x] Modules console de base (zsh, git, shell).
 - [x] Modules graphic de base (gnome, jeux de paquetages).
@@ -222,10 +240,10 @@ colmena apply --on gateway switch
 - [ ] Intégration de [nixvim](https://nix-community.github.io/nixvim/).
 - [ ] Gestion du secureboot avec [lanzaboote](https://github.com/nix-community/lanzaboote).
 
-## Sujets en cours d'étude
+## Idées en cours d'étude
 
 > [!CAUTION]
-> Sujets à l'état d'idée.
+> Pas encore fonctionnel.
 
 ### Installation K8S préconfigurée
 
