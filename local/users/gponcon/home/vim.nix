@@ -6,6 +6,8 @@
     defaultEditor = true; # Define EDITOR envvar
     plugins = with pkgs.vimPlugins; [
       #vim-airline
+      LazyVim
+      YouCompleteMe
       ctrlp-vim
       emmet-vim
       fzf-vim
