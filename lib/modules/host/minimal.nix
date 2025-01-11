@@ -15,8 +15,11 @@ in
     # Darkone main modules
     darkone.system = {
       core.enable = lib.mkDefault true;
+      core.enableFirewall = lib.mkDefault true;
       i18n.enable = lib.mkDefault true;
     };
+
+    # Minimum console features
     darkone.console.packages.enable = lib.mkDefault true;
 
     # No password for sudoers

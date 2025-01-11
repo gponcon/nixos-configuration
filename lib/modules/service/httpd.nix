@@ -4,11 +4,11 @@
   ...
 }:
 let
-  cfg = config.darkone.services.httpd;
+  cfg = config.darkone.service.httpd;
 in
 {
   options = {
-    darkone.services.httpd.enable = lib.mkEnableOption "Enable httpd (apache)";
+    darkone.service.httpd.enable = lib.mkEnableOption "Enable httpd (apache)";
   };
 
   config = lib.mkIf cfg.enable {

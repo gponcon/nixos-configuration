@@ -35,5 +35,4 @@ in
       );
     variables.EDITOR = "vim";
   };
-
 }

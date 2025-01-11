@@ -9,13 +9,27 @@ let
 in
 {
   options = {
-    darkone.host.laptop.enable = lib.mkEnableOption "Laptop host minimal configuration";
+    darkone.host.laptop.enable = lib.mkEnableOption "Laptop optimized host configuration";
   };
 
   config = lib.mkIf cfg.enable {
 
     # Load minimal configuration
     darkone.host.minimal.enable = true;
+
+    # Daemons
+    darkone.services = {
+      audio.enable = lib.mkDefault true;
+      printing.enable = lib.mkDefault true;
+    };
+
+    # Graphical applications
+    darkone.graphic = {
+      gnome.enable = lib.mkDefault true;
+      obsidian.enable = lib.mkOptionDefault true;
+      packages.enable = lib.mkDefault true;
+      packages.enableEmail = lib.mkOptionDefault true;
+    };
 
     # Sensors management (WIP)
     boot.kernelModules = [ "coretemp" ];

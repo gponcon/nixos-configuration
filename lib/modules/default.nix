@@ -13,12 +13,14 @@
     ./host/laptop.nix
     ./host/server.nix
     ./host/minimal.nix
-    ./services/printing.nix
-    ./services/audio.nix
-    ./services/httpd.nix
+    ./host/portable.nix
+    ./host/desktop.nix
     ./console/pandoc.nix
     ./console/zsh.nix
     ./console/packages.nix
     ./console/git.nix
+    ./service/printing.nix
+    ./service/audio.nix
+    ./service/httpd.nix
   ];
 }

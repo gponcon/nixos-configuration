@@ -4,11 +4,11 @@
   ...
 }:
 let
-  cfg = config.darkone.services.audio;
+  cfg = config.darkone.service.audio;
 in
 {
   options = {
-    darkone.services.audio.enable = lib.mkEnableOption "Enable sound system";
+    darkone.service.audio.enable = lib.mkEnableOption "Enable sound system";
   };
 
   config = lib.mkIf cfg.enable {

@@ -5,17 +5,17 @@
   ...
 }:
 let
-  cfg = config.darkone.services.printing;
+  cfg = config.darkone.service.printing;
   all-users = builtins.attrNames config.users.users;
   normal-users = builtins.filter (user: config.users.users.${user}.isNormalUser == true) all-users;
 in
 {
   # WIP
-  options = {
-    darkone.services.printing.enable = lib.mkEnableOption "Default useful packages";
+  options.darkone.service.printing = {
+    enable = lib.mkEnableOption "Default useful packages";
 
     # Full
-    darkone.services.printing.loadAll = lib.mkOption {
+    loadAll = lib.mkOption {
       type = lib.types.bool;
       default = false;
       example = true;
@@ -23,7 +23,7 @@ in
     };
 
     # Scanners
-    darkone.services.printing.enableScanners = lib.mkOption {
+    enableScanners = lib.mkOption {
       type = lib.types.bool;
       default = false;
       example = true;
@@ -31,7 +31,7 @@ in
     };
 
     # HP only
-    darkone.services.printing.enableHpPrinters = lib.mkOption {
+    enableHpPrinters = lib.mkOption {
       type = lib.types.bool;
       default = false;
       example = true;
@@ -39,7 +39,7 @@ in
     };
 
     # HP only
-    darkone.services.printing.enableManualInstall = lib.mkOption {
+    enableManualInstall = lib.mkOption {
       type = lib.types.bool;
       default = false;
       example = true;
