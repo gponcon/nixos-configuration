@@ -19,6 +19,9 @@
     # No email software
     graphic.packages.enableEmail = false;
 
+    # I'm the master, not a node
+    host.isNode = false;
+
   };
 
   system.stateVersion = "24.05";

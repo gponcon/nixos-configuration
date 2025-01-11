@@ -59,5 +59,8 @@ in
       rebuild = "nh os switch /etc/nixos/";
     };
 
+    # We need ssh agent to deploy nodes
+    programs.ssh.startAgent = true;
+
   };
 }

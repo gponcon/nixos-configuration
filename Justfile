@@ -5,10 +5,27 @@
 #alias g := generate
 
 generatedHostFile := './var/generated/hosts.nix'
+nixKeyDir := './var/security/ssh'
+nixKeyFile := nixKeyDir + '/id_ed25519_nix'
 
 # Justfile help
 _default:
 	@just --list
+
+# Framework installation (wip)
+install:
+	#!/usr/bin/env bash
+	if [ ! -d {{nixKeyDir}} ] ;then
+		echo "-> Creating {{nixKeyDir}} directory..."
+		mkdir -p {{nixKeyDir}}
+	fi
+	if [ ! -f {{nixKeyFile}} ] ;then
+	  echo "-> Creating ssh keys..."
+		ssh-keygen -t ed25519 -f {{nixKeyFile}} -N ""
+	else
+		echo "-> Maintenance ssh key already exists."
+	fi
+	ssh-add {{nixKeyFile}}
 
 # fix + defaults + check
 clean: fix generate check
@@ -70,3 +87,10 @@ _gen-hosts:
 		echo "[]" >> "{{generatedHostFile}}"
 	fi
 	nixfmt "{{generatedHostFile}}"
+
+# Register a new node (wip)
+ssh-copy TARGET:
+	#!/usr/bin/env bash
+	ssh-copy-id -i "{{nixKeyFile}}.pub" -t /home/nix/.ssh/authorized_keys {{TARGET}}
+	ssh {{TARGET}} 'chown -R nix:users /home/nix/.ssh'
+

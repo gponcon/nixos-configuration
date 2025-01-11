@@ -15,7 +15,7 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    colmena.url = "github:zhaofengli/colmena";
+    colmena.url = "github:zhaofengli/colmena/main";
     colmena.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -71,6 +71,15 @@
         name = host.hostname;
         value = {
           deployment = host.deployment;
+
+          # TODO: not working, use "just install" instead
+          #// {
+          #sshOptions = [
+          #  "-i"
+          #  "/etc/nixos/var/security/ssh/id_ed25519_nix"
+          #];
+          #};
+
         };
       };
 
@@ -103,11 +112,19 @@
             nodeSpecialArgs = builtins.mapAttrs (_name: value: value._module.specialArgs) conf;
           };
 
-          # Conf déploiement colmena
+          # Default deployment settings
           defaults.deployment = {
             buildOnTarget = nixpkgs.lib.mkDefault false;
             allowLocalDeployment = nixpkgs.lib.mkDefault false;
-            targetUser = null;
+            targetUser = "nix";
+
+            # TODO: not working, use "just install" instead
+            # Deployment with the project ssh keys
+            #sshOptions = [
+            #  "-i"
+            #  "/etc/nixos/var/security/ssh/id_ed25519_nix"
+            #];
+
           };
 
         }
