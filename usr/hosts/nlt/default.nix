@@ -1,7 +1,7 @@
 {
   imports = [
     ./../common.nix
-    ./../../users
+    ./../../users/gponcon
   ];
 
   # Darkone modules

@@ -1,5 +1,5 @@
 {
-  description = "Main NixOS Flake";
+  description = "Darkone Framework";
 
   # Usefull cache for colmena
   nixConfig = {
@@ -31,6 +31,9 @@
     let
       system = "x86_64-linux";
 
+      # The hosts.nix generated file (just generate)
+      hosts = import ./var/generated/hosts.nix;
+
       mkNixosHost = host: {
         name = host.hostname;
         value = nixpkgs.lib.nixosSystem {
@@ -47,6 +50,17 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 users = nixpkgs.lib.genAttrs host.users (user: import ./usr/users/${user}/home.nix);
+                extraSpecialArgs = {
+                  hostname = host.hostname;
+
+                  # This hack must be set to allow unfree packages
+                  # in home manager configurations.
+                  # useGlobalPkgs with allowUnfree nixpkgs do not works.
+                  pkgs = import nixpkgs {
+                    inherit system;
+                    config.allowUnfree = true;
+                  };
+                };
               };
             }
           ];
@@ -60,36 +74,16 @@
         };
       };
 
-      # List of hosts
-      hosts = [
-        {
-          hostname = "nlt"; # static or generated host
-          users = [ "gponcon" ]; # static or generated users
-
-          # the "deployment" section of colmena
-          deployment = {
-            tags = [
-              "desktop"
-              "admin"
-              "local"
-            ];
-            allowLocalDeployment = true;
-          };
-        }
-        {
-          hostname = "test";
-          users = [ "gponcon" ];
-          deployment = {
-            tags = [
-              "test"
-              "admin"
-            ];
-          };
-        }
-      ];
     in
     {
       nixosConfigurations = builtins.listToAttrs (map mkNixosHost hosts);
+
+      nixpkgs = {
+        config = {
+          allowUnfree = true;
+          allowUnfreePredicate = (_: true);
+        };
+      };
 
       # https://github.com/zhaofengli/colmena/issues/60#issuecomment-1510496861
       colmena =
@@ -98,11 +92,11 @@
         in
         {
           meta = {
-            description = "Arthur Network";
+            description = "Darkone Framework Network";
             nixpkgs = import nixpkgs {
               system = "x86_64-linux";
-              #stateVersion = "25.05";
               allowUnfree = true;
+              allowUnfreePredicate = (_: true);
               overlays = [ ];
             };
             nodeNixpkgs = builtins.mapAttrs (_name: value: value.pkgs) conf;

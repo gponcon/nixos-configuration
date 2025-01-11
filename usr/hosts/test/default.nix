@@ -23,10 +23,10 @@
     };
 
     # Graphical applications
-    graphic = {
-      gnome.enable = true;
-      packages.enable = true;
-    };
+    #graphic = {
+    #  gnome.enable = true;
+    #  packages.enable = true;
+    #};
   };
 
   system.stateVersion = "24.05";
