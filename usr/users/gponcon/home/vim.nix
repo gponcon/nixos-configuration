@@ -19,6 +19,7 @@
       nerdtree
       nerdtree-git-plugin
       vim-gitgutter
+      vim-just
       vim-lastplace
       vim-nix
     ];
