@@ -14,22 +14,11 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    # Load minimal configuration
-    darkone.host.minimal.enable = true;
+    # Based on desktop configuration
+    darkone.host.desktop.enable = lib.mkForce true;
 
-    # Daemons
-    darkone.services = {
-      audio.enable = lib.mkDefault true;
-      printing.enable = lib.mkDefault true;
-    };
-
-    # Graphical applications
-    darkone.graphic = {
-      gnome.enable = lib.mkDefault true;
-      obsidian.enable = lib.mkOptionDefault true;
-      packages.enable = lib.mkDefault true;
-      packages.enableEmail = lib.mkOptionDefault true;
-    };
+    # Several printing drivers
+    darkone.service.printing.loadAll = lib.mkDefault false;
 
     # Sensors management (WIP)
     boot.kernelModules = [ "coretemp" ];

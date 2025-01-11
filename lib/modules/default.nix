@@ -1,5 +1,9 @@
 {
   imports = [
+    ./user/children.nix
+    ./user/nix-admin.nix
+    ./user/teenager.nix
+    ./user/advanced.nix
     ./admin/nix.nix
     ./system/i18n.nix
     ./system/documentation.nix
@@ -10,6 +14,7 @@
     ./graphic/virt-manager.nix
     ./graphic/packages.nix
     ./graphic/obsidian.nix
+    ./host/vm.nix
     ./host/laptop.nix
     ./host/server.nix
     ./host/minimal.nix

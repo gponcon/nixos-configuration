@@ -7,26 +7,12 @@
   # Darkone modules
   darkone = {
 
-    # Host type
-    host.server.enable = true;
+    # Virtualbox VM
+    host.vm.enableVirtualbox = true;
 
-    # Hardware & System
-    system = {
-      documentation.enable = true;
-    };
+    # For advanced user
+    user.advanced.enable = true;
 
-    # Console applications
-    console = {
-      git.enable = true;
-      packages.enable = true;
-      zsh.enable = true;
-    };
-
-    # Graphical applications
-    #graphic = {
-    #  gnome.enable = true;
-    #  packages.enable = true;
-    #};
   };
 
   system.stateVersion = "24.05";

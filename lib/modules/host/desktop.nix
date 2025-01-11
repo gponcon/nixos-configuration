@@ -14,7 +14,7 @@ in
   config = lib.mkIf cfg.enable {
 
     # Load minimal configuration
-    darkone.host.minimal.enable = true;
+    darkone.host.minimal.enable = lib.mkForce true;
 
     # System additional features
     darkone.system = {
@@ -23,10 +23,9 @@ in
     };
 
     # Daemons
-    darkone.services = {
+    darkone.service = {
       audio.enable = lib.mkDefault true;
       printing.enable = lib.mkDefault true;
-      printing.loadAll = lib.mkDefault false;
     };
 
     # Graphical applications
@@ -35,6 +34,8 @@ in
       obsidian.enable = lib.mkDefault true;
       packages.enable = lib.mkDefault true;
       packages.enableEmail = lib.mkDefault true;
+      packages.enableOffice = lib.mkDefault true;
+      packages.enableInternet = lib.mkDefault true;
     };
   };
 }

@@ -11,18 +11,11 @@ in
     darkone.host.portable.enable = lib.mkEnableOption "Portable host configuration for usb keys";
   };
 
+  # TODO: specific boot options for usb keys
   config = lib.mkIf cfg.enable {
 
     # Based on laptop configuration
-    darkone.host.laptop.enable = true;
+    darkone.host.laptop.enable = lib.mkForce true;
 
-    # System additional features
-    darkone.system = {
-    };
-
-    # Daemons
-    darkone.services = {
-      printing.loadAll = lib.mkDefault true;
-    };
   };
 }

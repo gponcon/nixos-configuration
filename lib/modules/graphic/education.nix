@@ -15,7 +15,7 @@ in
     darkone.graphic.education = {
       enable = lib.mkEnableOption "Default useful packages";
       enableBaby = lib.mkEnableOption "Sofwares for childs <= 6-8 yo";
-      enableAdo = lib.mkEnableOption "Sofwares for childs >= 12-14 yo";
+      enableTeenager = lib.mkEnableOption "Sofwares for childs >= 12-14 yo";
       enableGames = lib.mkEnableOption "Additional games packages";
     };
   };
@@ -27,7 +27,7 @@ in
       with pkgs;
       (
         # 0-6(-12) yo
-        if cfg.enableBaby && !cfg.enableAdo then
+        if cfg.enableBaby && !cfg.enableTeenager then
           [
             gcompris
             tuxpaint
@@ -36,14 +36,14 @@ in
           ++ (if cfg.enableGames then [ rili ] else [ ])
 
         # 6-12 yo
-        else if !cfg.enableBaby && !cfg.enableAdo then
+        else if !cfg.enableBaby && !cfg.enableTeenager then
           [
             #childsplay (not found)
             #tuxblocs (not found)
           ]
 
         # (6-)12-18+ yo
-        else if !cfg.enableBaby && cfg.enableAdo then
+        else if !cfg.enableBaby && cfg.enableTeenager then
           [
             #scratch (not found)
             #tuxmath (not found)

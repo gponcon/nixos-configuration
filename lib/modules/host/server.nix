@@ -18,7 +18,7 @@ in
       enable = lib.mkEnableOption "Server host minimal configuration";
 
       # Enable systemd watchdog
-      watchdog = lib.mkOption {
+      enableWatchdog = lib.mkOption {
         type = lib.types.bool;
         default = true;
         example = false;
@@ -30,7 +30,7 @@ in
   config = lib.mkIf cfg.enable {
 
     # Load minimal configuration
-    darkone.host.minimal.enable = true;
+    darkone.host.minimal.enable = lib.mkForce true;
 
     # Darkone modules
     darkone.system.documentation.enable = lib.mkDefault true;
@@ -78,7 +78,7 @@ in
       enableEmergencyMode = false;
 
       # https://0pointer.de/blog/projects/watchdog.html
-      watchdog = lib.mkIf cfg.watchdog {
+      watchdog = lib.mkIf cfg.enableWatchdog {
 
         # systemd will send a signal to the hardware watchdog at half
         # the interval defined here, so every 15s.
