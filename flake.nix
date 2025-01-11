@@ -39,14 +39,14 @@
             hostname = host.hostname;
           };
           modules = [
-            ./modules
-            ./local/hosts/${host.hostname}
+            ./lib/modules
+            ./usr/hosts/${host.hostname}
             home-manager.nixosModules.home-manager
             {
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users = nixpkgs.lib.genAttrs host.users (user: import ./local/users/${user}/home.nix);
+                users = nixpkgs.lib.genAttrs host.users (user: import ./usr/users/${user}/home.nix);
               };
             }
           ];
@@ -65,7 +65,9 @@
         {
           hostname = "nlt"; # static or generated host
           users = [ "gponcon" ]; # static or generated users
-          deployment = { # the "deployment" section of colmena
+
+          # the "deployment" section of colmena
+          deployment = {
             tags = [
               "desktop"
               "admin"
@@ -113,38 +115,6 @@
             allowLocalDeployment = nixpkgs.lib.mkDefault false;
             targetUser = null;
           };
-
-          #builtins.listToAttrs (map mkColmenaHosts hosts);
-
-          ## Laptop
-          #nlt = {
-          #  deployment = {
-          #    tags = [
-          #      "desktop"
-          #      "admin"
-          #      "local"
-          #    ];
-          #    allowLocalDeployment = true;
-          #    buildOnTarget = true;
-          #  };
-          #};
-
-          ## Test vm
-          #test = {
-          #  deployment = {
-          #    tags = [
-          #      "test"
-          #      "admin"
-          #    ];
-          #    allowLocalDeployment = false;
-          #    targetHost = "test";
-          #    buildOnTarget = false;
-          #  };
-          #};
-
-          #rpi = { pkgs, ... }: {
-          #  nixpkgs.system = "aarch64-linux";
-          #};
 
         }
         // builtins.listToAttrs (map mkColmenaHost hosts)

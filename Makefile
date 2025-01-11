@@ -20,14 +20,14 @@ optimize:
 defaults: modules-default overlays-default
 
 modules-default:
-	cd modules
+	cd lib/modules
 	echo "{ imports = [" > default.nix
 	find . -name "*.nix" | grep -v default.nix >> default.nix
 	echo "];}" >> default.nix
 	nixfmt default.nix
 
 overlays-default:
-	cd overlays
+	cd lib/overlays
 	echo "{ imports = [" > default.nix
 	ls *.nix | grep -v default.nix >> default.nix
 	echo "];}" >> default.nix
