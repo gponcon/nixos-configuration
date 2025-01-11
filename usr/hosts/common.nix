@@ -2,7 +2,6 @@
 {
   imports = [
     ./${hostname}/hardware-configuration.nix
-    ./../modules
   ];
 
   # Darkone modules

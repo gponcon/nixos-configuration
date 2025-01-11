@@ -27,53 +27,69 @@
       colmena,
       ...
     }:
-    {
 
-      # A laptop
-      nixosConfigurations.nlt = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          hostname = "nlt";
+    let
+      system = "x86_64-linux";
+
+      mkNixosHost = host: {
+        name = host.hostname;
+        value = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            hostname = host.hostname;
+          };
+          modules = [
+            ./lib/modules
+            ./usr/hosts/${host.hostname}
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users = nixpkgs.lib.genAttrs host.users (user: import ./usr/users/${user}/home.nix);
+              };
+            }
+          ];
         };
-        modules = [
-          ./hosts/nlt
-
-          # Utilisation de home manager comme module flake
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.gponcon = import ./users/gponcon/home.nix;
-
-            # Optionally, use home-manager.extraSpecialArgs to pass
-            # arguments to home.nix
-          }
-
-          # Version de colmena compatible avec celle utilisée par colmenaHive
-          # Ne fonctione pas...
-          #(import ./overlays/colmena.nix)
-        ];
       };
 
-      # VM de test
-      nixosConfigurations.test = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
+      mkColmenaHost = host: {
+        name = host.hostname;
+        value = {
+          deployment = host.deployment;
+        };
+      };
+
+      # List of hosts
+      hosts = [
+        {
+          hostname = "nlt"; # static or generated host
+          users = [ "gponcon" ]; # static or generated users
+
+          # the "deployment" section of colmena
+          deployment = {
+            tags = [
+              "desktop"
+              "admin"
+              "local"
+            ];
+            allowLocalDeployment = true;
+          };
+        }
+        {
           hostname = "test";
-        };
-        modules = [
-          ./hosts/test
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.gponcon = import ./users/gponcon/home-lite.nix;
-          }
-        ];
-      };
-
-      # Not working with that
-      #colmenaHive = colmena.lib.makeHive self.outputs.colmena;
+          users = [ "gponcon" ];
+          deployment = {
+            tags = [
+              "test"
+              "admin"
+            ];
+          };
+        }
+      ];
+    in
+    {
+      nixosConfigurations = builtins.listToAttrs (map mkNixosHost hosts);
 
       # https://github.com/zhaofengli/colmena/issues/60#issuecomment-1510496861
       colmena =
@@ -100,37 +116,9 @@
             targetUser = null;
           };
 
-          # Laptop
-          nlt = {
-            deployment = {
-              tags = [
-                "desktop"
-                "admin"
-                "local"
-              ];
-              allowLocalDeployment = true;
-              buildOnTarget = true;
-            };
-          };
-
-          # Test vm
-          test = {
-            deployment = {
-              tags = [
-                "test"
-                "admin"
-              ];
-              allowLocalDeployment = false;
-              targetHost = "test";
-              buildOnTarget = false;
-            };
-          };
-
-          #rpi = { pkgs, ... }: {
-          #  nixpkgs.system = "aarch64-linux";
-          #};
-
         }
+        // builtins.listToAttrs (map mkColmenaHost hosts)
         // builtins.mapAttrs (_name: value: { imports = value._module.args.modules; }) conf;
+
     }; # outputs
 }

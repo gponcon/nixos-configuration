@@ -21,7 +21,7 @@ in
     environment.systemPackages = with pkgs; [
       colmena
       deadnix
-      gnumake
+      just
       nixfmt-rfc-style
     ];
 
