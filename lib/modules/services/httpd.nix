@@ -17,7 +17,9 @@ in
     services.httpd = {
       enable = true;
       enablePHP = true;
-      adminAddr = "gponcon@sn-pm.lan";
+
+      # TODO: email from configuration
+      adminAddr = "darkone@darkone.yt";
       virtualHosts.localhost.documentRoot = "/var/www";
       virtualHosts.localhost.enableUserDir = true;
       extraConfig = ''

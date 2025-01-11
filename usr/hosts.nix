@@ -4,7 +4,7 @@
 [
   {
     hostname = "nlt"; # static or generated host
-    users = [ "gponcon" ]; # static or generated users
+    users = [ "darkone" ]; # static or generated users
 
     # the "deployment" section of colmena
     deployment = {
@@ -18,7 +18,7 @@
   }
   {
     hostname = "test";
-    users = [ "gponcon" ];
+    users = [ "darkone" ];
     deployment = {
       tags = [
         "test"

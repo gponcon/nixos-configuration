@@ -2,8 +2,8 @@
 
 { ... }:
 {
-  home.username = "gponcon";
-  home.homeDirectory = "/home/gponcon";
+  home.username = "darkone";
+  home.homeDirectory = "/home/darkone";
 
   imports = [
     ./home/git.nix

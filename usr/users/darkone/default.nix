@@ -1,11 +1,11 @@
 # Chargé par la conf globale
-# Pour définir le user gponcon
+# Pour définir le user darkone
 
 { pkgs, ... }:
 {
-  users.users.gponcon = {
+  users.users.darkone = {
     isNormalUser = true;
-    description = "gponcon";
+    description = "darkone";
     extraGroups = [
       "networkmanager"
       "wheel"
