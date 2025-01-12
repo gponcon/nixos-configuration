@@ -27,7 +27,7 @@ install:
 	fi
 	ssh-add {{nixKeyFile}}
 
-# fix + defaults + check
+# fix + generate + check
 clean: fix generate check
 
 # Check nix files with deadnix
@@ -39,7 +39,7 @@ check:
 flake-check:
 	nix flake check
 
-# fmt (nixfmt) + optimize (deadnix)
+# format (nixfmt) + optimize (deadnix)
 fix: format optimize
 
 # Recursive nixfmt on all nix files
@@ -50,7 +50,7 @@ format:
 optimize:
 	find . -name "*.nix" -exec deadnix -eq {} \;
 
-# Generate the nix generated files
+# Update the nix generated files
 generate: _gen-default-modules _gen-default-overlays _gen-hosts
 
 # Generate default.nix of lib/modules dir
@@ -88,9 +88,9 @@ _gen-hosts:
 	fi
 	nixfmt "{{generatedHostFile}}"
 
-# Register a new node (wip)
-ssh-copy TARGET:
+# Copy local id on a new node (wip)
+ssh-copy-id host:
 	#!/usr/bin/env bash
-	ssh-copy-id -i "{{nixKeyFile}}.pub" -t /home/nix/.ssh/authorized_keys {{TARGET}}
-	ssh {{TARGET}} 'chown -R nix:users /home/nix/.ssh'
+	ssh-copy-id -i "{{nixKeyFile}}.pub" -t /home/nix/.ssh/authorized_keys {{host}}
+	ssh {{host}} 'chown -R nix:users /home/nix/.ssh'
 
