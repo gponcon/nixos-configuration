@@ -19,6 +19,9 @@
     # No email software
     graphic.packages.enableEmail = false;
 
+    # Virtualbox (to put in a profile)
+    graphic.virtualbox.enable = true;
+
     # I'm the master, not a node
     host.isNode = false;
 

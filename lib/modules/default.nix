@@ -13,6 +13,7 @@
     ./graphic/gnome.nix
     ./graphic/education.nix
     ./graphic/virt-manager.nix
+    ./graphic/virtualbox.nix
     ./graphic/packages.nix
     ./graphic/obsidian.nix
     ./host/vm.nix
