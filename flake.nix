@@ -1,5 +1,5 @@
 {
-  description = "Darkone Framework";
+  description = "NixOS Darkone Framework";
 
   # Usefull cache for colmena
   nixConfig = {
@@ -17,6 +17,9 @@
 
     colmena.url = "github:zhaofengli/colmena/main";
     colmena.inputs.nixpkgs.follows = "nixpkgs";
+
+    nixos-generators.url = "github:nix-community/nixos-generators";
+    nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -25,11 +28,31 @@
       nixpkgs,
       home-manager,
       colmena,
+      nixos-generators,
       ...
     }:
 
     let
+
+      # Main system
       system = "x86_64-linux";
+
+      # Start img common configuration
+      startImgParams = {
+        system = system;
+        modules = [
+          {
+            # Pin nixpkgs to the flake input, so that the packages installed
+            # come from the flake inputs.nixpkgs.url.
+            nix.registry.nixpkgs.flake = nixpkgs;
+
+            # set disk size to to 20G
+            virtualisation.diskSize = 20 * 1024;
+          }
+          ./lib/modules
+          ./lib/hosts/start-img.nix
+        ];
+      };
 
       # The hosts.nix generated file (just generate)
       hosts = import ./var/generated/hosts.nix;
@@ -47,7 +70,11 @@
             home-manager.nixosModules.home-manager
             {
               home-manager = {
+
+                # Use global packages from nixpkgs
                 useGlobalPkgs = true;
+
+                # Install in /etc/profiles instead of ~/nix-profiles.
                 useUserPackages = true;
                 users = nixpkgs.lib.genAttrs host.users (user: import ./usr/users/${user}/home.nix);
                 extraSpecialArgs = {
@@ -130,6 +157,59 @@
         }
         // builtins.listToAttrs (map mkColmenaHost hosts)
         // builtins.mapAttrs (_name: value: { imports = value._module.args.modules; }) conf;
+
+      ## A single nixos config outputting multiple formats.
+      ## Alternatively put this in a configuration.nix.
+      #nixosModules.myFormats =
+      #  { config, ... }:
+      #  {
+      #    imports = [
+      #      nixos-generators.nixosModules.all-formats
+      #    ];
+      #  };
+
+      ## a machine consuming the module
+      #nixosConfigurations.start-img = nixpkgs.lib.nixosSystem {
+      #  modules = [
+      #    {
+      #      # Pin nixpkgs to the flake input, so that the packages installed
+      #      # come from the flake inputs.nixpkgs.url.
+      #      nix.registry.nixpkgs.flake = nixpkgs;
+      #      # set disk size to to 20G
+      #      virtualisation.diskSize = 20 * 1024;
+      #    }
+      #    ./lib/modules
+      #    ./lib/hosts/start-img.nix
+      #    self.nixosModules.myFormats
+      #  ];
+      #};
+
+      # Start images generators
+      packages.x86_64-linux = {
+        start-img-iso = nixos-generators.nixosGenerate (
+          startImgParams
+          // {
+            format = "iso";
+            specialArgs = {
+              imgFormat = "iso";
+              hostname = "ndf-start-iso";
+            };
+          }
+        );
+        start-img-vbox = nixos-generators.nixosGenerate (
+          startImgParams
+          // {
+            format = "virtualbox";
+            specialArgs = {
+              imgFormat = "vbox";
+              hostname = "ndf-start-vbox";
+            };
+          }
+        );
+        start-img-qcow = nixos-generators.nixosGenerate startImgParams // {
+          format = "qcow";
+        };
+      };
 
     }; # outputs
 }

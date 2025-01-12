@@ -24,4 +24,14 @@
       ];
     };
   }
+  {
+    hostname = "test2";
+    users = [ "darkone" ];
+    deployment = {
+      tags = [
+        "test"
+      ];
+      targetHost = "ndf-start-iso";
+    };
+  }
 ]
