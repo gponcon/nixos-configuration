@@ -155,8 +155,8 @@
           };
 
         }
-        // builtins.listToAttrs (map mkColmenaHost hosts)
-        // builtins.mapAttrs (_name: value: { imports = value._module.args.modules; }) conf;
+        // builtins.mapAttrs (_name: value: { imports = value._module.args.modules; }) conf
+        // builtins.map (value: { ${value.hostname} = { deployment = value.deployment; }; }) hosts;
 
       ## A single nixos config outputting multiple formats.
       ## Alternatively put this in a configuration.nix.
