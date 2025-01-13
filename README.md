@@ -29,6 +29,7 @@ A la racine :
 - `lib` -> modules, users, hosts du framework
 - `usr` -> Projet local (en écriture)
 - `var` -> Fichiers générés et logs
+- `src` -> Fichiers source du générateur
 
 ```
 flake.nix  <-- Main flake
@@ -76,16 +77,22 @@ usr/               <-- Writable zone for local network project
 ├── modules/(...)  <-- Local modules
 ├── secrets/(...)  <-- Local secrets file
 ├── users/(...)    <-- Static users
-└── hosts/(...)    <-- Static hosts
+├── hosts/(...)    <-- Static hosts
+└── config.toml    <-- Local configuration used by the generator
 var/
 ├── log/
 └── generated/  <-- Generated files
     ├── hosts/  <-- Hosts to deploy
     └── users/  <-- Users to deploy
+src/(...)       <-- Maintenance program sources
 ```
 
 > [!NOTE]
 > Pour le moment il est prévu que le framework soit cloné et que le projet de l'utilisateur soit situé dans `usr`, qui peut recevoir un projet git indépendant. Avoir une séparation entre le projet local et le framework (qui serait un simple input du flake local) est en cours d'étude.
+
+## Le générateur
+
+Son rôle est de générer une configuration statique pure à partir d'une définition de machines (hosts), utilisateurs et groupes en provenance de diverses sources (déclarations statiques, ldap, etc. configurées dans `usr/config.toml`). La configuration nix générée est intégrée au dépôt afin d'être fixée et utilisée par le flake.
 
 ## Exemples
 
