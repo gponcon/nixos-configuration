@@ -3,7 +3,7 @@
 Une configuration NixOS pensée pour devenir à terme un framework pour la création et la gestion d'un réseau multi-host et multi-utilisateur avec NixOS.
 
 > [!WARNING]  
-> Ce projet est en cours de développement, il est utilisable en l'état, mais incomplet. En outre, il comporte des éléments de personnalisation issus de mes configurations, qui seront retirés de la version utilisable.
+> Ce projet est en cours de développement.
 
 Ce framework simplifie les choses grâce à&nbsp;:
 
@@ -169,45 +169,51 @@ Pour X postes monotypes qui ont Y utilisateurs :
 Version minimale :
 
 ```nix
-# hosts/server-gateway.nix
-darkone.host.gateway.my-gateway = {
-  wan.interface = "eth0";
-  lan.interfaces = [ "eth1" "eth2" ];
-};
+{
+  # hosts/server-gateway.nix
+  darkone.host.gateway.my-gateway = {
+    wan.interface = "eth0";
+    lan.interfaces = [ "eth1" "eth2" ];
+  };
+}
 ```
 
 Version plus complète :
 
 ```nix
-# hosts/server-gateway.nix
-darkone.host.gateway.my-other-gateway = {
-  wan = {
-    interface = "eth0";
-    gateway = "192.168.0.1"; # optional
-  };
-  lan = {
-    interfaces = [ "wlan0" "enu1u4" ]; # wlan must be an AP
-    bridgeIp = "192.168.1.1";
-    domain = "arthur.lan"; # optional (default is <hostname>.lan)
-    dhcp = { # optional
-      enable = true;
-      range = "192.168.1.100,192.168.1.230,24h";
-      hosts = [
-        "e8:ff:1e:d0:44:82,192.168.1.2,darkone,infinite"
-        "f0:1f:af:13:62:a5,192.168.1.3,laptop,infinite"
-      ];
-      extraOptions = [
-        "option:ntp-server,191.168.1.1"
+{
+  # hosts/server-gateway.nix
+  darkone.host.gateway.my-other-gateway = {
+    wan = {
+      interface = "eth0";
+      gateway = "192.168.0.1"; # optional
+    };
+    lan = {
+      interfaces = [ "wlan0" "enu1u4" ]; # wlan must be an AP
+      bridgeIp = "192.168.1.1";
+      domain = "arthur.lan"; # optional (default is <hostname>.lan)
+      dhcp = { # optional
+        enable = true;
+        range = "192.168.1.100,192.168.1.230,24h";
+        hosts = [
+          "e8:ff:1e:d0:44:82,192.168.1.2,darkone,infinite"
+          "f0:1f:af:13:62:a5,192.168.1.3,laptop,infinite"
+        ];
+        extraOptions = [
+          "option:ntp-server,191.168.1.1"
+        ];
+      };
+      accessPoints = [
+        {
+          wlan0 = {
+            ssid = "Mon AP";
+            passphrase = "Un password";
+          };
+        }
       ];
     };
-    accessPoints = [
-      wlan0 = {
-        ssid = "Mon AP";
-        passphrase = "Un password";
-      };
-    ];
   };
-};
+}
 ```
 
 Déploiement (3 possibilités) :
@@ -241,11 +247,12 @@ nixos-rebuild switch --flake path:.#gateway --target-host admin@gateway --build-
 - [ ] Postes types (bureautique, développeur, administrateur, enfant).
 - [ ] Services pré-configurés pour serveurs (nextcloud, etc.).
 - [ ] Gestion centralisée des utilisateurs avec [lldap](https://github.com/lldap/lldap).
-- [ ] Builder d'[ISOs d'installation](https://github.com/nix-community/nixos-generators) pour les machines à intégrer.
+- [x] Builder d'[ISOs d'installation](https://github.com/nix-community/nixos-generators) pour les machines à intégrer.
 - [ ] Refactoring des commentaires de code en anglais.
 - [ ] Documentation FR et EN (wip).
 - [ ] Intégration de [nixvim](https://nix-community.github.io/nixvim/).
-- [ ] Gestion du secureboot avec [lanzaboote](https://github.com/nix-community/lanzaboote).
+- [ ] Gestion du secure boot avec [lanzaboote](https://github.com/nix-community/lanzaboote).
+- [ ] Générateur de configuration nix statique (wip).
 
 ## Idées en cours d'étude
 
@@ -257,46 +264,52 @@ nixos-rebuild switch --flake path:.#gateway --target-host admin@gateway --build-
 Master (déclaration fonctionnelle sans autre configuration) :
 
 ```nix
-# Host k8s-master
-darkone.k8s.master = {
-  enable = true;
-  modules = {
-    nextcloud.enable = true;
-    forgejo.enable = true;
+{
+  # Host k8s-master
+  darkone.k8s.master = {
+    enable = true;
+    modules = {
+      nextcloud.enable = true;
+      forgejo.enable = true;
+    };
   };
-};
+}
 ```
 
 Slave (connu et autorisé par master car déclaré dans la même conf nix) :
 
 ```nix
-# Host k8s-slave-01
-darkone.k8s.slave = {
-  enable = true;
-  master.hostname = "k8s-master";
-};
+{
+  # Host k8s-slave-01
+  darkone.k8s.slave = {
+    enable = true;
+    master.hostname = "k8s-master";
+  };
+}
 ```
 
 Master avec options :
 
 ```nix
-# Host k8s-master
-darkone.k8s.master = {
-  enable = true;
-  modules = {
-    nextcloud.enable = true;
-    forgejo.enable = true;
+{
+  # Host k8s-master
+  darkone.k8s.master = {
+    enable = true;
+    modules = {
+      nextcloud.enable = true;
+      forgejo.enable = true;
+    };
+    preemtibleSlaves = {
+      hosts = [ "k8s-node-01" "k8s-node-02" ];
+      xen.hypervisors = [
+        {
+          dom0 = "xenserver-01";
+          vmTemplate = "k8s-node";
+          minStatic = 3;
+          maxPreemptible = 20;
+        }
+      ];
+    };
   };
-  preemtibleSlaves = {
-    hosts = [ "k8s-node-01" "k8s-node-02" ];
-    xen.hypervisors = [
-      {
-        dom0 = "xenserver-01";
-        vmTemplate = "k8s-node";
-        minStatic = 3;
-        maxPreemptible = 20;
-      }
-    ];
-  };
-};
+}
 ```
