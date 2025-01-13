@@ -4,7 +4,6 @@ namespace Darkone\NixGenerator;
 
 use Darkone\NixGenerator\Item\Host;
 use Darkone\NixGenerator\Token\NixAttrSet;
-use Darkone\NixGenerator\Token\NixList;
 use Darkone\NixGenerator\NixException;
 use Symfony\Component\Yaml\Yaml;
 
@@ -15,13 +14,15 @@ class Configuration extends NixAttrSet
     const TYPE_ARRAY = 'array';
     const TYPE_INT = 'int';
 
+    const REGEX_HOSTNAME = '/^[a-zA-Z][a-zA-Z0-9_-]{2,59}$/';
+
     private string $formatter = 'nixfmt';
     private array|null $lldapConfig = null;
 
     /**
      * @var Host[]
      */
-    private array $hosts;
+    private array $hosts = [];
 
     /**
      * Load nix configuration
@@ -89,9 +90,54 @@ class Configuration extends NixAttrSet
             return;
         }
         $this->assert(self::TYPE_ARRAY, $config['hosts'], "Bad hosts root value");
-        $this->hosts = [];
+        $this->loadStaticHosts($config['hosts']['static'] ?? []);
+        $this->loadRangeHosts($config['hosts']['range'] ?? []);
+        $this->loadListHosts($config['hosts']['list'] ?? []);
+    }
 
-        // TODO
+    /**
+     * @throws NixException
+     */
+    private function loadStaticHosts(array $staticHosts): void
+    {
+        array_map(function (array $host) {
+            $this->assertHostCommonParams($host);
+            $this->assertHostName($host['hostname']);
+            $host = new Host();
+            }, $staticHosts);
+    }
+
+    private function loadRangeHosts(array $staticHosts): void
+    {
+    }
+
+    private function loadListHosts(array $staticHosts): void
+    {
+    }
+
+    /**
+     * @throws NixException
+     */
+    public function assertHostName(string $hostName): void
+    {
+        if (array_key_exists($hostName, $this->hosts)) {
+            throw new NixException('Host name collision "' . $hostName . '" (value already exists)');
+        }
+        if (!preg_match(self::REGEX_HOSTNAME, $hostName)) {
+            throw new NixException('Invalid host name "' . $hostName . '" (must match ' . self::REGEX_HOSTNAME . ')');
+        }
+    }
+
+    /**
+     * @throws NixException
+     */
+    public function assertHostCommonParams(array $host): void
+    {
+        $this->assert(self::TYPE_STRING, $host['hostname'] ?? null, "A hostname is required");
+        $this->assert(self::TYPE_STRING, $host['name'] ?? null, "A name (description) is required");
+        $this->assert(self::TYPE_ARRAY, $host['users'] ?? null, "A list of users is required");
+        $this->assert(self::TYPE_ARRAY, $host['colmena'] ?? null, "A colmena configuration is required");
+        $this->assert(self::TYPE_ARRAY, $host['colmena']['deployment']['tags'] ?? null, "A colmena deployment tags is required");
     }
 
     /**

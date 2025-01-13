@@ -37,6 +37,26 @@ hostProvider:
 # Nix DNF static hosts (nested hosts.<type>) (wip)
 #------------------------------------------------------------------------------
 
+# Static users
+# -> profile is HomeManager profile
+# -> groups is used to select related hosts
+users:
+
+    darkone:
+        name: "Darkone Linux"
+        email: "darkone@darkone.yt"
+        profile: "admin"
+        groups: [ "trainers", "employes" ]
+    john:
+        name: "John Doe"
+        email: "john@doe.fr"
+        profile: "office"
+        groups: [ "students" ]
+
+# Hosts declaration
+# -> users are explicit users
+# -> groups are used to select related users
+#    and add colmena tags
 hosts:
 
     # Static hosts
@@ -46,6 +66,7 @@ hosts:
         - hostname: "nlt"
           name: "Darkone Laptop"
           users: [ "darkone" ]
+          groups: [ "laptop", "admin", "local" ]
           colmena:
               deployment:
                   tags: [ "laptop", "admin", "local" ]
@@ -58,7 +79,7 @@ hosts:
         - hostname: "vbox-%'02s"
           name: "Virtual %'02s"
           range: [ 1, 3 ]
-          users: [ "darkone" ]
+          users: [ "darkone", "john" ]
           colmena: { deployment: { tags: [ "test" ] } }
 
     # Host groups by list of hostnames
