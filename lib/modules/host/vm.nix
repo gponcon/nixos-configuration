@@ -40,6 +40,5 @@ in
       "xen-pcifront"
       "xen-scsifront"
     ];
-
   };
 }

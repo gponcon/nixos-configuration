@@ -23,6 +23,5 @@ in
 
     # Packages
     environment.systemPackages = with pkgs; [ obsidian ];
-
   };
 }

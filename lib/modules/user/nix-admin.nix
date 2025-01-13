@@ -20,6 +20,5 @@ in
 
     # Nix features
     darkone.admin.nix.enable = lib.mkDefault true;
-
   };
 }

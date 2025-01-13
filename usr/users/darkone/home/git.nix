@@ -11,6 +11,8 @@
       "*~"
       "*.swp"
     ];
+
+    # TODO
     #extraConfig = {};
     #userName = "Darkone Linux";
     #userEmail = "darkone@darkone.yt";

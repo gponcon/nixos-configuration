@@ -16,6 +16,5 @@ in
 
     # Based on laptop configuration
     darkone.host.laptop.enable = lib.mkForce true;
-
   };
 }

@@ -23,6 +23,5 @@ in
 
     # Permissions
     users.extraGroups.vboxusers.members = normal-users;
-
   };
 }

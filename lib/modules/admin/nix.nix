@@ -61,6 +61,5 @@ in
 
     # We need ssh agent to deploy nodes
     programs.ssh.startAgent = true;
-
   };
 }

@@ -19,6 +19,5 @@ in
     darkone.graphic.education.enable = lib.mkDefault true;
     darkone.graphic.education.enableBaby = lib.mkDefault true;
     darkone.graphic.education.enableGames = lib.mkDefault true;
-
   };
 }

@@ -1,5 +1,6 @@
 { pkgs, ... }:
 {
+  # TODO vim common module
   # Conf complète : https://github.com/jagajaga/my_configs/blob/master/.nixpkgs/vimrc.nix
   programs.vim = {
     enable = true;

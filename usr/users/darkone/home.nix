@@ -12,23 +12,6 @@
     #./home/gtk.nix
   ];
 
-  # Déjà dans la conf globale, à étudier
-  #programs.zsh = {
-  #  enable = true;
-  #  enableCompletion = true;
-  #  autosuggestion.enable = true;
-  #  syntaxHighlighting.enable = true;
-  #  shellAliases = {
-  #    ll = "ls -l";
-  #    update = "sudo nixos-rebuild switch";
-  #  };
-  #  history.size = 10000;
-  #  promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-  #  shellInit = ''
-  #    export MANPAGER="less -M -R -i --use-color -Dd+R -Du+B -DHkC -j5";
-  #  '';
-  #};
-
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards

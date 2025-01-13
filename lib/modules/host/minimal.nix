@@ -3,7 +3,6 @@ let
   cfg = config.darkone.host;
 in
 {
-
   options = {
     darkone.host.minimal.enable = lib.mkEnableOption "Minimal host configuration";
 
@@ -39,6 +38,5 @@ in
 
     # Is a local network managed node (true by default)
     darkone.user.isNode = lib.mkDefault true;
-
   };
 }

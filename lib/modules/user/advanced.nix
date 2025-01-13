@@ -27,6 +27,5 @@ in
 
     # Daemons
     darkone.service.httpd.enable = lib.mkDefault false;
-
   };
 }

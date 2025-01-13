@@ -73,6 +73,5 @@ in
       );
 
     darkone.graphic.obsidian = lib.mkIf (!cfg.enableBaby) { enable = true; };
-
   };
 }
