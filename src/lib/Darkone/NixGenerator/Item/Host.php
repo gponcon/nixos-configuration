@@ -12,9 +12,9 @@ class Host
     private array $users = [];
 
     /**
-     * Colmena host configuration
+     * Host groups
      */
-    private array $colmena = [];
+    private array $groups = [];
 
     public function getHostname(): string
     {
@@ -38,14 +38,14 @@ class Host
         return $this;
     }
 
-    public function getColmena(): array
+    public function getGroups(): array
     {
-        return $this->colmena;
+        return $this->groups;
     }
 
-    public function setColmena(array $colmena): Host
+    public function setGroups(array $groups): Host
     {
-        $this->colmena = $colmena;
+        $this->groups = $groups;
         return $this;
     }
 }

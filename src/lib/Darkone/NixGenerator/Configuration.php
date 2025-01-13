@@ -3,6 +3,7 @@
 namespace Darkone\NixGenerator;
 
 use Darkone\NixGenerator\Item\Host;
+use Darkone\NixGenerator\Item\User;
 use Darkone\NixGenerator\Token\NixAttrSet;
 use Darkone\NixGenerator\NixException;
 use Symfony\Component\Yaml\Yaml;
@@ -15,9 +16,16 @@ class Configuration extends NixAttrSet
     const TYPE_INT = 'int';
 
     const REGEX_HOSTNAME = '/^[a-zA-Z][a-zA-Z0-9_-]{2,59}$/';
+    const REGEX_LOGIN = '/^[a-zA-Z][a-zA-Z0-9_-]{2,59}$/';
+    const REGEX_NAME = '/^.{3,128}$/';
 
     private string $formatter = 'nixfmt';
     private array|null $lldapConfig = null;
+
+    /**
+     * @var User[]
+     */
+    private array $users = [];
 
     /**
      * @var Host[]
@@ -31,9 +39,10 @@ class Configuration extends NixAttrSet
     public function loadYamlFile(string $configFile): Configuration
     {
         $config = Yaml::parseFile($configFile);
+        $this->loadUsers($config);
+        $this->loadHosts($config);
         $this->loadFormatter($config);
         $this->loadLldapProvider($config);
-        $this->loadHosts($config);
         return $this;
     }
 
@@ -42,9 +51,9 @@ class Configuration extends NixAttrSet
      */
     public function loadFormatter(array $config): void
     {
-        if (isset($config['formatter'])) {
-            $this->assert(self::TYPE_STRING, $config['formatter'], 'Bad formatter type');
-            $this->formatter = $config['formatter'];
+        if (isset($config['nix']['formatter'])) {
+            $this->assert(self::TYPE_STRING, $config['nix']['formatter'], 'Bad formatter type');
+            $this->formatter = $config['nix']['formatter'];
         }
     }
 
@@ -68,7 +77,6 @@ class Configuration extends NixAttrSet
             if (!file_exists($pwdFile)) {
                 throw new NixException('Lldap password file "' . $pwdFile . '" not found.');
             }
-            $this->formatter = $config['formatter'];
         }
     }
 
@@ -79,6 +87,26 @@ class Configuration extends NixAttrSet
     {
         $this->assert(self::TYPE_ARRAY, $this->lldapConfig, "No lldap configuration loaded");
         return $this->lldapConfig;
+    }
+
+    /**
+     * @throws NixException
+     */
+    private function loadUsers(array $config): void
+    {
+        $this->assert(self::TYPE_ARRAY, $config['users'] ?? null, "Users not found in configuration");
+        foreach ($config['users'] as $login => $user) {
+            $this->assert(self::TYPE_STRING, $login, "A user name is required", self::REGEX_LOGIN);
+            $this->assert(self::TYPE_STRING, $user['email'] ?? '', "Bad email type for " . $login); // TODO email validation
+            $this->assert(self::TYPE_STRING, $user['name'] ?? null, "A valid user name is required for " . $login, self::REGEX_NAME);
+            $this->assert(self::TYPE_ARRAY, $user['groups'] ?? [], "Bad user group type for " . $login);
+            $this->users[$login] = (new User())
+                ->setLogin($login)
+                ->setEmail($user['email'])
+                ->setName($user['name'])
+                ->setGroups($user['groups']);
+        }
+        print_r($this->users);
     }
 
     /**
@@ -103,8 +131,10 @@ class Configuration extends NixAttrSet
         array_map(function (array $host) {
             $this->assertHostCommonParams($host);
             $this->assertHostName($host['hostname']);
-            $host = new Host();
+            $this->hosts[$host['hostname']] = (new Host())
+                ->setHostname($host['hostname']);
             }, $staticHosts);
+        print_r($this->hosts);
     }
 
     private function loadRangeHosts(array $staticHosts): void
@@ -136,8 +166,8 @@ class Configuration extends NixAttrSet
         $this->assert(self::TYPE_STRING, $host['hostname'] ?? null, "A hostname is required");
         $this->assert(self::TYPE_STRING, $host['name'] ?? null, "A name (description) is required");
         $this->assert(self::TYPE_ARRAY, $host['users'] ?? null, "A list of users is required");
-        $this->assert(self::TYPE_ARRAY, $host['colmena'] ?? null, "A colmena configuration is required");
-        $this->assert(self::TYPE_ARRAY, $host['colmena']['deployment']['tags'] ?? null, "A colmena deployment tags is required");
+        //$this->assert(self::TYPE_ARRAY, $host['colmena'] ?? null, "A colmena configuration is required");
+        //$this->assert(self::TYPE_ARRAY, $host['colmena']['deployment']['tags'] ?? null, "A colmena deployment tags is required");
     }
 
     /**

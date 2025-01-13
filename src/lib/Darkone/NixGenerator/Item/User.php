@@ -64,4 +64,9 @@ class User
     {
         return $this->groups;
     }
+
+    public function hasGroup(string $groupName): bool
+    {
+        return in_array($groupName, $this->groups);
+    }
 }
