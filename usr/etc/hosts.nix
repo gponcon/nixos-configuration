@@ -1,5 +1,6 @@
 # This file contains a list of manually declared hosts
 # for local network and is read by the root flake file.
+# Will be replace by config.toml
 
 [
   {
