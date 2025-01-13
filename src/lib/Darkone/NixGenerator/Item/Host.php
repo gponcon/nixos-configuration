@@ -5,9 +5,10 @@ namespace Darkone\NixGenerator\Item;
 class Host
 {
     private string $hostname;
+    private string $name;
 
     /**
-     * @var User[]
+     * @var array of string (logins)
      */
     private array $users = [];
 
@@ -27,14 +28,25 @@ class Host
         return $this;
     }
 
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): Host
+    {
+        $this->name = $name;
+        return $this;
+    }
+
     public function getUsers(): array
     {
         return $this->users;
     }
 
-    public function addUser(User $user): Host
+    public function setUsers(array $users): Host
     {
-        $this->users[] = $user;
+        $this->users = $users;
         return $this;
     }
 

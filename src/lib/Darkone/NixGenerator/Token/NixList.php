@@ -2,6 +2,7 @@
 
 namespace Darkone\NixGenerator\Token;
 
+use Darkone\NixGenerator\NixException;
 use Iterator;
 
 /**
@@ -38,6 +39,18 @@ class NixList implements NixItemInterface, Iterator
     public function addString(int|string|float $value): NixList
     {
         return $this->add((new NixValue($value))->forceString());
+    }
+
+    public function populate(array $items): NixList
+    {
+        array_map(fn (mixed $item): NixList => $this->add($item), $items);
+        return $this;
+    }
+
+    public function populateStrings(array $items): NixList
+    {
+        array_map(fn (mixed $item): NixList => $this->addString($item), $items);
+        return $this;
     }
 
     public function __toString(): string

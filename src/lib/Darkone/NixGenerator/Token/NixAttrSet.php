@@ -26,26 +26,31 @@ class NixAttrSet implements NixItemInterface, Iterator
         return $this;
     }
 
-    public function setInt(string $key, int|string|float $value): NixAttrSet
+    public function setInt(string $key, int|string|float|bool $value): NixAttrSet
     {
         return $this->set($key, (new NixValue($value))->forceInt());
     }
 
-    public function setFloat(string $key, int|string|float $value): NixAttrSet
+    public function setFloat(string $key, int|string|float|bool $value): NixAttrSet
     {
         return $this->set($key, (new NixValue($value))->forceFloat());
     }
 
-    public function setString(string $key, int|string|float $value): NixAttrSet
+    public function setString(string $key, int|string|float|bool $value): NixAttrSet
     {
         return $this->set($key, (new NixValue($value))->forceString());
+    }
+
+    public function setBool(string $key, int|string|float|bool $value): NixAttrSet
+    {
+        return $this->set($key, (new NixValue($value))->forceBool());
     }
 
     public function __toString(): string
     {
         $retVal = '';
         foreach ($this->attrSet as $key => $value) {
-            $retVal .= $key . ' = ' . $value . ';';
+            $retVal .= $key . '=' . $value . ';';
         }
 
         return '{' . $retVal . '}';

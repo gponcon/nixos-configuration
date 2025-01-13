@@ -15,6 +15,8 @@ class Configuration extends NixAttrSet
     const TYPE_ARRAY = 'array';
     const TYPE_INT = 'int';
 
+    const MAX_RANGE_BOUND = 1000;
+
     const REGEX_HOSTNAME = '/^[a-zA-Z][a-zA-Z0-9_-]{2,59}$/';
     const REGEX_LOGIN = '/^[a-zA-Z][a-zA-Z0-9_-]{2,59}$/';
     const REGEX_NAME = '/^.{3,128}$/';
@@ -99,14 +101,15 @@ class Configuration extends NixAttrSet
             $this->assert(self::TYPE_STRING, $login, "A user name is required", self::REGEX_LOGIN);
             $this->assert(self::TYPE_STRING, $user['email'] ?? '', "Bad email type for " . $login); // TODO email validation
             $this->assert(self::TYPE_STRING, $user['name'] ?? null, "A valid user name is required for " . $login, self::REGEX_NAME);
+            $this->assert(self::TYPE_STRING, $user['profile'] ?? null, "A valid user profile is required for " . $login, self::REGEX_NAME);
             $this->assert(self::TYPE_ARRAY, $user['groups'] ?? [], "Bad user group type for " . $login);
             $this->users[$login] = (new User())
                 ->setLogin($login)
                 ->setEmail($user['email'])
                 ->setName($user['name'])
+                ->setProfile($user['profile'])
                 ->setGroups($user['groups']);
         }
-        print_r($this->users);
     }
 
     /**
@@ -132,17 +135,63 @@ class Configuration extends NixAttrSet
             $this->assertHostCommonParams($host);
             $this->assertHostName($host['hostname']);
             $this->hosts[$host['hostname']] = (new Host())
-                ->setHostname($host['hostname']);
-            }, $staticHosts);
-        print_r($this->hosts);
+                ->setHostname($host['hostname'])
+                ->setName($host['name'])
+                ->setUsers($this->getAllUsers($host['users'], $host['groups']))
+                ->setGroups($host['groups']);
+        }, $staticHosts);
     }
 
-    private function loadRangeHosts(array $staticHosts): void
+    /**
+     * @todo can be optimized
+     */
+    private function getAllUsers(array $users, array $groups): array
     {
+        foreach ($groups as $group) {
+            foreach ($this->getUsers() as $user) {
+                if (!isset($users[$user->getLogin()]) && in_array($group, $user->getGroups())) {
+                    $users[] = $user->getLogin();
+                }
+            }
+        }
+
+        return $users;
+    }
+
+    private function loadRangeHosts(array $rangeHosts): void
+    {
+        array_map(fn (array $hostGroup) => $this->buildRangeHostGroup($hostGroup), $rangeHosts);
+    }
+
+    /**
+     * @throws NixException
+     */
+    private function buildRangeHostGroup(array $rangeHostGroup): void
+    {
+        $range = $this->assert(self::TYPE_ARRAY, $rangeHostGroup['range'], "Bad range type");
+        if (count($range) !== 2 || !is_int($range[0]) || !is_int($range[1])) {
+            throw new NixException('Bad range [' . $range[0] . ', ' . $range[0] . ']');
+        }
+        $count = $range[1] - $range[0];
+        if ($count < 0 || $count > self::MAX_RANGE_BOUND) {
+            throw new NixException('Range [' . $range[0] . ', ' . $range[0] . '] out of bound');
+        }
+
+        $hosts = [];
+        for ($i = $range[0]; $i <= $range[1]; $i++) {
+            $hosts[] = [
+                'hostname' => sprintf($rangeHostGroup['hostname'], $i),
+                'name' => sprintf($rangeHostGroup['name'], $i),
+                'users' => $rangeHostGroup['users'] ?? [],
+                'groups' => $rangeHostGroup['groups'] ?? [],
+            ];
+        }
+        $this->loadStaticHosts($hosts);
     }
 
     private function loadListHosts(array $staticHosts): void
     {
+        // TODO
     }
 
     /**
@@ -173,7 +222,7 @@ class Configuration extends NixAttrSet
     /**
      * @throws NixException
      */
-    public function assert(string $type, mixed $value, string $errMessage, ?string $regex = null): void
+    public function assert(string $type, mixed $value, string $errMessage, ?string $regex = null): mixed
     {
         if ($type !== gettype($value)) {
             throw new NixException($errMessage);
@@ -186,5 +235,34 @@ class Configuration extends NixAttrSet
                 throw new NixException('Syntax Error: ' . $errMessage);
             }
         }
+
+        return $value;
+    }
+
+    /**
+     * @return User[]
+     */
+    public function getUsers(): array
+    {
+        return $this->users;
+    }
+
+    /**
+     * @throws NixException
+     */
+    public function getUser(string $login): User
+    {
+        if (!isset($this->users[$login])) {
+            throw new NixException('User "' . $login . '" not found');
+        }
+        return $this->users[$login];
+    }
+
+    /**
+     * @return Host[]
+     */
+    public function getHosts(): array
+    {
+        return $this->hosts;
     }
 }

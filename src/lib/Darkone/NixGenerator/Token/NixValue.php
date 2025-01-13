@@ -7,29 +7,32 @@ namespace Darkone\NixGenerator\Token;
  */
 class NixValue implements NixItemInterface
 {
-    public function __construct(private int|float|string $value)
+    private mixed $value = null;
+
+    public function __construct(mixed $value)
     {
+        $this->value = $value;
     }
 
-    public function forceInt(): self
+    public function forceInt(): NixValue
     {
         $this->value = (int) $this->value;
         return $this;
     }
 
-    public function forceFloat(): self
+    public function forceFloat(): NixValue
     {
         $this->value = (float) $this->value;
         return $this;
     }
 
-    public function forceString(): self
+    public function forceString(): NixValue
     {
-        $this->value = (float) $this->value;
+        $this->value = (string) $this->value;
         return $this;
     }
 
-    public function forceBool(): self
+    public function forceBool(): NixValue
     {
         $this->value = (bool) $this->value;
         return $this;

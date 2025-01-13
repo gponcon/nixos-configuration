@@ -19,6 +19,11 @@ users:
         email: "john@doe.fr"
         profile: "office"
         groups: [ "students" ]
+    test:
+        name: "Lea Test"
+        email: "lea@test.fr"
+        profile: "office"
+        groups: [ "students" ]
 
 # Hosts declaration
 # -> users are explicit users
@@ -32,8 +37,14 @@ hosts:
         # A simple host
         - hostname: "nlt"
           name: "Darkone Laptop"
-          users: [ "darkone" ]
+          users: [ "darkone", "john" ]
           groups: [ "laptop", "admin", "local" ]
+
+        # Another host
+        - hostname: "gateway"
+          name: "My Gateway"
+          users: [ "darkone" ]
+          groups: [ "rpi", "admin" ]
 
     # Host groups by range
     range:
@@ -42,7 +53,8 @@ hosts:
         - hostname: "vbox-%'02s"
           name: "Virtual %'02s"
           range: [ 1, 3 ]
-          users: [ "darkone", "john", "test" ]
+          users: [ "darkone" ]
+          groups: [ "vm", "students" ]
 
     # Host groups by list of hostnames
     list:
@@ -63,9 +75,6 @@ hosts:
               patrick: "Patrick Dupont"
               john: "John Doe"
           groups: [ "employes" ]
-
-          nix:
-    formatter: "nixfmt"
 
 #------------------------------------------------------------------------------
 # Nix default.nix generations (wip)
