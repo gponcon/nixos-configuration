@@ -1,0 +1,67 @@
+# Nix generator
+
+formatter = "nixfmt"
+root = "../.."
+
+#------------------------------------------------------------------------------
+# Nix default.nix generations
+#------------------------------------------------------------------------------
+
+[default.modules]
+name = "DNF Modules directory"
+directory = "lib/modules"
+recursive = true
+
+[default.overlays]
+name = "DNF Overlays directory"
+directory = "lib/overlays"
+recursive = true
+
+#------------------------------------------------------------------------------
+# Nix DNF hosts from LLDAP
+# Contains users and groups
+# users <-> groups <-> hosts
+#------------------------------------------------------------------------------
+
+[hostProvider.lldap]
+url = "ldap://localhost:3890"
+bind = { user = "admin", passwordFile = "usr/secrets/lldap" }
+
+#------------------------------------------------------------------------------
+# Nix DNF static hosts (nested hosts.<type>)
+#------------------------------------------------------------------------------
+
+# A simple host
+[[hosts.static]]
+hostname = "nlt"
+name = "Darkone Laptop"
+users = [ "darkone" ]
+colmena = { deployment = { tags = [ "laptop", "admin", "local" ], allowLocalDeployment = true } }
+
+# 3 hosts vbox-01, vbox-02 and vbox-03
+[[hosts.range]]
+hostname = "vbox-%'02s"
+name = "Virtual %'02s"
+range = [ 1, 3 ]
+users = [ "darkone" ]
+groups = [ "developpers", "administrators" ]
+colmena = { deployment = { tags = [ "test" ] } }
+
+## 3 hosts lea, tom and bob
+#[[hosts.list]]
+#hostname = "%s"
+#name = "Training machine of %s"
+#host.lea = "Lea"
+#host.tom = "Tom"
+#host.bob = "Bob"
+#groups = [ "trainers", "students" ]
+#colmena = { deployment = { tags = [ "training", "test" ] } }
+#
+## 2 hosts patrick and john
+#[[hosts.list]]
+#hostname = "%s"
+#name = "Workstation of %s"
+#host.patrick = "Patrick Dupont"
+#host.john = "John Doe"
+#groups = [ "employes" ]
+#colmena = { deployment = { tags = [ "employes" ] } }

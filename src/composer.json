@@ -3,7 +3,7 @@
     "description": "Darkone NixOS Framework generator",
     "type": "library",
     "require": {
-        "yosymfony/toml": "v1.0.4"
+        "symfony/yaml": "v7.2.0"
     },
     "require-dev": {
         "codeception/codeception": "5.1.2"

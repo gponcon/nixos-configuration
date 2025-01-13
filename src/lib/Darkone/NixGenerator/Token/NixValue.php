@@ -1,6 +1,6 @@
 <?php
 
-namespace Darkone\NixGenerator\Item;
+namespace Darkone\NixGenerator\Token;
 
 /**
  * Nix elementary value
@@ -29,8 +29,18 @@ class NixValue implements NixItemInterface
         return $this;
     }
 
+    public function forceBool(): self
+    {
+        $this->value = (bool) $this->value;
+        return $this;
+    }
+
     public function __toString(): string
     {
-        return (string) is_string($this->value) ? '"' . str_replace('"', '\"', $this->value) . '"' : $this->value;
+        return match (true) {
+            is_string($this->value) => '"' . str_replace('"', '\"', $this->value) . '"',
+            is_bool($this->value) => $this->value ? 'true' : 'false',
+            default => $this->value,
+        };
     }
 }

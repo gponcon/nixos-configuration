@@ -1,11 +1,11 @@
 # Chargé par la conf globale
 # Pour définir le user darkone
 
-{ pkgs, ... }:
+{ pkgs, user, ... }:
 {
-  users.users.darkone = {
+  users.users.${user.login} = {
     isNormalUser = true;
-    description = "darkone";
+    description = "${user.name}";
     extraGroups = [
       "networkmanager"
       "wheel"

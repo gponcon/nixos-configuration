@@ -76,9 +76,10 @@
 
                 # Install in /etc/profiles instead of ~/nix-profiles.
                 useUserPackages = true;
-                users = nixpkgs.lib.genAttrs host.users (user: import ./usr/users/${user}/home.nix);
+                users = nixpkgs.lib.genAttrs host.users (user: import ./usr/users/${user.profile}/home.nix);
                 extraSpecialArgs = {
                   hostname = host.hostname;
+                  user = user;
 
                   # This hack must be set to allow unfree packages
                   # in home manager configurations.

@@ -1,6 +1,16 @@
 <?php
 
-$tomlConfigFile = __DIR__ . '/../usr/config.toml';
+use Darkone\Generator;
+use Darkone\NixGenerator\NixException;
 
-$generator = new \Dnf\Generator($tomlConfigFile);
-$generator->generate();
+define('NIX_PROJECT_ROOT', realpath(__DIR__ . '/..'));
+
+require __DIR__ . '/vendor/autoload.php';
+
+try {
+    $generator = new Generator(__DIR__ . '/../usr/config.yaml');
+    $generator->generate();
+} catch (NixException $e) {
+    echo "ERR: " . $e->getMessage() . PHP_EOL;
+    exit(1);
+}

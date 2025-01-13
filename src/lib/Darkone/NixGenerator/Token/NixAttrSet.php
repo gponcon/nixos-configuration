@@ -1,6 +1,6 @@
 <?php
 
-namespace Darkone\NixGenerator\Item;
+namespace Darkone\NixGenerator\Token;
 
 use ArrayIterator;
 use Iterator;
