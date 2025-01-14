@@ -6,30 +6,29 @@
   {
     hostname = "nlt";
     name = "Darkone Laptop";
+    profile = "nlt";
     users = [
       {
         login = "darkone";
         email = "darkone@darkone.yt";
         profile = "admin";
       }
-      {
-        login = "john";
-        email = "john@doe.fr";
-        profile = "office";
-      }
     ];
-    deployment = {
-      tags = [
-        "laptop"
-        "admin"
-        "local"
-      ];
+    colmena = {
+      deployment = {
+        tags = [
+          "laptops"
+          "admins"
+          "user-darkone"
+        ];
+      };
+      allowLocalDeployment = true;
     };
-    allowLocalDeployment = true;
   }
   {
     hostname = "gateway";
-    name = "My Gateway";
+    name = "Home Gateway & HomeLab";
+    profile = "gateway";
     users = [
       {
         login = "darkone";
@@ -37,97 +36,104 @@
         profile = "admin";
       }
     ];
-    deployment = {
-      tags = [
-        "rpi"
-        "admin"
-      ];
+    colmena = {
+      deployment = {
+        tags = [
+          "group-admin"
+          "user-darkone"
+        ];
+      };
+    };
+  }
+  {
+    hostname = "charlie";
+    name = "Cle USB Charlie";
+    profile = "child-key";
+    users = [
+      {
+        login = "charlie";
+        email = "charlie@arthur.lan";
+        profile = "teen";
+      }
+    ];
+    colmena = {
+      deployment = {
+        tags = [ "user-charlie" ];
+      };
+    };
+  }
+  {
+    hostname = "axelle";
+    name = "Cle USB Axelle";
+    profile = "child-key";
+    users = [
+      {
+        login = "axelle";
+        email = "axelle@arthur.lan";
+        profile = "kid";
+      }
+    ];
+    colmena = {
+      deployment = {
+        tags = [ "user-axelle" ];
+      };
     };
   }
   {
     hostname = "vbox-01";
     name = "Virtual 01";
+    profile = "vbox";
     users = [
       {
         login = "darkone";
         email = "darkone@darkone.yt";
         profile = "admin";
       }
-      {
-        login = "john";
-        email = "john@doe.fr";
-        profile = "office";
-      }
-      {
-        login = "test";
-        email = "lea@test.fr";
-        profile = "office";
-      }
     ];
-    deployment = {
-      tags = [
-        "vm"
-        "students"
-      ];
+    colmena = {
+      deployment = {
+        tags = [ "user-darkone" ];
+      };
     };
   }
   {
     hostname = "vbox-02";
     name = "Virtual 02";
+    profile = "vbox";
     users = [
       {
         login = "darkone";
         email = "darkone@darkone.yt";
         profile = "admin";
       }
-      {
-        login = "john";
-        email = "john@doe.fr";
-        profile = "office";
-      }
-      {
-        login = "test";
-        email = "lea@test.fr";
-        profile = "office";
-      }
     ];
-    deployment = {
-      tags = [
-        "vm"
-        "students"
-      ];
+    colmena = {
+      deployment = {
+        tags = [ "user-darkone" ];
+      };
     };
   }
   {
     hostname = "vbox-03";
     name = "Virtual 03";
+    profile = "vbox";
     users = [
       {
         login = "darkone";
         email = "darkone@darkone.yt";
         profile = "admin";
       }
-      {
-        login = "john";
-        email = "john@doe.fr";
-        profile = "office";
-      }
-      {
-        login = "test";
-        email = "lea@test.fr";
-        profile = "office";
-      }
     ];
-    deployment = {
-      tags = [
-        "vm"
-        "students"
-      ];
+    colmena = {
+      deployment = {
+        tags = [ "user-darkone" ];
+      };
     };
   }
   {
-    hostname = "lea";
-    name = "Training machine of Lea";
+    hostname = "laptop-darktwo";
+    name = "Ordi portable Darktwo";
+    profile = "common-laptop";
     users = [
       {
         login = "darkone";
@@ -135,28 +141,43 @@
         profile = "admin";
       }
       {
-        login = "john";
-        email = "john@doe.fr";
+        login = "anso";
+        email = "anso@arthur.lan";
         profile = "office";
       }
       {
-        login = "test";
-        email = "lea@test.fr";
-        profile = "office";
+        login = "charlie";
+        email = "charlie@arthur.lan";
+        profile = "teen";
+      }
+      {
+        login = "axelle";
+        email = "axelle@arthur.lan";
+        profile = "kid";
+      }
+      {
+        login = "tristan";
+        email = "tristan@arthur.lan";
+        profile = "kid";
       }
     ];
-    deployment = {
-      tags = [
-        "trainers"
-        "students"
-        "training"
-        "test"
-      ];
+    colmena = {
+      deployment = {
+        tags = [
+          "group-common"
+          "user-darkone"
+          "user-anso"
+          "user-charlie"
+          "user-axelle"
+          "user-tristan"
+        ];
+      };
     };
   }
   {
-    hostname = "tom";
-    name = "Training machine of Tom";
+    hostname = "laptop-kids";
+    name = "Ordi portable Kids";
+    profile = "common-laptop";
     users = [
       {
         login = "darkone";
@@ -164,100 +185,37 @@
         profile = "admin";
       }
       {
-        login = "john";
-        email = "john@doe.fr";
+        login = "anso";
+        email = "anso@arthur.lan";
         profile = "office";
       }
       {
-        login = "test";
-        email = "lea@test.fr";
-        profile = "office";
+        login = "charlie";
+        email = "charlie@arthur.lan";
+        profile = "teen";
+      }
+      {
+        login = "axelle";
+        email = "axelle@arthur.lan";
+        profile = "kid";
+      }
+      {
+        login = "tristan";
+        email = "tristan@arthur.lan";
+        profile = "kid";
       }
     ];
-    deployment = {
-      tags = [
-        "trainers"
-        "students"
-        "training"
-        "test"
-      ];
-    };
-  }
-  {
-    hostname = "bob";
-    name = "Training machine of Bob";
-    users = [
-      {
-        login = "darkone";
-        email = "darkone@darkone.yt";
-        profile = "admin";
-      }
-      {
-        login = "john";
-        email = "john@doe.fr";
-        profile = "office";
-      }
-      {
-        login = "test";
-        email = "lea@test.fr";
-        profile = "office";
-      }
-    ];
-    deployment = {
-      tags = [
-        "trainers"
-        "students"
-        "training"
-        "test"
-      ];
-    };
-  }
-  {
-    hostname = "workstation-patrick";
-    name = "Workstation of Patrick Dupont";
-    users = [
-      {
-        login = "patrick";
-        email = "patrick@arthur.lan";
-        profile = "office";
-      }
-      {
-        login = "darkone";
-        email = "darkone@darkone.yt";
-        profile = "admin";
-      }
-      {
-        login = "john";
-        email = "john@doe.fr";
-        profile = "office";
-      }
-    ];
-    deployment = {
-      tags = [ "employes" ];
-    };
-  }
-  {
-    hostname = "workstation-john";
-    name = "Workstation of John Doe";
-    users = [
-      {
-        login = "patrick";
-        email = "patrick@arthur.lan";
-        profile = "office";
-      }
-      {
-        login = "darkone";
-        email = "darkone@darkone.yt";
-        profile = "admin";
-      }
-      {
-        login = "john";
-        email = "john@doe.fr";
-        profile = "office";
-      }
-    ];
-    deployment = {
-      tags = [ "employes" ];
+    colmena = {
+      deployment = {
+        tags = [
+          "group-common"
+          "user-darkone"
+          "user-anso"
+          "user-charlie"
+          "user-axelle"
+          "user-tristan"
+        ];
+      };
     };
   }
 ]

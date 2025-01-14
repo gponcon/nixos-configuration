@@ -10,7 +10,7 @@ use Symfony\Component\Yaml\Yaml;
 class Configuration extends NixAttrSet
 {
     const TYPE_STRING = 'string';
-    const TYPE_BOOL = 'bool';
+    const TYPE_BOOL = 'boolean';
     const TYPE_ARRAY = 'array';
     const TYPE_INT = 'int';
 
@@ -24,7 +24,7 @@ class Configuration extends NixAttrSet
     const DEFAULT_PROFILE = 'minimal';
 
     private string $formatter = 'nixfmt';
-    private array|null $lldapConfig = null;
+    private ?array $lldapConfig = null;
 
     /**
      * @var User[]
@@ -107,7 +107,7 @@ class Configuration extends NixAttrSet
             $this->assert(self::TYPE_ARRAY, $user['groups'] ?? [], "Bad user group type for " . $login);
             $this->users[$login] = (new User())
                 ->setLogin($login)
-                ->setEmail($user['email'] ?? $login . '@' . ($config['network']['domain'] ?? self::DEFAULT_NETWORK_DOMAIN))
+                ->setEmail($user['email'] ?? $login . '@' . ($config['global']['domain'] ?? self::DEFAULT_NETWORK_DOMAIN))
                 ->setName($user['name'])
                 ->setProfile($user['profile'] ?? self::DEFAULT_PROFILE)
                 ->setGroups($user['groups'] ?? []);
@@ -139,8 +139,11 @@ class Configuration extends NixAttrSet
             $this->hosts[$host['hostname']] = (new Host())
                 ->setHostname($host['hostname'])
                 ->setName($host['name'])
-                ->setUsers($this->getAllUsers($host['users'], $host['groups']))
-                ->setGroups($host['groups']);
+                ->setProfile($host['profile'])
+                ->setLocal($host['local'] ?? false)
+                ->setUsers($this->getAllUsers($host['users'] ?? [], $host['groups'] ?? []))
+                ->setGroups($host['groups'] ?? [])
+                ->setTags($host['tags'] ?? []);
         }, $staticHosts);
     }
 
@@ -186,8 +189,10 @@ class Configuration extends NixAttrSet
             $hosts[] = [
                 'hostname' => sprintf($rangeHostGroup['hostname'], $i),
                 'name' => sprintf($rangeHostGroup['name'], $i),
+                'profile' => $rangeHostGroup['profile'],
                 'users' => $rangeHostGroup['users'] ?? [],
                 'groups' => $rangeHostGroup['groups'] ?? [],
+                'tags' => $rangeHostGroup['tags'] ?? [],
             ];
         }
         $this->loadStaticHosts($hosts);
@@ -211,8 +216,10 @@ class Configuration extends NixAttrSet
             $hosts[] = [
                 'hostname' => sprintf($listHostGroup['hostname'] ?? "%s", $hostname),
                 'name' => sprintf($listHostGroup['name'] ?? "%s", $hostdesc),
+                'profile' => $listHostGroup['profile'],
                 'users' => $listHostGroup['users'] ?? [],
                 'groups' => $listHostGroup['groups'] ?? [],
+                'tags' => $listHostGroup['tags'] ?? [],
             ];
         }
         $this->loadStaticHosts($hosts);
@@ -237,8 +244,10 @@ class Configuration extends NixAttrSet
     public function assertHostCommonParams(array $host): void
     {
         $this->assert(self::TYPE_STRING, $host['hostname'] ?? null, "A hostname is required");
-        $this->assert(self::TYPE_STRING, $host['name'] ?? null, "A name (description) is required");
-        $this->assert(self::TYPE_ARRAY, $host['users'] ?? null, "A list of users is required");
+        $this->assert(self::TYPE_STRING, $host['name'] ?? null, 'A name (description) is required for "' . $host['hostname'] . '"');
+        $this->assert(self::TYPE_STRING, $host['profile'] ?? null, 'A host profile is required for "' . $host['hostname'] . '"');
+        $this->assert(self::TYPE_ARRAY, $host['users'] ?? [], 'Bad users list type for "' . $host['hostname'] . '"');
+        $this->assert(self::TYPE_BOOL, $host['local'] ?? false, 'Bad local key type for "' . $host['hostname'] . '"');
     }
 
     /**

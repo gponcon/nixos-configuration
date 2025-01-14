@@ -6,6 +6,8 @@ class Host
 {
     private string $hostname;
     private string $name;
+    private string $profile;
+    private bool $local = false;
 
     /**
      * @var array of string (logins)
@@ -13,9 +15,14 @@ class Host
     private array $users = [];
 
     /**
-     * Host groups
+     * Host groups (for link with users)
      */
     private array $groups = [];
+
+    /**
+     * Host tags (for colmena deployments)
+     */
+    private array $tags = [];
 
     public function getHostname(): string
     {
@@ -59,5 +66,39 @@ class Host
     {
         $this->groups = $groups;
         return $this;
+    }
+
+    public function setProfile(string $profile): Host
+    {
+        $this->profile = $profile;
+        return $this;
+    }
+
+    public function getProfile(): string
+    {
+        return $this->profile;
+    }
+
+    public function setTags(array $tags): Host
+    {
+        // TODO: array_map(fn (string $tag): if ($tag), $tags);
+        $this->tags = $tags;
+        return $this;
+    }
+
+    public function getTags(): array
+    {
+        return $this->tags;
+    }
+
+    public function setLocal(bool $local): Host
+    {
+        $this->local = $local;
+        return $this;
+    }
+
+    public function isLocal(): bool
+    {
+        return $this->local;
     }
 }

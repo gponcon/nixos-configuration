@@ -38,13 +38,15 @@ class Generator
                     ->setString('profile', $user->getProfile());
                 }, $host->getUsers()));
             $deployment = (new NixAttrSet())
-                ->set('tags', (new NixList())->populateStrings($host->getGroups()));
+                ->set('tags', (new NixList())->populateStrings($this->extractTags($host)));
+            $colmena = (new NixAttrSet())->set('deployment', $deployment);
+            $this->setLocal($host, $colmena);
             $newHost = (new NixAttrSet())
                 ->setString('hostname', $host->getHostname())
                 ->setString('name', $host->getName())
+                ->setString('profile', $host->getProfile())
                 ->set('users', $users)
-                ->set('deployment', $deployment);
-            $this->setLocal($host, $newHost);
+                ->set('colmena', $colmena);
             $hosts->add($newHost);
         }
 
@@ -59,7 +61,7 @@ class Generator
      */
     public function setLocal(Host $host, NixAttrSet $newHost): void
     {
-        if (in_array('local', $host->getGroups())) {
+        if ($host->isLocal()) {
             if ($this->localHost !== null) {
                 $msg = 'Only one host can be local. ';
                 $msg .= 'Conflit between "' . $this->localHost . '" and "' . $host->getHostname() . '".';
@@ -68,5 +70,14 @@ class Generator
             $newHost->setBool('allowLocalDeployment', true);
             $this->localHost = $host->getHostname();
         }
+    }
+
+    private function extractTags(Host $host): array
+    {
+        return array_merge(
+            $host->getTags(),
+            array_map(fn (string $group): string => 'group-' . $group, $host->getGroups()),
+            array_map(fn (string $group): string => 'user-' . $group, $host->getUsers())
+        );
     }
 }

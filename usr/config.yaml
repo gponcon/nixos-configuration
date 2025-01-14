@@ -1,6 +1,6 @@
 # Nix generator configuration file for Darkone NixOS Framework
 
-network:
+global:
     domain: "arthur.lan"
 
 #------------------------------------------------------------------------------
@@ -45,18 +45,22 @@ hosts:
 
         - hostname: "nlt"
           name: "Darkone Laptop"
-          groups: [ "laptop", "admin", "local" ]
+          profile: "nlt"
+          users: [ "darkone" ]
+          tags: [ "laptops", "admins" ]
+          local: true
         - hostname: "gateway"
           name: "Home Gateway & HomeLab"
-          groups: [ "rpi5", "admin", "gateway" ]
+          profile: "gateway"
+          groups: [ "admin" ]
         - hostname: "charlie"
           name: "Cle USB Charlie"
+          profile: "child-key"
           users: [ "charlie" ]
-          groups: [ "key" ]
         - hostname: "axelle"
           name: "Cle USB Axelle"
+          profile: "child-key"
           users: [ "axelle" ]
-          groups: [ "key" ]
 
     # Host groups by range
     range:
@@ -64,33 +68,20 @@ hosts:
         # 3 hosts vbox-01, vbox-02 and vbox-03
         - hostname: "vbox-%'02s"
           name: "Virtual %'02s"
+          profile: "vbox"
           range: [ 1, 3 ]
           users: [ "darkone" ]
-          groups: [ "vbox" "server" ]
 
     # Host groups by list of hostnames
     list:
 
         - hostname: "laptop-%s" # optional
           name: "Ordi portable %s" # optional
+          profile: "common-laptop"
           hosts:
               darktwo: "Darktwo"
               kids: "Kids"
-          groups: [ "laptop" "common" ]
-
-#------------------------------------------------------------------------------
-# Nix default.nix generations (wip)
-#------------------------------------------------------------------------------
-
-default:
-    modules:
-        - name: "DNF Modules directory"
-          directory: "lib/modules"
-          recursive: true
-    overlays:
-        - name: "DNF Overlays directory"
-          directory: "lib/overlays"
-          recursive: true
+          groups: [ "common" ]
 
 #------------------------------------------------------------------------------
 # Nix DNF hosts from LLDAP (wip)

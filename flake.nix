@@ -66,7 +66,7 @@
           };
           modules = [
             ./lib/modules
-            ./usr/hosts/${host.hostname}
+            ./usr/hosts/${host.profile}.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
@@ -76,9 +76,9 @@
 
                 # Install in /etc/profiles instead of ~/nix-profiles.
                 useUserPackages = true;
-                users = nixpkgs.lib.genAttrs host.users (user: import ./usr/users/${user.profile}/home.nix);
+                users = nixpkgs.lib.genAttrs host.users (user: import ./usr/users/${user.profile});
                 extraSpecialArgs = {
-                  hostname = host.hostname;
+                  host = host;
                   user = user;
 
                   # This hack must be set to allow unfree packages
@@ -97,18 +97,7 @@
 
       mkColmenaHost = host: {
         name = host.hostname;
-        value = {
-          deployment = host.deployment;
-
-          # TODO: not working, use "just install" instead
-          #// {
-          #sshOptions = [
-          #  "-i"
-          #  "/etc/nixos/var/security/ssh/id_ed25519_nix"
-          #];
-          #};
-
-        };
+        value = host.colmena;
       };
 
     in
@@ -158,32 +147,6 @@
         }
         // builtins.listToAttrs (map mkColmenaHost hosts)
         // builtins.mapAttrs (_name: value: { imports = value._module.args.modules; }) conf;
-
-      ## A single nixos config outputting multiple formats.
-      ## Alternatively put this in a configuration.nix.
-      #nixosModules.myFormats =
-      #  { config, ... }:
-      #  {
-      #    imports = [
-      #      nixos-generators.nixosModules.all-formats
-      #    ];
-      #  };
-
-      ## a machine consuming the module
-      #nixosConfigurations.start-img = nixpkgs.lib.nixosSystem {
-      #  modules = [
-      #    {
-      #      # Pin nixpkgs to the flake input, so that the packages installed
-      #      # come from the flake inputs.nixpkgs.url.
-      #      nix.registry.nixpkgs.flake = nixpkgs;
-      #      # set disk size to to 20G
-      #      virtualisation.diskSize = 20 * 1024;
-      #    }
-      #    ./lib/modules
-      #    ./lib/hosts/start-img.nix
-      #    self.nixosModules.myFormats
-      #  ];
-      #};
 
       # Start images generators
       packages.x86_64-linux = {
