@@ -1,5 +1,8 @@
 # Nix generator configuration file for Darkone NixOS Framework
 
+network:
+    domain: "arthur.lan"
+
 #------------------------------------------------------------------------------
 # Nix DNF static hosts (nested hosts.<type>) (wip)
 #------------------------------------------------------------------------------
@@ -18,7 +21,10 @@ users:
         name: "John Doe"
         email: "john@doe.fr"
         profile: "office"
-        groups: [ "students" ]
+        groups: [ "students", "employes" ]
+    patrick:
+        name: "Patrick Doe"
+        profile: "office"
     test:
         name: "Lea Test"
         email: "lea@test.fr"
@@ -27,8 +33,8 @@ users:
 
 # Hosts declaration
 # -> users are explicit users
-# -> groups are used to select related users
-#    and add colmena tags
+# -> groups are used to select related users and add colmena tags.
+#    "local" special group is only for the local (master) machine.
 hosts:
 
     # Static hosts
@@ -60,8 +66,8 @@ hosts:
     list:
 
         # 3 hosts : lea, tom and bob
-        - hostname: "%s"
-          name: "Training machine of %s"
+        - hostname: "%s" # optional
+          name: "Training machine of %s" # optional
           hosts:
               lea: "Lea"
               tom: "Tom"
@@ -69,12 +75,13 @@ hosts:
           groups: [ "trainers", "students", "training", "test" ]
 
         # 2 hosts : patrick and john
-        - hostname: "%s"
+        - hostname: "workstation-%s"
           name: "Workstation of %s"
           hosts:
               patrick: "Patrick Dupont"
               john: "John Doe"
           groups: [ "employes" ]
+          users: [ "patrick" ]
 
 #------------------------------------------------------------------------------
 # Nix default.nix generations (wip)

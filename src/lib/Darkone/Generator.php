@@ -4,7 +4,6 @@ namespace Darkone;
 
 use Darkone\NixGenerator\Configuration;
 use Darkone\NixGenerator\Item\Host;
-use Darkone\NixGenerator\Item\User;
 use Darkone\NixGenerator\NixException;
 use Darkone\NixGenerator\Token\NixAttrSet;
 use Darkone\NixGenerator\Token\NixList;
@@ -12,6 +11,8 @@ use Darkone\NixGenerator\Token\NixList;
 class Generator
 {
     private Configuration $config;
+
+    private ?string $localHost = null;
 
     /**
      * @throws NixException
@@ -43,12 +44,29 @@ class Generator
                 ->setString('name', $host->getName())
                 ->set('users', $users)
                 ->set('deployment', $deployment);
-            if (in_array('local', $host->getGroups())) {
-                $newHost->setBool('allowLocalDeployment', true);
-            }
+            $this->setLocal($host, $newHost);
             $hosts->add($newHost);
         }
 
         return $hosts;
+    }
+
+    /**
+     * @param Host $host
+     * @param NixAttrSet $newHost
+     * @return void
+     * @throws NixException
+     */
+    public function setLocal(Host $host, NixAttrSet $newHost): void
+    {
+        if (in_array('local', $host->getGroups())) {
+            if ($this->localHost !== null) {
+                $msg = 'Only one host can be local. ';
+                $msg .= 'Conflit between "' . $this->localHost . '" and "' . $host->getHostname() . '".';
+                throw new NixException($msg);
+            }
+            $newHost->setBool('allowLocalDeployment', true);
+            $this->localHost = $host->getHostname();
+        }
     }
 }

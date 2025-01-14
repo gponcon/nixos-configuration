@@ -5,7 +5,6 @@ namespace Darkone\NixGenerator;
 use Darkone\NixGenerator\Item\Host;
 use Darkone\NixGenerator\Item\User;
 use Darkone\NixGenerator\Token\NixAttrSet;
-use Darkone\NixGenerator\NixException;
 use Symfony\Component\Yaml\Yaml;
 
 class Configuration extends NixAttrSet
@@ -20,6 +19,9 @@ class Configuration extends NixAttrSet
     const REGEX_HOSTNAME = '/^[a-zA-Z][a-zA-Z0-9_-]{2,59}$/';
     const REGEX_LOGIN = '/^[a-zA-Z][a-zA-Z0-9_-]{2,59}$/';
     const REGEX_NAME = '/^.{3,128}$/';
+
+    const DEFAULT_NETWORK_DOMAIN = 'darkone.lan';
+    const DEFAULT_PROFILE = 'minimal';
 
     private string $formatter = 'nixfmt';
     private array|null $lldapConfig = null;
@@ -105,10 +107,10 @@ class Configuration extends NixAttrSet
             $this->assert(self::TYPE_ARRAY, $user['groups'] ?? [], "Bad user group type for " . $login);
             $this->users[$login] = (new User())
                 ->setLogin($login)
-                ->setEmail($user['email'])
+                ->setEmail($user['email'] ?? $login . '@' . ($config['network']['domain'] ?? self::DEFAULT_NETWORK_DOMAIN))
                 ->setName($user['name'])
-                ->setProfile($user['profile'])
-                ->setGroups($user['groups']);
+                ->setProfile($user['profile'] ?? self::DEFAULT_PROFILE)
+                ->setGroups($user['groups'] ?? []);
         }
     }
 
@@ -160,7 +162,9 @@ class Configuration extends NixAttrSet
 
     private function loadRangeHosts(array $rangeHosts): void
     {
-        array_map(fn (array $hostGroup) => $this->buildRangeHostGroup($hostGroup), $rangeHosts);
+        array_map(/**
+         * @throws NixException
+         */ fn (array $hostGroup) => $this->buildRangeHostGroup($hostGroup), $rangeHosts);
     }
 
     /**
@@ -189,9 +193,29 @@ class Configuration extends NixAttrSet
         $this->loadStaticHosts($hosts);
     }
 
-    private function loadListHosts(array $staticHosts): void
+    private function loadListHosts(array $listHosts): void
     {
-        // TODO
+        array_map(fn (array $hostGroup) => $this->buildListHostGroup($hostGroup), $listHosts);
+    }
+
+    /**
+     * @throws NixException
+     */
+    private function buildListHostGroup(array $listHostGroup): void
+    {
+        $list = $this->assert(self::TYPE_ARRAY, $listHostGroup['hosts'], "Bad hosts list type");
+        $hosts = [];
+        foreach ($list as $hostname => $hostdesc) {
+            $this->assert(self::TYPE_STRING, $hostname, "Bad host name (hostname key)", self::REGEX_HOSTNAME);
+            $this->assert(self::TYPE_STRING, $hostdesc, "Bad host description (name)", self::REGEX_NAME);
+            $hosts[] = [
+                'hostname' => sprintf($listHostGroup['hostname'] ?? "%s", $hostname),
+                'name' => sprintf($listHostGroup['name'] ?? "%s", $hostdesc),
+                'users' => $listHostGroup['users'] ?? [],
+                'groups' => $listHostGroup['groups'] ?? [],
+            ];
+        }
+        $this->loadStaticHosts($hosts);
     }
 
     /**
@@ -215,8 +239,6 @@ class Configuration extends NixAttrSet
         $this->assert(self::TYPE_STRING, $host['hostname'] ?? null, "A hostname is required");
         $this->assert(self::TYPE_STRING, $host['name'] ?? null, "A name (description) is required");
         $this->assert(self::TYPE_ARRAY, $host['users'] ?? null, "A list of users is required");
-        //$this->assert(self::TYPE_ARRAY, $host['colmena'] ?? null, "A colmena configuration is required");
-        //$this->assert(self::TYPE_ARRAY, $host['colmena']['deployment']['tags'] ?? null, "A colmena deployment tags is required");
     }
 
     /**
@@ -232,7 +254,7 @@ class Configuration extends NixAttrSet
                 throw new NixException('Cannot check regex with non-string value');
             }
             if (!preg_match($regex, $value)) {
-                throw new NixException('Syntax Error: ' . $errMessage);
+                throw new NixException('Syntax Error for value "' . $value . '": ' . $errMessage);
             }
         }
 
