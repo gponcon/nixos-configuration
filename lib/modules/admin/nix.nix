@@ -23,6 +23,8 @@ in
       deadnix
       just
       nixfmt-rfc-style
+      php84
+      php84Packages.composer
     ];
 
     # Optimized switch (perl -> rust)

@@ -8,7 +8,11 @@
 
     # static or generated users
     users = [
-      { login = "darkone"; name = "Darkone Linux"; profile = "admin"; }
+      {
+        login = "darkone";
+        name = "Darkone Linux";
+        profile = "admin";
+      }
     ];
 
     # the "deployment" section of colmena
@@ -24,7 +28,11 @@
   {
     hostname = "test";
     users = [
-      { login = "darkone"; name = "Darkone Linux"; profile = "admin"; }
+      {
+        login = "darkone";
+        name = "Darkone Linux";
+        profile = "admin";
+      }
     ];
     deployment = {
       tags = [
@@ -36,7 +44,11 @@
   {
     hostname = "test2";
     users = [
-      { login = "darkone"; name = "Darkone Linux"; profile = "admin"; }
+      {
+        login = "darkone";
+        name = "Darkone Linux";
+        profile = "admin";
+      }
     ];
     deployment = {
       tags = [
