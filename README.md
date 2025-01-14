@@ -76,15 +76,14 @@ lib/       <-- Projet library
 usr/               <-- Writable zone for local network project
 ├── modules/(...)  <-- Local modules
 ├── secrets/(...)  <-- Local secrets file
-├── users/(...)    <-- Static users
-├── hosts/(...)    <-- Static hosts
-└── config.toml    <-- Local configuration used by the generator
+├── homes/(...)    <-- Home profiles
+├── hosts/(...)    <-- Host profiles
+└── config.yaml    <-- Local configuration used by the generator
 var/
 ├── log/
-└── generated/  <-- Generated files
-    ├── hosts/  <-- Hosts to deploy
-    └── users/  <-- Users to deploy
-src/(...)       <-- Maintenance program sources
+└── generated/    <-- Generated files
+    └── hosts.nix <-- Hosts to deploy
+src/(...)         <-- Generator sources
 ```
 
 > [!NOTE]
@@ -102,13 +101,31 @@ Son rôle est de générer une configuration statique pure à partir d'une défi
 Configurer un poste bureautique complet se fera très simplement :
 
 ```nix
-# hosts/pc01/default.nix
+# usr/hosts/desktop-office.nix
 {
-  darkone.host.desktop.pc01 = {
-    username = "patrick";
-  };
+  # Activate all the necessary to have an office PC
+  darkone.host.desktop.enable = true;
+
+  # Add obsidian to the previous configuration
+  darkone.graphic.obsidian.enable = true;
 }
 ```
+
+Puis on déclare un PC dans la configuration :
+
+```yaml
+hosts:
+    static:
+        - hostname: "pc01"
+          name: "A PC"
+          profile: desktop-office
+          users: [ "darkone" "john" ]
+          groups: [ "desktop" ]
+```
+
+- Le profile `desktop-office` fait référence à `usr/hosts/desktop-office.nix`.
+- Les noms d'hôtes sont attribués automatiquement.
+- Les utilisateurs sont ajoutés individuellement ou via les groupes.
 
 > [!NOTE]
 > Pour créer un poste, le plus simple est d'installer l'iso d'initialisation, même si ça fonctionne avec un poste contenant déjà un linux.
@@ -140,7 +157,7 @@ Configurer un poste bureautique complet se fera très simplement :
 > colmena apply --on @desktop switch
 > ```
 
-### Créer un template de poste
+### Créer un template de poste (WIP)
 
 Pour X postes monotypes qui ont Y utilisateurs :
 
@@ -170,8 +187,9 @@ Version minimale :
 
 ```nix
 {
-  # hosts/server-gateway.nix
-  darkone.host.gateway.my-gateway = {
+  # usr/hosts/server-gateway.nix
+  darkone.host.gateway = {
+    enable = true;
     wan.interface = "eth0";
     lan.interfaces = [ "eth1" "eth2" ];
   };
@@ -182,7 +200,7 @@ Version plus complète :
 
 ```nix
 {
-  # hosts/server-gateway.nix
+  # usr/hosts/server-gateway.nix
   darkone.host.gateway.my-other-gateway = {
     wan = {
       interface = "eth0";

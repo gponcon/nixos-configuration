@@ -8,7 +8,7 @@ network:
 #------------------------------------------------------------------------------
 
 # Static users
-# -> profile is the HomeManager profile
+# -> profile is HomeManager profile
 # -> groups is used to select related hosts
 users:
 
@@ -16,23 +16,20 @@ users:
         name: "Darkone Linux"
         email: "darkone@darkone.yt"
         profile: "admin"
-        groups: [ "admin", "media", "common" ]
-    anso:
-        name: "Anso"
+        groups: [ "trainers", "employes" ]
+    john:
+        name: "John Doe"
+        email: "john@doe.fr"
         profile: "office"
-        groups: [ "common" ]
-    charlie:
-        name: "Charlie"
-        profile: "teen"
-        groups: [ "kids", "common" ]
-    axelle:
-        name: "Axelle"
-        profile: "kid"
-        groups: [ "kids", "common" ]
-    tristan:
-        name: "Tristan"
-        profile: "kid"
-        groups: [ "kids", "common" ]
+        groups: [ "students", "employes" ]
+    patrick:
+        name: "Patrick Doe"
+        profile: "office"
+    test:
+        name: "Lea Test"
+        email: "lea@test.fr"
+        profile: "office"
+        groups: [ "students" ]
 
 # Hosts declaration
 # -> users are explicit users
@@ -43,20 +40,17 @@ hosts:
     # Static hosts
     static:
 
+        # A simple host
         - hostname: "nlt"
           name: "Darkone Laptop"
+          users: [ "darkone", "john" ]
           groups: [ "laptop", "admin", "local" ]
+
+        # Another host
         - hostname: "gateway"
-          name: "Home Gateway & HomeLab"
-          groups: [ "rpi5", "admin", "gateway" ]
-        - hostname: "charlie"
-          name: "Cle USB Charlie"
-          users: [ "charlie" ]
-          groups: [ "key" ]
-        - hostname: "axelle"
-          name: "Cle USB Axelle"
-          users: [ "axelle" ]
-          groups: [ "key" ]
+          name: "My Gateway"
+          users: [ "darkone" ]
+          groups: [ "rpi", "admin" ]
 
     # Host groups by range
     range:
@@ -66,17 +60,28 @@ hosts:
           name: "Virtual %'02s"
           range: [ 1, 3 ]
           users: [ "darkone" ]
-          groups: [ "vbox" "server" ]
+          groups: [ "vm", "students" ]
 
     # Host groups by list of hostnames
     list:
 
-        - hostname: "laptop-%s" # optional
-          name: "Ordi portable %s" # optional
+        # 3 hosts : lea, tom and bob
+        - hostname: "%s" # optional
+          name: "Training machine of %s" # optional
           hosts:
-              darktwo: "Darktwo"
-              kids: "Kids"
-          groups: [ "laptop" "common" ]
+              lea: "Lea"
+              tom: "Tom"
+              bob: "Bob"
+          groups: [ "trainers", "students", "training", "test" ]
+
+        # 2 hosts : patrick and john
+        - hostname: "workstation-%s"
+          name: "Workstation of %s"
+          hosts:
+              patrick: "Patrick Dupont"
+              john: "John Doe"
+          groups: [ "employes" ]
+          users: [ "patrick" ]
 
 #------------------------------------------------------------------------------
 # Nix default.nix generations (wip)
