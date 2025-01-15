@@ -3,8 +3,11 @@
     ./user/children.nix
     ./user/nix-admin.nix
     ./user/teenager.nix
+    ./user/minimal.nix
     ./user/nix.nix
+    ./user/normal.nix
     ./user/advanced.nix
+    ./user/admin.nix
     ./admin/nix.nix
     ./system/i18n.nix
     ./system/documentation.nix

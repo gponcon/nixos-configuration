@@ -1,10 +1,6 @@
 # VBOX virtual machine profile
 
 {
-  imports = [
-    ./common.nix
-  ];
-
   # Darkone modules
   darkone = {
 

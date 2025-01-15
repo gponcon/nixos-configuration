@@ -6,12 +6,12 @@
   {
     hostname = "nlt";
     name = "Darkone Laptop";
-    profile = "nlt";
+    profile = "usr/hosts/admin-laptop.nix";
     users = [
       {
         login = "darkone";
         email = "darkone@darkone.yt";
-        profile = "admin";
+        profile = "usr/homes/darkone.nix";
       }
     ];
     colmena = {
@@ -26,68 +26,14 @@
     };
   }
   {
-    hostname = "gateway";
-    name = "Home Gateway & HomeLab";
-    profile = "gateway";
-    users = [
-      {
-        login = "darkone";
-        email = "darkone@darkone.yt";
-        profile = "admin";
-      }
-    ];
-    colmena = {
-      deployment = {
-        tags = [
-          "group-admin"
-          "user-darkone"
-        ];
-      };
-    };
-  }
-  {
-    hostname = "charlie";
-    name = "Cle USB Charlie";
-    profile = "child-key";
-    users = [
-      {
-        login = "charlie";
-        email = "charlie@arthur.lan";
-        profile = "teen";
-      }
-    ];
-    colmena = {
-      deployment = {
-        tags = [ "user-charlie" ];
-      };
-    };
-  }
-  {
-    hostname = "axelle";
-    name = "Cle USB Axelle";
-    profile = "child-key";
-    users = [
-      {
-        login = "axelle";
-        email = "axelle@arthur.lan";
-        profile = "kid";
-      }
-    ];
-    colmena = {
-      deployment = {
-        tags = [ "user-axelle" ];
-      };
-    };
-  }
-  {
     hostname = "vbox-01";
     name = "Virtual 01";
-    profile = "vbox";
+    profile = "usr/hosts/vbox.nix";
     users = [
       {
         login = "darkone";
         email = "darkone@darkone.yt";
-        profile = "admin";
+        profile = "usr/homes/darkone.nix";
       }
     ];
     colmena = {
@@ -99,12 +45,12 @@
   {
     hostname = "vbox-02";
     name = "Virtual 02";
-    profile = "vbox";
+    profile = "usr/hosts/vbox.nix";
     users = [
       {
         login = "darkone";
         email = "darkone@darkone.yt";
-        profile = "admin";
+        profile = "usr/homes/darkone.nix";
       }
     ];
     colmena = {
@@ -116,12 +62,12 @@
   {
     hostname = "vbox-03";
     name = "Virtual 03";
-    profile = "vbox";
+    profile = "usr/hosts/vbox.nix";
     users = [
       {
         login = "darkone";
         email = "darkone@darkone.yt";
-        profile = "admin";
+        profile = "usr/homes/darkone.nix";
       }
     ];
     colmena = {
@@ -133,32 +79,32 @@
   {
     hostname = "laptop-darktwo";
     name = "Ordi portable Darktwo";
-    profile = "common-laptop";
+    profile = "lib/hosts/laptop.nix";
     users = [
       {
         login = "darkone";
         email = "darkone@darkone.yt";
-        profile = "admin";
+        profile = "usr/homes/darkone.nix";
       }
       {
         login = "anso";
         email = "anso@arthur.lan";
-        profile = "office";
+        profile = "lib/homes/normal.nix";
       }
       {
         login = "charlie";
         email = "charlie@arthur.lan";
-        profile = "teen";
+        profile = "lib/homes/teenager.nix";
       }
       {
         login = "axelle";
         email = "axelle@arthur.lan";
-        profile = "kid";
+        profile = "lib/homes/children.nix";
       }
       {
         login = "tristan";
         email = "tristan@arthur.lan";
-        profile = "kid";
+        profile = "lib/homes/children.nix";
       }
     ];
     colmena = {
@@ -177,32 +123,32 @@
   {
     hostname = "laptop-kids";
     name = "Ordi portable Kids";
-    profile = "common-laptop";
+    profile = "lib/hosts/laptop.nix";
     users = [
       {
         login = "darkone";
         email = "darkone@darkone.yt";
-        profile = "admin";
+        profile = "usr/homes/darkone.nix";
       }
       {
         login = "anso";
         email = "anso@arthur.lan";
-        profile = "office";
+        profile = "lib/homes/normal.nix";
       }
       {
         login = "charlie";
         email = "charlie@arthur.lan";
-        profile = "teen";
+        profile = "lib/homes/teenager.nix";
       }
       {
         login = "axelle";
         email = "axelle@arthur.lan";
-        profile = "kid";
+        profile = "lib/homes/children.nix";
       }
       {
         login = "tristan";
         email = "tristan@arthur.lan";
-        profile = "kid";
+        profile = "lib/homes/children.nix";
       }
     ];
     colmena = {

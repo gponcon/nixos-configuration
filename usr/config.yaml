@@ -16,7 +16,7 @@ users:
     darkone:
         name: "Darkone Linux"
         email: "darkone@darkone.yt"
-        profile: "admin"
+        profile: "darkone"
         groups: [ "admin", "media", "common" ]
     anso:
         name: "Anso"

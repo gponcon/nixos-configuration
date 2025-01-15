@@ -3,11 +3,6 @@
 # WIP: autogeneration of blackhole host
 
 {
-  imports = [
-    ./../../usr/common.nix
-    ./../../usr/users
-  ];
-
   darkone.host.laptop.enable = true;
   darkone.host.server.enable = true;
   darkone.host.portable.enable = true;

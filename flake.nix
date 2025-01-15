@@ -57,6 +57,14 @@
       # The hosts.nix generated file (just generate)
       hosts = import ./var/generated/hosts.nix;
 
+      mkUser = user: {
+        name = user.login;
+        value = {
+          home.username = "${user.login}";
+          home.homeDirectory = "/home/${user.login}";
+        } // import ./${user.profile};
+      };
+
       mkNixosHost = host: {
         name = host.hostname;
         value = nixpkgs.lib.nixosSystem {
@@ -66,7 +74,7 @@
           };
           modules = [
             ./lib/modules
-            ./usr/hosts/${host.profile}.nix
+            ./${host.profile}
             home-manager.nixosModules.home-manager
             {
               home-manager = {
@@ -77,11 +85,12 @@
                 # Install in /etc/profiles instead of ~/nix-profiles.
                 useUserPackages = true;
 
-                # TODO adapter à la nouvelle conf
-                users = nixpkgs.lib.genAttrs host.users (user: import ./usr/users/${user.profile});
+                #users = builtins.listToAttrs (map mkUser host.users);
+
+                # Load users profiles
+                users = nixpkgs.lib.genAttrs host.users (user: import ./${user.profile});
                 extraSpecialArgs = {
                   host = host;
-                  user = user;
 
                   # This hack must be set to allow unfree packages
                   # in home manager configurations.

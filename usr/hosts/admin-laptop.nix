@@ -1,8 +1,4 @@
 {
-  imports = [
-    ./common.nix
-  ];
-
   # Darkone modules
   darkone = {
 

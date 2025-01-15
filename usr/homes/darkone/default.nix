@@ -1,3 +1,6 @@
-{import [
+{
+  import = [
     #./gtk.nix
-    ./programs.nix];}
+    ./programs.nix
+  ];
+}

@@ -1,6 +1,5 @@
 # A unique user profile
 
-{ user, ... }:
 {
   # Is a nix administrator with additional home environment
   imports = [
@@ -16,5 +15,5 @@
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = lib.mkForce "25.05";
+  home.stateVersion = "25.05";
 }

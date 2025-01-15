@@ -1,7 +1,7 @@
 # Features for teenagers
 
 {
-  import[ ./minimal.nix ];
+  import = [ ./minimal.nix ];
 
-  darkone.user.teenager.enable = true;
+  #darkone.user.teenager.enable = true;
 }

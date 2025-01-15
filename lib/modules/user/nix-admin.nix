@@ -1,5 +1,3 @@
-
-
 # Darkone Network administrator (super-admin)
 
 {

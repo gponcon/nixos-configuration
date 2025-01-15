@@ -3,6 +3,8 @@
 {
   lib,
   config,
+  user,
+  pkgs,
   ...
 }:
 let

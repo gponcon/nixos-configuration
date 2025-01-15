@@ -1,9 +1,9 @@
 # Darkone Network administrator
 
 {
-  import [
+  import = [
     ./advanced.nix
   ];
 
-  darkone.user.nix-admin.enable = true;
+  #darkone.user.admin.enable = true;
 }
