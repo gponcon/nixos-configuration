@@ -62,11 +62,11 @@
         value = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
-            hostname = host.hostname;
+            host = host;
           };
           modules = [
             ./lib/modules
-            ./usr/hosts/${host.profile}.nix
+            ./usr/hosts
             home-manager.nixosModules.home-manager
             {
               home-manager = {
@@ -77,8 +77,8 @@
                 # Install in /etc/profiles instead of ~/nix-profiles.
                 useUserPackages = true;
 
-                # TODO adapter à la nouvelle conf
-                users = nixpkgs.lib.genAttrs host.users (user: import ./usr/users/${user.profile});
+                # Call the home dispatcher
+                users = nixpkgs.lib.genAttrs host.users (user: import ./usr/homes);
                 extraSpecialArgs = {
                   host = host;
                   user = user;

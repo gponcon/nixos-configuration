@@ -82,7 +82,8 @@ class Host
      */
     public function setProfile(string $profile): Host
     {
-        $this->profile = $this->filterProfile($profile, 'host');
+        $this->assertProfileExists($profile, 'host');
+        $this->profile = $profile;
         return $this;
     }
 

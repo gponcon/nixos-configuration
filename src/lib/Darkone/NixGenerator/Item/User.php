@@ -42,7 +42,8 @@ class User
      */
     public function setProfile(string $profile): User
     {
-        $this->profile = $this->filterProfile($profile, 'user');
+        $this->assertProfileExists($profile, 'user');
+        $this->profile = $profile;
         return $this;
     }
 

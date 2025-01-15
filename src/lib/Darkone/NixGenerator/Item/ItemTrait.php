@@ -9,7 +9,7 @@ trait ItemTrait
     /**
      * @throws NixException
      */
-    public function filterProfile(string $profile, string $context): string
+    public function assertProfileExists(string $profile, string $context): void
     {
         static $validProfiles = [];
 
@@ -29,8 +29,5 @@ trait ItemTrait
         $found || throw new NixException(
             'No ' . $context . ' profile path found for profile "' . $profile . '" in usr and lib declarations.'
         );
-        isset($profilePath) || throw new NixException('Profile path is not set');
-
-        return $profilePath;
     }
 }
