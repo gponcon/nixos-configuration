@@ -15,6 +15,9 @@ in
 
   config = lib.mkIf cfg.enable {
 
+    # Based on a minimal user
+    darkone.user.minimal.enable = true;
+
     # System additional features
     darkone.system.documentation.enable = lib.mkDefault true;
 

@@ -39,6 +39,5 @@ in
 
     # Is a local network managed node (true by default)
     darkone.user.isNode = lib.mkDefault true;
-
   };
 }

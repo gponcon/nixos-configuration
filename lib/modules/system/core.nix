@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  hostname,
+  host,
   ...
 }:
 let
@@ -44,7 +44,7 @@ in
     };
 
     # Hostname and firewall
-    networking.hostName = hostname;
+    networking.hostName = host.hostname;
     networking.firewall = {
       enable = cfg.enableFirewall;
       allowedTCPPorts = [ 22 ];

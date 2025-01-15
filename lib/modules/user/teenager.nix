@@ -15,7 +15,10 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    # Additional features for children
+    # Based on a minimal user
+    darkone.user.minimal.enable = true;
+
+    # Additional features for teens
     darkone.graphic.education.enable = lib.mkDefault true;
     darkone.graphic.education.enableTeenager = lib.mkDefault true;
     darkone.graphic.education.enableGames = lib.mkDefault true;

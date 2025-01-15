@@ -1,4 +1,6 @@
-# Darkone Network administrator
+
+
+# Darkone Network administrator (super-admin)
 
 {
   lib,
@@ -10,13 +12,13 @@ let
 in
 {
   options = {
-    darkone.user.nix-admin.enable = lib.mkEnableOption "Darkone Network administrator";
+    darkone.user.nix-admin.enable = lib.mkEnableOption "Darkone Network administrator (super-admin)";
   };
 
   config = lib.mkIf cfg.enable {
 
-    # Based on advanced user
-    darkone.user.advanced.enable = lib.mkForce true;
+    # Based on admin user
+    darkone.user.admin.enable = lib.mkForce true;
 
     # Nix features
     darkone.admin.nix.enable = lib.mkDefault true;

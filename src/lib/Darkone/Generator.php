@@ -19,6 +19,9 @@ class Generator
      */
     public function __construct(string $tomlConfigFile)
     {
+        if (!defined('NIX_PROJECT_ROOT')) {
+            throw new NixException('NIX_PROJECT_ROOT must be defined');
+        }
         $this->config = (new Configuration())->loadYamlFile($tomlConfigFile);
     }
 

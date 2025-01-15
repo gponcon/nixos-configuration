@@ -2,8 +2,17 @@
 
 namespace Darkone\NixGenerator\Item;
 
+use Darkone\NixGenerator\NixException;
+
 class User
 {
+    use ItemTrait;
+
+    private const PROFILE_PATHS = [
+        'usr/homes/%s.nix',
+        'lib/homes/%s.nix',
+    ];
+
     private string $login;
     private string $name;
     private string $email;
@@ -28,9 +37,12 @@ class User
         return $this;
     }
 
+    /**
+     * @throws NixException
+     */
     public function setProfile(string $profile): User
     {
-        $this->profile = $profile;
+        $this->profile = $this->filterProfile($profile, 'user');
         return $this;
     }
 

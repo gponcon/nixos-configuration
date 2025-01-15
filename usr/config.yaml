@@ -1,5 +1,6 @@
 # Nix generator configuration file for Darkone NixOS Framework
 
+# Global configuration is converted in lists / attSets to be used in nix conf.
 global:
     domain: "arthur.lan"
 
@@ -19,19 +20,19 @@ users:
         groups: [ "admin", "media", "common" ]
     anso:
         name: "Anso"
-        profile: "office"
+        profile: "normal"
         groups: [ "common" ]
     charlie:
         name: "Charlie"
-        profile: "teen"
+        profile: "teenager"
         groups: [ "kids", "common" ]
     axelle:
         name: "Axelle"
-        profile: "kid"
+        profile: "children"
         groups: [ "kids", "common" ]
     tristan:
         name: "Tristan"
-        profile: "kid"
+        profile: "children"
         groups: [ "kids", "common" ]
 
 # Hosts declaration
@@ -45,22 +46,22 @@ hosts:
 
         - hostname: "nlt"
           name: "Darkone Laptop"
-          profile: "nlt"
+          profile: "admin-laptop"
           users: [ "darkone" ]
           tags: [ "laptops", "admins" ]
           local: true
-        - hostname: "gateway"
-          name: "Home Gateway & HomeLab"
-          profile: "gateway"
-          groups: [ "admin" ]
-        - hostname: "charlie"
-          name: "Cle USB Charlie"
-          profile: "child-key"
-          users: [ "charlie" ]
-        - hostname: "axelle"
-          name: "Cle USB Axelle"
-          profile: "child-key"
-          users: [ "axelle" ]
+#        - hostname: "gateway"
+#          name: "Home Gateway & HomeLab"
+#          profile: "gateway"
+#          groups: [ "admin" ]
+#        - hostname: "charlie"
+#          name: "Cle USB Charlie"
+#          profile: "child-key"
+#          users: [ "charlie" ]
+#        - hostname: "axelle"
+#          name: "Cle USB Axelle"
+#          profile: "child-key"
+#          users: [ "axelle" ]
 
     # Host groups by range
     range:
@@ -77,7 +78,7 @@ hosts:
 
         - hostname: "laptop-%s" # optional
           name: "Ordi portable %s" # optional
-          profile: "common-laptop"
+          profile: "laptop"
           hosts:
               darktwo: "Darktwo"
               kids: "Kids"

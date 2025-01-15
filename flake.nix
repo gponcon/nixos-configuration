@@ -76,6 +76,8 @@
 
                 # Install in /etc/profiles instead of ~/nix-profiles.
                 useUserPackages = true;
+
+                # TODO adapter à la nouvelle conf
                 users = nixpkgs.lib.genAttrs host.users (user: import ./usr/users/${user.profile});
                 extraSpecialArgs = {
                   host = host;
