@@ -91,6 +91,8 @@ src/(...)         <-- Generator sources
 
 ## Le générateur
 
+![Darkone NixOS Framework Generator](doc/arch.png)
+
 Son rôle est de générer une configuration statique pure à partir d'une définition de machines (hosts), utilisateurs et groupes en provenance de diverses sources (déclarations statiques, ldap, etc. configurées dans `usr/config.toml`). La configuration nix générée est intégrée au dépôt afin d'être fixée et utilisée par le flake.
 
 ## Exemples
