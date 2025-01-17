@@ -57,12 +57,34 @@
       # The hosts.nix generated file (just generate)
       hosts = import ./var/generated/hosts.nix;
 
-      mkUser = user: {
+      mkHome = user: {
         name = user.login;
-        value = {
-          home.username = "${user.login}";
-          home.homeDirectory = "/home/${user.login}";
-        } // import ./${user.profile};
+        value =
+          let
+            pkgs = import nixpkgs {
+              inherit system;
+              config.allowUnfree = true;
+            };
+          in
+          {
+            imports = [ (import ./${user.profile}) ];
+
+            #import ./${user.profile} {
+            #inherit (nixpkgs) lib;
+            #inherit pkgs;
+            # Passer les informations de l'utilisateur comme specialArgs
+            #specialArgs = {
+            #  inherit user;
+            #};
+            # Configuration de base pour chaque utilisateur
+            #config = {
+            home = {
+              username = user.login;
+              homeDirectory = nixpkgs.lib.mkForce "/home/${user.login}";
+              stateVersion = "25.05";
+            };
+            #};
+          };
       };
 
       mkNixosHost = host: {
@@ -70,7 +92,7 @@
         value = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
-            hostname = host.hostname;
+            inherit host;
           };
           modules = [
             ./lib/modules
@@ -85,24 +107,24 @@
                 # Install in /etc/profiles instead of ~/nix-profiles.
                 useUserPackages = true;
 
-                #users = builtins.listToAttrs (map mkUser host.users);
+                users = builtins.listToAttrs (map mkHome host.users);
 
                 # Load users profiles
-                users = nixpkgs.lib.genAttrs host.users (user: import ./${user.profile});
+                #users = nixpkgs.lib.genAttrs host.users (user: import ./${user.profile});
                 extraSpecialArgs = {
                   host = host;
 
                   # This hack must be set to allow unfree packages
                   # in home manager configurations.
                   # useGlobalPkgs with allowUnfree nixpkgs do not works.
-                  pkgs = import nixpkgs {
-                    inherit system;
-                    config.allowUnfree = true;
-                  };
+                  #pkgs = import nixpkgs {
+                  #  inherit system;
+                  #  config.allowUnfree = true;
+                  #};
                 };
               };
             }
-          ];
+          ] ++ lib.optional (builtins.pathExists ./usr/machines/${host.hostname}.nix) ./usr/machines/${host.hostname}.nix;
         };
       };
 

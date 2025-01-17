@@ -1,7 +1,5 @@
-# Normal user with graphic environment
+# A "normal" user profile
 
 {
-  import = [ ./minimal.nix ];
-
-  #darkone.user.normal.enable = true;
+  darkone.user.normal.enable = true;
 }

@@ -1,6 +1,10 @@
+# Profile for advanced users (computer scientists, developers, admins)
+
 {
-  import = [
+  imports = [
+    ./../minimal
     ./git.nix
     ./vim.nix
   ];
 }
+

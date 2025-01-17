@@ -1,10 +1,9 @@
 # A unique user profile
 
 {
-  # Is a nix administrator with additional home environment
+  # Is a nix administrator
   imports = [
-    ../../lib/homes/nix-admin.nix
-    ./darkone
+    ../../lib/nix-admin.nix
   ];
 
   # This value determines the Home Manager release that your

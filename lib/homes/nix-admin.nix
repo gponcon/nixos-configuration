@@ -1,8 +1,6 @@
-# Darkone Network administrator
+# Darkone Network administrator user profile
 
 { config, lib, ... }:
 {
-  import = [ ./admin.nix ];
-
-  #darkone.user.nix-admin.enable = true;
+  darkone.user.nix-admin.enable = true;
 }

@@ -14,10 +14,10 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    users.users.${user.login} = {
-      isNormalUser = true;
-      description = "${user.name}";
-    };
+    #users.users.${user.login} = {
+    #  isNormalUser = true;
+    #  description = "${user.name}";
+    #};
 
   };
 }

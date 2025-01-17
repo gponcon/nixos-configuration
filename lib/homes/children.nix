@@ -1,7 +1,5 @@
-# Features for childs and babies
+# Childs and babies profile
 
 {
-  import = [ ./minimal.nix ];
-
-  #darkone.user.children.enable = true;
+  darkone.user.children.enable = true;
 }
