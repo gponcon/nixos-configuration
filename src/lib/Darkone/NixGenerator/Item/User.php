@@ -9,8 +9,8 @@ class User
     use ItemTrait;
 
     private const PROFILE_PATHS = [
-        'usr/homes/%s.nix',
-        'lib/homes/%s.nix',
+        'usr/homes/%s',
+        'lib/homes/%s',
     ];
 
     private string $login;

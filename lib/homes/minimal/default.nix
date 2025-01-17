@@ -1,4 +1,4 @@
-{ user, ... }:
+{ ... }:
 {
   # Home manager minimal settings
   #home.username = "${user.login}";

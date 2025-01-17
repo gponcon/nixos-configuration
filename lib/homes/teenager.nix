@@ -1,5 +1,3 @@
 # Teenager user profile
 
-{
-  darkone.user.teenager.enable = true;
-}
+{ } // builtins.import ./minimal.nix

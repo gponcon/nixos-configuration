@@ -36,47 +36,51 @@ flake.nix  <-- Main flake
 Justfile   <-- Project management
 lib/       <-- Projet library
 ├── modules/
-|   ├── default.nix       <-- Auto-generated default (by Makefile)
-|   ├── system/           <-- System / Hardware configurations
-|   │   ├── core.nix      <-- Core features (activated by default)
-|   │   ├── i18n.nix      <-- Lang / Region settings
-|   │   └── doc.nix       <-- Technical doc
-|   ├── console/(...)     <-- CLI applications
-|   ├── graphic/(...)     <-- X applications
-|   ├── service/(...)     <-- Daemons
-|   ├── admin/            <-- Nix administration settings
-|   │   ├── nix.nix       <-- Nix tools
-|   │   └── identity.nix  <-- Identities and grocomplet du réseau local
-|   │   │   ├── backup.nix
-|   │   │   ├── homelab.nix
-|   │   │   └── builder.nix
-|   │   ├── desktop/
-|   │   │   ├── office.nix
-|   │   │   └── administrator.nix
-|   │   ├── container/
-|   │   │   ├── docker.nix
-|   │   │   └── nix.nix
-|   │   └── vm/
-|   │       ├── virtualbox.nix
-|   │       └── xen.nix
-|   └── user/                 <-- Home-manager abstract user profiles
-|       ├── common/
-|       │   ├── default.nix
-|       │   └── home/(...)
-|       ├── developper/(...)  <-- Advanced user with development tools
-|       ├── beginner/(...)    <-- Easy environment
-|       ├── regular/(...)     <-- Non-technical user
-|       ├── gamer/(...)       <-- Optimized environment for gamers
-|       ├── admin/(...)       <-- System Admin
-|       └── child/(...)       <-- Kids softwares and settings
-├── users/                    <-- System concrete users
-|   └── nix/                  <-- A special user for nodes management
-└── hosts/                    <-- Hosts and host-templates declarations
-    └── builder.nix           <-- A desktop host
+│   ├── default.nix       <-- Auto-generated default (by Justfile)
+│   ├── system/           <-- System / Hardware configurations
+│   │   ├── core.nix      <-- Core features (activated by default)
+│   │   ├── i18n.nix      <-- Lang / Region settings
+│   │   └── doc.nix       <-- Technical doc
+│   ├── console/(...)     <-- CLI applications
+│   ├── graphic/(...)     <-- X applications
+│   ├── service/(...)     <-- Daemons
+│   ├── admin/            <-- Nix administration settings
+│   │   ├── nix.nix       <-- Nix tools
+│   │   └── identity.nix  <-- Identities and grocomplet du réseau local
+│   │   │   ├── backup.nix
+│   │   │   ├── homelab.nix
+│   │   │   └── builder.nix
+│   │   ├── desktop/
+│   │   │   ├── office.nix
+│   │   │   └── administrator.nix
+│   │   ├── container/
+│   │   │   ├── docker.nix
+│   │   │   └── nix.nix
+│   │   └── vm/
+│   │       ├── virtualbox.nix
+│   │       └── xen.nix
+│   └── user/          <-- User management (not home)
+│       ├── nix.nix    <-- Nix special user
+│       ├── build.nix  <-- Advanced user with development tools
+├── homes/                <-- User profiles configuration (.nix) + home profiles (dirs)
+│   ├── admin.nix         <-- Admin user profile configuration (extragroups, etc.)
+│   ├── admin/(...)       <-- Admin user profile home
+│   ├── developper(...)   <-- Advanced user with development tools
+│   ├── minimal(...)      <-- Easy environment
+│   ├── regular(...)      <-- Non-technical user
+│   ├── gamer(...)        <-- Optimized environment for gamers
+│   └── child(...)        <-- Kids softwares and settings
+└── hosts/                <-- Hosts and host-templates declarations
+    ├── desktop.nix       <-- A desktop host
+    ├── laptop.nix        <-- A laptop host
+    ├── server.nix        <-- A server host
+    ├── minimal.nix       <-- A minimal host
+    └── builder.nix       <-- Another host
 usr/               <-- Writable zone for local network project
 ├── modules/(...)  <-- Local modules
 ├── secrets/(...)  <-- Local secrets file
 ├── homes/(...)    <-- Home profiles
+├── machines/(...) <-- Machine specific configuration by hostname
 ├── hosts/(...)    <-- Host profiles
 └── config.yaml    <-- Local configuration used by the generator
 var/
@@ -249,6 +253,22 @@ colmena apply --on gateway switch
 nixos-rebuild switch --flake path:.#gateway --target-host admin@gateway --build-host gateway --fast --use-remote-sudo
 ```
 
+## Justfile
+
+```shell
+❯ just
+Available recipes:
+    check            # Check nix files with deadnix
+    clean            # fix + generate + check
+    fix              # format (nixfmt) + optimize (deadnix)
+    flake-check      # Check the main flake
+    format           # Recursive nixfmt on all nix files
+    generate         # Update the nix generated files
+    install          # Framework installation (wip)
+    optimize         # Recursive deadnix on all nix files
+    ssh-copy-id host # Copy local id on a new node (wip)
+```
+
 ## Liste TODO
 
 - [x] Architecture modulaire.
@@ -258,7 +278,7 @@ nixos-rebuild switch --flake path:.#gateway --target-host admin@gateway --build-
 - [x] Modules console de base (zsh, git, shell).
 - [x] Modules graphic de base (gnome, jeux de paquetages).
 - [x] Hosts préconfigurés : minimal, serveur, desktop, laptop.
-- [x] Makefile pour checker et fixer les sources.
+- [x] [Justfile](https://github.com/casey/just) pour checker et fixer les sources.
 - [ ] Création de noeuds avec [nixos-anywhere](https://github.com/nix-community/nixos-anywhere) + [disko](https://github.com/nix-community/disko) (wip).
 - [ ] Homepage automatique en fonction des services activés (wip).
 - [ ] Configuration transversale générale (wip).

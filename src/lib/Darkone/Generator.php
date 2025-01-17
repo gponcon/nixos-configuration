@@ -38,6 +38,7 @@ class Generator
                 return (new NixAttrSet())
                     ->setString('login', $user->getLogin())
                     ->setString('email', $user->getEmail())
+                    ->setString('name', $user->getName())
                     ->setString('profile', $user->getProfile());
                 }, $host->getUsers()));
             $deployment = (new NixAttrSet())

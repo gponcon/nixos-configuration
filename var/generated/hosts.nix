@@ -11,7 +11,8 @@
       {
         login = "darkone";
         email = "darkone@darkone.yt";
-        profile = "usr/homes/darkone.nix";
+        name = "Darkone Linux";
+        profile = "usr/homes/darkone";
       }
     ];
     colmena = {
@@ -33,7 +34,8 @@
       {
         login = "darkone";
         email = "darkone@darkone.yt";
-        profile = "usr/homes/darkone.nix";
+        name = "Darkone Linux";
+        profile = "usr/homes/darkone";
       }
     ];
     colmena = {
@@ -50,7 +52,8 @@
       {
         login = "darkone";
         email = "darkone@darkone.yt";
-        profile = "usr/homes/darkone.nix";
+        name = "Darkone Linux";
+        profile = "usr/homes/darkone";
       }
     ];
     colmena = {
@@ -67,7 +70,8 @@
       {
         login = "darkone";
         email = "darkone@darkone.yt";
-        profile = "usr/homes/darkone.nix";
+        name = "Darkone Linux";
+        profile = "usr/homes/darkone";
       }
     ];
     colmena = {
@@ -84,27 +88,32 @@
       {
         login = "darkone";
         email = "darkone@darkone.yt";
-        profile = "usr/homes/darkone.nix";
+        name = "Darkone Linux";
+        profile = "usr/homes/darkone";
       }
       {
         login = "anso";
         email = "anso@arthur.lan";
-        profile = "lib/homes/normal.nix";
+        name = "Anso";
+        profile = "lib/homes/normal";
       }
       {
         login = "charlie";
         email = "charlie@arthur.lan";
-        profile = "lib/homes/teenager.nix";
+        name = "Charlie";
+        profile = "lib/homes/teenager";
       }
       {
         login = "axelle";
         email = "axelle@arthur.lan";
-        profile = "lib/homes/children.nix";
+        name = "Axelle";
+        profile = "lib/homes/children";
       }
       {
         login = "tristan";
         email = "tristan@arthur.lan";
-        profile = "lib/homes/children.nix";
+        name = "Tristan";
+        profile = "lib/homes/children";
       }
     ];
     colmena = {
@@ -128,27 +137,32 @@
       {
         login = "darkone";
         email = "darkone@darkone.yt";
-        profile = "usr/homes/darkone.nix";
+        name = "Darkone Linux";
+        profile = "usr/homes/darkone";
       }
       {
         login = "anso";
         email = "anso@arthur.lan";
-        profile = "lib/homes/normal.nix";
+        name = "Anso";
+        profile = "lib/homes/normal";
       }
       {
         login = "charlie";
         email = "charlie@arthur.lan";
-        profile = "lib/homes/teenager.nix";
+        name = "Charlie";
+        profile = "lib/homes/teenager";
       }
       {
         login = "axelle";
         email = "axelle@arthur.lan";
-        profile = "lib/homes/children.nix";
+        name = "Axelle";
+        profile = "lib/homes/children";
       }
       {
         login = "tristan";
         email = "tristan@arthur.lan";
-        profile = "lib/homes/children.nix";
+        name = "Tristan";
+        profile = "lib/homes/children";
       }
     ];
     colmena = {

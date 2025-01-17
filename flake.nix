@@ -59,32 +59,25 @@
 
       mkHome = user: {
         name = user.login;
-        value =
-          let
-            pkgs = import nixpkgs {
-              inherit system;
-              config.allowUnfree = true;
-            };
-          in
-          {
-            imports = [ (import ./${user.profile}) ];
+        value = {
+          imports = [ (import ./${user.profile}) ];
 
-            #import ./${user.profile} {
-            #inherit (nixpkgs) lib;
-            #inherit pkgs;
-            # Passer les informations de l'utilisateur comme specialArgs
-            #specialArgs = {
-            #  inherit user;
-            #};
-            # Configuration de base pour chaque utilisateur
-            #config = {
-            home = {
-              username = user.login;
-              homeDirectory = nixpkgs.lib.mkForce "/home/${user.login}";
-              stateVersion = "25.05";
-            };
-            #};
+          #import ./${user.profile} {
+          #inherit (nixpkgs) lib;
+          #inherit pkgs;
+          # Passer les informations de l'utilisateur comme specialArgs
+          #specialArgs = {
+          #  inherit user;
+          #};
+          # Configuration de base pour chaque utilisateur
+          #config = {
+          home = {
+            username = user.login;
+            homeDirectory = nixpkgs.lib.mkForce "/home/${user.login}";
+            stateVersion = "25.05";
           };
+          #};
+        };
       };
 
       mkNixosHost = host: {
@@ -94,37 +87,39 @@
           specialArgs = {
             inherit host;
           };
-          modules = [
-            ./lib/modules
-            ./${host.profile}
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
+          modules =
+            [
+              ./lib/modules
+              ./${host.profile}
+              home-manager.nixosModules.home-manager
+              {
+                home-manager = {
 
-                # Use global packages from nixpkgs
-                useGlobalPkgs = true;
+                  # Use global packages from nixpkgs
+                  useGlobalPkgs = true;
 
-                # Install in /etc/profiles instead of ~/nix-profiles.
-                useUserPackages = true;
+                  # Install in /etc/profiles instead of ~/nix-profiles.
+                  useUserPackages = true;
 
-                users = builtins.listToAttrs (map mkHome host.users);
+                  users = builtins.listToAttrs (map mkHome host.users);
 
-                # Load users profiles
-                #users = nixpkgs.lib.genAttrs host.users (user: import ./${user.profile});
-                extraSpecialArgs = {
-                  host = host;
+                  # Load users profiles
+                  #users = nixpkgs.lib.genAttrs host.users (user: import ./${user.profile});
+                  extraSpecialArgs = {
+                    host = host;
 
-                  # This hack must be set to allow unfree packages
-                  # in home manager configurations.
-                  # useGlobalPkgs with allowUnfree nixpkgs do not works.
-                  #pkgs = import nixpkgs {
-                  #  inherit system;
-                  #  config.allowUnfree = true;
-                  #};
+                    # This hack must be set to allow unfree packages
+                    # in home manager configurations.
+                    # useGlobalPkgs with allowUnfree nixpkgs do not works.
+                    #pkgs = import nixpkgs {
+                    #  inherit system;
+                    #  config.allowUnfree = true;
+                    #};
+                  };
                 };
-              };
-            }
-          ] ++ lib.optional (builtins.pathExists ./usr/machines/${host.hostname}.nix) ./usr/machines/${host.hostname}.nix;
+              }
+            ]
+            ++ nixpkgs.lib.optional (builtins.pathExists ./usr/machines/${host.hostname}) ./usr/machines/${host.hostname};
         };
       };
 

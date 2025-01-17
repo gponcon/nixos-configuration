@@ -1,11 +1,7 @@
 # Advanced user profile (computer scientists, developers, admins)
 
 {
-  lib,
-  config,
   pkgs,
   ...
 }:
-{
-  darkone.user.advanced.enable = true;
-}
+{ shell = pkgs.zsh; } // builtins.import ./minimal.nix

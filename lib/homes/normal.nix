@@ -1,5 +1,3 @@
 # A "normal" user profile
 
-{
-  darkone.user.normal.enable = true;
-}
+{ } // builtins.import ./minimal.nix
