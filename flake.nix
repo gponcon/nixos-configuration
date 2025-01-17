@@ -62,21 +62,12 @@
         value = {
           imports = [ (import ./${user.profile}) ];
 
-          #import ./${user.profile} {
-          #inherit (nixpkgs) lib;
-          #inherit pkgs;
-          # Passer les informations de l'utilisateur comme specialArgs
-          #specialArgs = {
-          #  inherit user;
-          #};
-          # Configuration de base pour chaque utilisateur
-          #config = {
+          # Home profiles loading
           home = {
             username = user.login;
             homeDirectory = nixpkgs.lib.mkForce "/home/${user.login}";
             stateVersion = "25.05";
           };
-          #};
         };
       };
 
@@ -101,20 +92,19 @@
                   # Install in /etc/profiles instead of ~/nix-profiles.
                   useUserPackages = true;
 
+                  # Load users profiles
                   users = builtins.listToAttrs (map mkHome host.users);
 
-                  # Load users profiles
-                  #users = nixpkgs.lib.genAttrs host.users (user: import ./${user.profile});
                   extraSpecialArgs = {
                     host = host;
 
                     # This hack must be set to allow unfree packages
                     # in home manager configurations.
                     # useGlobalPkgs with allowUnfree nixpkgs do not works.
-                    #pkgs = import nixpkgs {
-                    #  inherit system;
-                    #  config.allowUnfree = true;
-                    #};
+                    pkgs = import nixpkgs {
+                      inherit system;
+                      config.allowUnfree = true;
+                    };
                   };
                 };
               }

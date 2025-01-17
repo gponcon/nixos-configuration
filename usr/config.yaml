@@ -18,6 +18,10 @@ users:
         email: "darkone@darkone.yt"
         profile: "darkone"
         groups: [ "admin", "media", "common" ]
+    gponcon:
+        name: "G. Ponçon"
+        profile: "normal"
+        groups: [ ]
     anso:
         name: "Anso"
         profile: "normal"

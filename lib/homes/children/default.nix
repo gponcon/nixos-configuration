@@ -2,6 +2,4 @@
 
 {
   imports = [ ./minimal.nix ];
-
-  #darkone.user.children.enable = true;
 }
