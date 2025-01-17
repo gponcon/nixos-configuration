@@ -1,0 +1,107 @@
+# Nix generator configuration file for Darkone NixOS Framework
+
+# Global configuration is converted in lists / attSets to be used in nix conf.
+global:
+    domain: "arthur.lan"
+
+#------------------------------------------------------------------------------
+# Nix DNF static hosts (nested hosts.<type>) (wip)
+#------------------------------------------------------------------------------
+
+# Static users
+# -> profile is the HomeManager profile
+# -> groups is used to select related hosts
+users:
+
+    darkone:
+        name: "Darkone Linux"
+        email: "darkone@darkone.yt"
+        profile: "darkone"
+        groups: [ "admin", "media", "common" ]
+    gponcon:
+        name: "G. Ponçon"
+        profile: "normal"
+        groups: [ ]
+    anso:
+        name: "Anso"
+        profile: "normal"
+        groups: [ "common" ]
+    charlie:
+        name: "Charlie"
+        profile: "teenager"
+        groups: [ "kids", "common" ]
+    axelle:
+        name: "Axelle"
+        profile: "children"
+        groups: [ "kids", "common" ]
+    tristan:
+        name: "Tristan"
+        profile: "children"
+        groups: [ "kids", "common" ]
+
+# Hosts declaration
+# -> users are explicit users
+# -> groups are used to select related users and add colmena tags.
+#    "local" special group is only for the local (master) machine.
+hosts:
+
+    # Static hosts
+    static:
+
+        - hostname: "nlt"
+          name: "Darkone Laptop"
+          profile: "admin-laptop"
+          users: [ "darkone" ]
+          tags: [ "laptops", "admins" ]
+          local: true
+#        - hostname: "gateway"
+#          name: "Home Gateway & HomeLab"
+#          profile: "gateway"
+#          groups: [ "admin" ]
+#        - hostname: "charlie"
+#          name: "Cle USB Charlie"
+#          profile: "child-key"
+#          users: [ "charlie" ]
+#        - hostname: "axelle"
+#          name: "Cle USB Axelle"
+#          profile: "child-key"
+#          users: [ "axelle" ]
+
+    # Host groups by range
+    range:
+
+        # 3 hosts vbox-01, vbox-02 and vbox-03
+        - hostname: "vbox-%'02s"
+          name: "Virtual %'02s"
+          profile: "vbox"
+          range: [ 1, 3 ]
+          users: [ "darkone" ]
+
+    # Host groups by list of hostnames
+    list:
+
+        - hostname: "laptop-%s" # optional
+          name: "Ordi portable %s" # optional
+          profile: "laptop"
+          hosts:
+              darktwo: "Darktwo"
+              kids: "Kids"
+          groups: [ "common" ]
+
+#------------------------------------------------------------------------------
+# Nix DNF hosts from LLDAP (wip)
+# Contains users and groups
+# users <-> groups <-> hosts
+#------------------------------------------------------------------------------
+
+hostProvider:
+    lldap:
+        enabled: false
+
+        # Use nsswitch to login users, otherwise user configurations are
+        # generated in the nix configuration
+        #nss: false # Not implemented yet
+        url: "ldap://localhost:3890"
+        bind:
+            user: "admin"
+            passwordFile: "usr/secrets/lldap"

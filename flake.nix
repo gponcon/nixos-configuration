@@ -57,57 +57,65 @@
       # The hosts.nix generated file (just generate)
       hosts = import ./var/generated/hosts.nix;
 
+      mkHome = user: {
+        name = user.login;
+        value = {
+          imports = [ (import ./${user.profile}) ];
+
+          # Home profiles loading
+          home = {
+            username = user.login;
+            homeDirectory = nixpkgs.lib.mkForce "/home/${user.login}";
+            stateVersion = "25.05";
+          };
+        };
+      };
+
       mkNixosHost = host: {
         name = host.hostname;
         value = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
-            hostname = host.hostname;
+            inherit host;
           };
-          modules = [
-            ./lib/modules
-            ./usr/hosts/${host.hostname}
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
+          modules =
+            [
+              ./lib/modules
+              ./${host.profile}
+              home-manager.nixosModules.home-manager
+              {
+                home-manager = {
 
-                # Use global packages from nixpkgs
-                useGlobalPkgs = true;
+                  # Use global packages from nixpkgs
+                  useGlobalPkgs = true;
 
-                # Install in /etc/profiles instead of ~/nix-profiles.
-                useUserPackages = true;
-                users = nixpkgs.lib.genAttrs host.users (user: import ./usr/users/${user}/home.nix);
-                extraSpecialArgs = {
-                  hostname = host.hostname;
+                  # Install in /etc/profiles instead of ~/nix-profiles.
+                  useUserPackages = true;
 
-                  # This hack must be set to allow unfree packages
-                  # in home manager configurations.
-                  # useGlobalPkgs with allowUnfree nixpkgs do not works.
-                  pkgs = import nixpkgs {
-                    inherit system;
-                    config.allowUnfree = true;
+                  # Load users profiles
+                  users = builtins.listToAttrs (map mkHome host.users);
+
+                  extraSpecialArgs = {
+                    host = host;
+
+                    # This hack must be set to allow unfree packages
+                    # in home manager configurations.
+                    # useGlobalPkgs with allowUnfree nixpkgs do not works.
+                    pkgs = import nixpkgs {
+                      inherit system;
+                      config.allowUnfree = true;
+                    };
                   };
                 };
-              };
-            }
-          ];
+              }
+            ]
+            ++ nixpkgs.lib.optional (builtins.pathExists ./usr/machines/${host.hostname}) ./usr/machines/${host.hostname};
         };
       };
 
       mkColmenaHost = host: {
         name = host.hostname;
-        value = {
-          deployment = host.deployment;
-
-          # TODO: not working, use "just install" instead
-          #// {
-          #sshOptions = [
-          #  "-i"
-          #  "/etc/nixos/var/security/ssh/id_ed25519_nix"
-          #];
-          #};
-
-        };
+        value = host.colmena;
       };
 
     in
@@ -157,32 +165,6 @@
         }
         // builtins.listToAttrs (map mkColmenaHost hosts)
         // builtins.mapAttrs (_name: value: { imports = value._module.args.modules; }) conf;
-
-      ## A single nixos config outputting multiple formats.
-      ## Alternatively put this in a configuration.nix.
-      #nixosModules.myFormats =
-      #  { config, ... }:
-      #  {
-      #    imports = [
-      #      nixos-generators.nixosModules.all-formats
-      #    ];
-      #  };
-
-      ## a machine consuming the module
-      #nixosConfigurations.start-img = nixpkgs.lib.nixosSystem {
-      #  modules = [
-      #    {
-      #      # Pin nixpkgs to the flake input, so that the packages installed
-      #      # come from the flake inputs.nixpkgs.url.
-      #      nix.registry.nixpkgs.flake = nixpkgs;
-      #      # set disk size to to 20G
-      #      virtualisation.diskSize = 20 * 1024;
-      #    }
-      #    ./lib/modules
-      #    ./lib/hosts/start-img.nix
-      #    self.nixosModules.myFormats
-      #  ];
-      #};
 
       # Start images generators
       packages.x86_64-linux = {

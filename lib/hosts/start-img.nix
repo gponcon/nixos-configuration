@@ -23,8 +23,6 @@
 
   users.users.root.initialPassword = "ToChange";
 
-  # hardware configuration from real machine
-
   boot.initrd.availableKernelModules = [
     "ata_piix"
     "ohci_pci"
@@ -40,5 +38,5 @@
   networking.useDHCP = lib.mkDefault true;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.05";
 }

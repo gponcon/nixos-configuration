@@ -1,6 +1,6 @@
 # Specific modules for students
 
-{ pkgs, ... }:
+{ ... }:
 {
   # HA
   services.home-assistant = {
