@@ -1,9 +1,14 @@
 {
+  imports = [ ./admin-laptop ];
+
   # Darkone modules
   darkone = {
 
     # Based on laptop framework profile
     host.laptop.enable = true;
+
+    # Enable nix administration module
+    admin.nix.enable = true;
 
     # Hp printers
     service.printing.enableHpPrinters = true;

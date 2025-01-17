@@ -1,5 +1,7 @@
 { lib, config, ... }:
 let
+
+  # without .minimal
   cfg = config.darkone.host;
 in
 {

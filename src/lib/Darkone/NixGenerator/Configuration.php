@@ -9,19 +9,19 @@ use Symfony\Component\Yaml\Yaml;
 
 class Configuration extends NixAttrSet
 {
-    const TYPE_STRING = 'string';
-    const TYPE_BOOL = 'boolean';
-    const TYPE_ARRAY = 'array';
-    const TYPE_INT = 'int';
+    private const TYPE_STRING = 'string';
+    private const TYPE_BOOL = 'boolean';
+    private const TYPE_ARRAY = 'array';
+    private const TYPE_INT = 'int';
 
-    const MAX_RANGE_BOUND = 1000;
+    private const MAX_RANGE_BOUND = 1000;
 
-    const REGEX_HOSTNAME = '/^[a-zA-Z][a-zA-Z0-9_-]{2,59}$/';
-    const REGEX_LOGIN = '/^[a-zA-Z][a-zA-Z0-9_-]{2,59}$/';
-    const REGEX_NAME = '/^.{3,128}$/';
+    public const REGEX_HOSTNAME = '/^[a-zA-Z][a-zA-Z0-9_-]{2,59}$/';
+    public const REGEX_LOGIN = '/^[a-zA-Z][a-zA-Z0-9_-]{2,59}$/';
+    public const REGEX_NAME = '/^.{3,128}$/';
 
-    const DEFAULT_NETWORK_DOMAIN = 'darkone.lan';
-    const DEFAULT_PROFILE = 'minimal';
+    private const DEFAULT_NETWORK_DOMAIN = 'darkone.lan';
+    private const DEFAULT_PROFILE = 'minimal';
 
     private string $formatter = 'nixfmt';
     private ?array $lldapConfig = null;
@@ -141,7 +141,7 @@ class Configuration extends NixAttrSet
                 ->setName($host['name'])
                 ->setProfile($host['profile'])
                 ->setLocal($host['local'] ?? false)
-                ->setUsers($this->getAllUsers($host['users'] ?? [], $host['groups'] ?? []))
+                ->setUsers($this->extractAllUsers($host['users'] ?? [], $host['groups'] ?? []))
                 ->setGroups($host['groups'] ?? [])
                 ->setTags($host['tags'] ?? []);
         }, $staticHosts);
@@ -150,12 +150,16 @@ class Configuration extends NixAttrSet
     /**
      * @todo can be optimized
      */
-    private function getAllUsers(array $users, array $groups): array
+    private function extractAllUsers(array $hostUsers, array $groups): array
     {
+        $users = [];
+        foreach ($hostUsers as $login) {
+            $users[$login] = $login;
+        }
         foreach ($groups as $group) {
             foreach ($this->getUsers() as $user) {
                 if (!isset($users[$user->getLogin()]) && in_array($group, $user->getGroups())) {
-                    $users[] = $user->getLogin();
+                    $users[$user->getLogin()] = $user->getLogin();
                 }
             }
         }
@@ -165,9 +169,7 @@ class Configuration extends NixAttrSet
 
     private function loadRangeHosts(array $rangeHosts): void
     {
-        array_map(/**
-         * @throws NixException
-         */ fn (array $hostGroup) => $this->buildRangeHostGroup($hostGroup), $rangeHosts);
+        array_map(fn (array $hostGroup) => $this->buildRangeHostGroup($hostGroup), $rangeHosts);
     }
 
     /**

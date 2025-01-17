@@ -6,4 +6,6 @@
     ./git.nix
     ./vim.nix
   ];
+
+  programs.zsh.enable = true;
 }

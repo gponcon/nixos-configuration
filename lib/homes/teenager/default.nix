@@ -1,5 +1,5 @@
 # Features for teenagers
 
 {
-  imports = [ ./minimal.nix ];
+  imports = [ ./../minimal ];
 }

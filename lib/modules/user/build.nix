@@ -2,16 +2,17 @@
   lib,
   config,
   host,
+  pkgs,
   ...
 }:
 let
   mkUser = user: {
+    inherit pkgs;
     name = user.login;
     value = {
       isNormalUser = true;
       description = "${user.name}";
-    } // import ./../../../lib/homes/nix-admin.nix;
-    #} // import ./../../../${user.profile}.nix;
+    } // import ./../../../${user.profile}.nix;
   };
   cfg = config.darkone.user.build;
 in

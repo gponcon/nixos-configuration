@@ -1,5 +1,5 @@
 # Features for childs and babies
 
 {
-  imports = [ ./minimal.nix ];
+  imports = [ ./../minimal ];
 }

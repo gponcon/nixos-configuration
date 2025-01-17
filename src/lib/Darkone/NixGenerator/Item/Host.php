@@ -2,6 +2,7 @@
 
 namespace Darkone\NixGenerator\Item;
 
+use Darkone\NixGenerator\Configuration;
 use Darkone\NixGenerator\NixException;
 
 class Host
@@ -62,6 +63,7 @@ class Host
 
     public function setUsers(array $users): Host
     {
+        array_map(fn ($key) => preg_match(Configuration::REGEX_LOGIN, $key) || throw new NixException("Bad login '$key'"), array_keys($users));
         $this->users = $users;
         return $this;
     }

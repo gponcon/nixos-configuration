@@ -7,4 +7,4 @@
     "corectrl"
   ];
 }
-// import ./minimal.nix
+// import ./advanced.nix

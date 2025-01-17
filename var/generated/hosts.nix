@@ -14,13 +14,21 @@
         name = "Darkone Linux";
         profile = "usr/homes/darkone";
       }
+      {
+        login = "gponcon";
+        email = "gponcon@arthur.lan";
+        name = "G. Ponçon";
+        profile = "lib/homes/normal";
+      }
     ];
     colmena = {
       deployment = {
         tags = [
           "laptops"
-          "admins"
+          "admin"
+          "group-admin"
           "user-darkone"
+          "user-gponcon"
         ];
       };
       allowLocalDeployment = true;
