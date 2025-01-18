@@ -1,9 +1,9 @@
 # Darkone NixOS Framework
 
-Une configuration NixOS pensée pour devenir à terme un framework pour la création et la gestion d'un réseau multi-host et multi-utilisateur avec NixOS.
+Une configuration NixOS pensée pour devenir un framework pour la création et la gestion d'un réseau multi-host et multi-utilisateur avec NixOS.
 
 > [!WARNING]  
-> Ce projet est en cours de développement.
+> Projet en cours de développement.
 
 Ce framework simplifie les choses grâce à&nbsp;:
 
@@ -14,10 +14,11 @@ Ce framework simplifie les choses grâce à&nbsp;:
 ## Fonctionnalités
 
 - **Déploiements multi-hosts** et multi-utilisateurs avec [colmena](https://github.com/zhaofengli/colmena) et [just](https://github.com/casey/just).
-- **Configurations types** pour serveurs, containers et machines de travail.
+- **Profils de hosts** pour serveurs, conteneurs et machines de travail.
+- **Profils de users** proposant des confs types pour de nombreux utilisateurs.
 - **Modules complets** et 100% fonctionnels avec un simple `.enable = true`.
-- **Architecture extensible**, facile à aborder, personnalisable.
-- **Gestion des paramètres** utilisateur avec [home manager](https://github.com/nix-community/home-manager) + pré-configurations.
+- **Architecture extensible**, cohérente, personnalisable.
+- **Gestion des paramètres** utilisateur avec [home manager](https://github.com/nix-community/home-manager) + profils de homes.
 - **[Homepage](https://github.com/gethomepage/homepage) automatique** en fonction des services activés.
 - **Configuration transversale** pour assurer la cohérence du réseau.
 - **Sécurisation facile et fiable**, un seul mdp pour déverouiller, avec [sops](https://github.com/Mic92/sops-nix).
@@ -26,10 +27,11 @@ Ce framework simplifie les choses grâce à&nbsp;:
 
 A la racine :
 
-- `lib` -> modules, users, hosts du framework
+- `lib` -> modules, users, hosts (framework)
 - `usr` -> Projet local (en écriture)
 - `var` -> Fichiers générés et logs
 - `src` -> Fichiers source du générateur
+- `doc` -> Documentation du projet
 
 ```
 flake.nix  <-- Main flake
@@ -95,6 +97,14 @@ src/(...)         <-- Generator sources
 
 ## Le générateur
 
+```shell
+# Utilisation
+just generate
+
+# Génération + formattages + checks
+just fix
+```
+
 ![Darkone NixOS Framework Generator](doc/arch.png)
 
 Son rôle est de générer une configuration statique pure à partir d'une définition de machines (hosts), utilisateurs et groupes en provenance de diverses sources (déclarations statiques, ldap, etc. configurées dans `usr/config.toml`). La configuration nix générée est intégrée au dépôt afin d'être fixée et utilisée par le flake.
@@ -102,9 +112,9 @@ Son rôle est de générer une configuration statique pure à partir d'une défi
 ## Exemples
 
 > [!CAUTION]
-> Ces exemples ne sont pas encore fonctionnels, mais ça arrive. Ces configurations et commandes pourront différer dans la future version stable du projet.
+> Ces exemples ne sont pas encore fonctionnels. Ces configurations et commandes pourront différer dans la future version stable du projet.
 
-Configurer un poste bureautique complet se fera très simplement :
+Configurer un template de poste bureautique complet se fera très simplement :
 
 ```nix
 # usr/hosts/desktop-office.nix
@@ -112,26 +122,29 @@ Configurer un poste bureautique complet se fera très simplement :
   # Activate all the necessary to have an office PC
   darkone.host.desktop.enable = true;
 
+  # Activate the "office" theme with themed softwares
+  darkone.theme.office.enable = true;
+
   # Add obsidian to the previous configuration
   darkone.graphic.obsidian.enable = true;
 }
 ```
 
-Puis on déclare un PC dans la configuration :
+Puis on déclare des machines dans la configuration `usr/config.yaml` :
 
 ```yaml
 hosts:
     static:
-        - hostname: "pc01"
+        - hostname: "my-pc"
           name: "A PC"
           profile: desktop-office
           users: [ "darkone" "john" ]
-          groups: [ "desktop" ]
 ```
 
 - Le profile `desktop-office` fait référence à `usr/hosts/desktop-office.nix`.
-- Les noms d'hôtes sont attribués automatiquement.
-- Les utilisateurs sont ajoutés individuellement ou via les groupes.
+- Il existe aussi des profils de hosts pré-configurés dans `lib/hosts`.
+- Les utilisateurs liés au host sont déclarés via `users` et/ou `groups`.
+- Utilisateurs et groupes peuvent être déclarés dans la configuration ou dans LDAP.
 
 > [!NOTE]
 > Pour créer un poste, le plus simple est d'installer l'iso d'initialisation, même si ça fonctionne avec un poste contenant déjà un linux.
@@ -163,30 +176,6 @@ hosts:
 > colmena apply --on @desktop switch
 > ```
 
-### Créer un template de poste (WIP)
-
-Pour X postes monotypes qui ont Y utilisateurs :
-
-```nix
-# hosts/desktop-office.nix
-{
-  # "office-room" comme mot clé / préfixe de hostname
-  # Nom des postes par défaut : office-room-01, etc.
-  # sauf si déclarés dans un attrSet (mac -> nom).
-  darkone.host.officeDesktop.office-room = {
-
-    # Tous les users de ces groupes seront déclarés
-    # dans les hosts créés.
-    hosts.groups = [ "students" "trainers" ];
-  };
-}
-```
-
-> [!NOTE]
-> - Utilisateurs et postes (hosts) sont liés entre eux via les groupes.
-> - Les utilisateurs et les groupes sont déclarés dans une base LDAP.
-> - On peut mixer les postes "statiques" et les templates de postes.
-
 ### Créer une passerelle complète
 
 Version minimale :
@@ -207,7 +196,8 @@ Version plus complète :
 ```nix
 {
   # usr/hosts/server-gateway.nix
-  darkone.host.gateway.my-other-gateway = {
+  darkone.host.gateway = {
+    enable = true;
     wan = {
       interface = "eth0";
       gateway = "192.168.0.1"; # optional
@@ -258,14 +248,19 @@ nixos-rebuild switch --flake path:.#gateway --target-host admin@gateway --build-
 ```shell
 ❯ just
 Available recipes:
-    check            # Check nix files with deadnix
-    clean            # fix + generate + check
-    fix              # format (nixfmt) + optimize (deadnix)
+    [_main]
+    fix              # format (nixfmt) + generate + check (deadnix)
+    install          # Framework installation (wip)
+
+    [check]
+    check            # Recursive deadnix on nix files
     flake-check      # Check the main flake
+
+    [touch]
     format           # Recursive nixfmt on all nix files
     generate         # Update the nix generated files
-    install          # Framework installation (wip)
-    optimize         # Recursive deadnix on all nix files
+
+    [utils]
     ssh-copy-id host # Copy local id on a new node (wip)
 ```
 
@@ -281,10 +276,10 @@ Available recipes:
 - [x] [Justfile](https://github.com/casey/just) pour checker et fixer les sources.
 - [ ] Création de noeuds avec [nixos-anywhere](https://github.com/nix-community/nixos-anywhere) + [disko](https://github.com/nix-community/disko) (wip).
 - [ ] Homepage automatique en fonction des services activés (wip).
-- [ ] Configuration transversale générale (wip).
+- [x] Configuration transversale générale (wip).
 - [ ] Chaîne CI / CD pour la gestion de ce développement (wip).
 - [ ] Passerelle type (dhcp, dns, ap, firewall, adguard, AD, VPN).
-- [ ] Postes types (bureautique, développeur, administrateur, enfant).
+- [x] Postes types (bureautique, développeur, administrateur, enfant).
 - [ ] Services pré-configurés pour serveurs (nextcloud, etc.).
 - [ ] Gestion centralisée des utilisateurs avec [lldap](https://github.com/lldap/lldap).
 - [x] Builder d'[ISOs d'installation](https://github.com/nix-community/nixos-generators) pour les machines à intégrer.
@@ -292,7 +287,8 @@ Available recipes:
 - [ ] Documentation FR et EN (wip).
 - [ ] Intégration de [nixvim](https://nix-community.github.io/nixvim/).
 - [ ] Gestion du secure boot avec [lanzaboote](https://github.com/nix-community/lanzaboote).
-- [ ] Générateur de configuration nix statique (wip).
+- [x] Générateur de configuration nix statique (wip).
+- [ ] Tests unitaires (wip).
 
 ## Idées en cours d'étude
 
