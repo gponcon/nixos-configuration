@@ -1,3 +1,1 @@
-{
-  darkone.host.vm.enable = true;
-}
+{ darkone.host.vm.enable = true; }

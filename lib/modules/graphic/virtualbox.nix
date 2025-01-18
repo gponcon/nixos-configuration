@@ -1,8 +1,4 @@
-{
-  lib,
-  config,
-  ...
-}:
+{ lib, config, ... }:
 let
   cfg = config.darkone.graphic.virtualbox;
   all-users = builtins.attrNames config.users.users;

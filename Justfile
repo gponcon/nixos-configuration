@@ -1,4 +1,5 @@
 # Darkone framework just file
+# darkone@darkone.yt
 
 #alias c := clean
 #alias f := fix
@@ -13,6 +14,7 @@ _default:
 	@just --list
 
 # Framework installation (wip)
+[group('_main')]
 install:
 	#!/usr/bin/env bash
 	if [ ! -d {{nixKeyDir}} ] ;then
@@ -34,51 +36,49 @@ install:
 	ssh-add {{nixKeyFile}}
 	echo "-> Done"
 
-# fix + generate + check
-clean: fix generate check
+# format (nixfmt) + generate + check (deadnix)
+[group('_main')]
+fix: format generate check
 
-# Check nix files with deadnix
+# Recursive deadnix on nix files
+[group('check')]
 check:
 	@echo "Checking nix files with deadnix..."
-	find . -name "*.nix" -exec deadnix {} \;
+	find . -name "*.nix" -exec deadnix -eq {} \;
 
 # Check the main flake
+[group('check')]
 flake-check:
 	nix flake check
 
-# format (nixfmt) + optimize (deadnix)
-fix: format optimize
-
 # Recursive nixfmt on all nix files
+[group('touch')]
 format:
-	find . -name "*.nix" -exec nixfmt {} \;
-
-# Recursive deadnix on all nix files
-optimize:
-	find . -name "*.nix" -exec deadnix -eq {} \;
+	@echo "Formatting nix files with nixfmt..."
+	find . -name "*.nix" -exec nixfmt -s {} \;
 
 # Update the nix generated files
+[group('touch')]
 generate: _gen-default-modules _gen-default-overlays _gen-hosts
 
 # Generate default.nix of lib/modules dir
-_gen-default-modules:
+_gen-default-modules: (_gen-default "lib/modules")
+
+# Generate default.nix of lib/overlays
+_gen-default-overlays: (_gen-default "lib/overlays")
+
+# Generator of default.nix files
+_gen-default dir:
 	#!/usr/bin/env bash
-	echo "-> generating modules default.nix..."
-	cd lib/modules
-	echo "{ imports = [" > default.nix
+	echo "-> generating {{dir}} default.nix..."
+	cd {{dir}}
+	echo "# DO NOT EDIT, this is a generated file." > default.nix
+	echo >> default.nix 
+	echo "{ imports = [" >> default.nix
 	find . -name "*.nix" | grep -v default.nix >> default.nix
 	echo "];}" >> default.nix
 	nixfmt default.nix
 
-# Generate default.nix of lib/overlays
-_gen-default-overlays:
-	#!/usr/bin/env bash
-	echo "-> generating overlays default.nix..."
-	cd lib/overlays
-	echo "{ imports = [" > default.nix
-	ls *.nix | grep -v default.nix >> default.nix
-	echo "];}" >> default.nix
-	nixfmt default.nix
 
 # Generate var/generated/hosts.nix
 # TODO: generate with nix generator
@@ -93,6 +93,7 @@ _gen-hosts:
 	nixfmt "{{generatedHostFile}}"
 
 # Copy local id on a new node (wip)
+[group('utils')]
 ssh-copy-id host:
 	#!/usr/bin/env bash
 	ssh-copy-id -i "{{nixKeyFile}}.pub" -t /home/nix/.ssh/authorized_keys {{host}}

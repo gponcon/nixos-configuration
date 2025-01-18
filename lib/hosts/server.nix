@@ -1,3 +1,1 @@
-{
-  darkone.host.server.enable = true;
-}
+{ darkone.host.server.enable = true; }

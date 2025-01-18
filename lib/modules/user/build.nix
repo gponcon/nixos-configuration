@@ -7,12 +7,19 @@
 }:
 let
   mkUser = user: {
-    inherit pkgs;
     name = user.login;
     value = {
       isNormalUser = true;
       description = "${user.name}";
-    } // import ./../../../${user.profile}.nix;
+
+      # To load with the right profile
+      shell = pkgs.zsh;
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "corectrl"
+      ];
+    }; # NOT WORKING # // (import ./../../../${user.profile}.nix { inherit pkgs; });
   };
   cfg = config.darkone.user.build;
 in

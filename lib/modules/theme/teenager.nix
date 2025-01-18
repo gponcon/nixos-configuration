@@ -1,10 +1,6 @@
 # Features for teenagers
 
-{
-  lib,
-  config,
-  ...
-}:
+{ lib, config, ... }:
 let
   cfg = config.darkone.theme.teenager;
 in

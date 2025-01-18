@@ -15,11 +15,7 @@ in
   config = lib.mkIf cfg.enable {
 
     # Unfree exception for obsidian
-    nixpkgs.config.allowUnfreePredicate =
-      pkg:
-      builtins.elem (lib.getName pkg) [
-        "obsidian"
-      ];
+    nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "obsidian" ];
 
     # Packages
     environment.systemPackages = with pkgs; [ obsidian ];

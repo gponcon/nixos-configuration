@@ -1,3 +1,8 @@
 # Darkone Network administrator user profile
 
-{ } // import ./admin.nix
+{ pkgs }:
+{
+  shell = pkgs.zsh;
+}
+
+# // import ./admin.nix

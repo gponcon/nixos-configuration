@@ -57,9 +57,7 @@ in
         extraArgs = "--keep-since 7d --keep 3";
       };
     };
-    environment.shellAliases = lib.mkIf cfg.enable {
-      rebuild = "nh os switch /etc/nixos/";
-    };
+    environment.shellAliases = lib.mkIf cfg.enable { rebuild = "nh os switch /etc/nixos/"; };
 
     # We need ssh agent to deploy nodes
     programs.ssh.startAgent = true;

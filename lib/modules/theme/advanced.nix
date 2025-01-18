@@ -1,10 +1,6 @@
 # Profile for advanced users (computer scientists, developers, admins)
 
-{
-  lib,
-  config,
-  ...
-}:
+{ lib, config, ... }:
 let
   cfg = config.darkone.theme.advanced;
 in

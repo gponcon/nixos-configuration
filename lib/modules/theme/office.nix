@@ -1,11 +1,6 @@
 # Graphic environment with office softwares
 
-{
-  lib,
-  config,
-  user,
-  ...
-}:
+{ lib, config, ... }:
 let
   cfg = config.darkone.theme.office;
 in
@@ -15,9 +10,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-
-    # Based on a minimal user
-    darkone.theme.minimal.enable = true;
 
     # Common packages features
     darkone.console.packages.enable = lib.mkDefault true;

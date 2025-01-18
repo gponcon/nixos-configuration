@@ -1,5 +1,3 @@
 # Features for teenagers
 
-{
-  imports = [ ./../minimal ];
-}
+{ imports = [ ./../minimal ]; }

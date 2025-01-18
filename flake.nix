@@ -75,9 +75,7 @@
         name = host.hostname;
         value = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = {
-            inherit host;
-          };
+          specialArgs = { inherit host; };
           modules =
             [
               ./lib/modules

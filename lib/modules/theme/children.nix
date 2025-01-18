@@ -1,10 +1,6 @@
 # Features for childs and babies
 
-{
-  lib,
-  config,
-  ...
-}:
+{ lib, config, ... }:
 let
   cfg = config.darkone.theme.children;
 in

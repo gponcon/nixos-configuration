@@ -1,3 +1,1 @@
-{
-  darkone.host.portable.enable = true;
-}
+{ darkone.host.portable.enable = true; }

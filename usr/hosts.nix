@@ -51,9 +51,7 @@
       }
     ];
     deployment = {
-      tags = [
-        "test"
-      ];
+      tags = [ "test" ];
       targetHost = "ndf-start-iso";
     };
   }

@@ -1,3 +1,1 @@
-{
-  darkone.host.laptop.enable = true;
-}
+{ darkone.host.laptop.enable = true; }

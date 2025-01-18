@@ -15,9 +15,7 @@ in
   config = lib.mkIf cfg.enable {
 
     # Font used in pdf documents
-    fonts.packages = with pkgs; [
-      gentium
-    ];
+    fonts.packages = with pkgs; [ gentium ];
 
     # Pandoc package + dependencies
     environment.systemPackages = with pkgs; [

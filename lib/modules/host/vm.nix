@@ -1,15 +1,9 @@
-{
-  lib,
-  config,
-  ...
-}:
+{ lib, config, ... }:
 let
   cfg = config.darkone.host.vm;
 in
 {
-  imports = [
-    ./minimal.nix
-  ];
+  imports = [ ./minimal.nix ];
 
   options = {
     darkone.host.vm = {
@@ -23,13 +17,9 @@ in
     # Based on server configuration
     darkone.host.server.enable = lib.mkDefault true;
 
-    virtualisation.virtualbox = lib.mkIf cfg.enableVirtualbox {
-      guest.enable = true;
-    };
+    virtualisation.virtualbox = lib.mkIf cfg.enableVirtualbox { guest.enable = true; };
 
-    services.xe-guest-utilities = lib.mkIf cfg.enableXen {
-      enable = true;
-    };
+    services.xe-guest-utilities = lib.mkIf cfg.enableXen { enable = true; };
 
     boot.initrd.kernelModules = lib.mkIf cfg.enableXen [
       "xen-blkfront"

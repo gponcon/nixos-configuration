@@ -1,20 +1,12 @@
 # Start image for new nodes (used by main flake)
 
-{
-  lib,
-  imgFormat,
-  ...
-}:
+{ lib, imgFormat, ... }:
 {
   darkone.host =
     if imgFormat == "vbox" then
-      {
-        vm.enableVirtualbox = true;
-      }
+      { vm.enableVirtualbox = true; }
     else if imgFormat == "xen" then
-      {
-        vm.enableXen = true;
-      }
+      { vm.enableXen = true; }
     else
       {
         # Based on minimal configuration by default

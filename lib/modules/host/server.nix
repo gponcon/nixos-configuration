@@ -9,9 +9,7 @@ let
   cfgLimit = 10;
 in
 {
-  imports = [
-    ./minimal.nix
-  ];
+  imports = [ ./minimal.nix ];
 
   options = {
     darkone.host.server = {

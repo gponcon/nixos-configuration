@@ -83,9 +83,7 @@ in
     };
 
     # To install printers manually
-    programs.system-config-printer = lib.mkIf cfg.enableManualInstall {
-      enable = true;
-    };
+    programs.system-config-printer = lib.mkIf cfg.enableManualInstall { enable = true; };
 
     # Enable autodiscovery
     services.avahi = {
@@ -115,9 +113,7 @@ in
     ];
 
     # add all users to group scanner and lp
-    users.groups.scanner = lib.mkIf cfg.enableScanners {
-      members = normal-users;
-    };
+    users.groups.scanner = lib.mkIf cfg.enableScanners { members = normal-users; };
 
   };
 }

@@ -1,3 +1,3 @@
 # Advanced user profile (computer scientists, developers, admins)
 
-{ } // builtins.import ./minimal.nix
+{ shell = pkgs.zsh; } // builtins.import ./minimal.nix

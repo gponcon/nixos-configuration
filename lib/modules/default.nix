@@ -1,3 +1,5 @@
+# DO NOT EDIT, this is a generated file.
+
 {
   imports = [
     ./user/build.nix
@@ -26,5 +28,9 @@
     ./service/printing.nix
     ./service/audio.nix
     ./service/httpd.nix
+    ./theme/children.nix
+    ./theme/teenager.nix
+    ./theme/office.nix
+    ./theme/advanced.nix
   ];
 }

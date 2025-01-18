@@ -35,16 +35,7 @@ in
   config = lib.mkIf cfg.enable {
 
     # TODO: Packages
-    environment.systemPackages =
-      with pkgs;
-      (
-        if cfg.enableOffice then
-          [
-            libreoffice-fresh
-          ]
-        else
-          [ ]
-      );
+    environment.systemPackages = with pkgs; (if cfg.enableOffice then [ libreoffice-fresh ] else [ ]);
 
     # Firefox
     programs.firefox = lib.mkIf cfg.enableInternet { enable = true; };

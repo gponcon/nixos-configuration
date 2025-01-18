@@ -24,9 +24,7 @@ in
         "wheel"
       ];
       shell = pkgs.bash;
-      packages = with pkgs; [
-        vim
-      ];
+      packages = with pkgs; [ vim ];
 
       # https://systemd.io/UIDS-GIDS/
       uid = 65000;
