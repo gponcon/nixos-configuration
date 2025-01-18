@@ -34,21 +34,21 @@ A la racine :
 - `doc` -> Documentation du projet
 
 ```
-flake.nix  <-- Main flake
-Justfile   <-- Project management
-lib/       <-- Projet library
+flake.nix .................... Main flake
+Justfile ..................... Project management
+lib/ ......................... Projet library
 ├── modules/
-│   ├── default.nix       <-- Auto-generated default (by Justfile)
-│   ├── system/           <-- System / Hardware configurations
-│   │   ├── core.nix      <-- Core features (activated by default)
-│   │   ├── i18n.nix      <-- Lang / Region settings
-│   │   └── doc.nix       <-- Technical doc
-│   ├── console/(...)     <-- CLI applications
-│   ├── graphic/(...)     <-- X applications
-│   ├── service/(...)     <-- Daemons
-│   ├── admin/            <-- Nix administration settings
-│   │   ├── nix.nix       <-- Nix tools
-│   │   └── identity.nix  <-- Identities and grocomplet du réseau local
+│   ├── default.nix .......... Auto-generated default (by Justfile)
+│   ├── system/ .............. System / Hardware configurations
+│   │   ├── core.nix ......... Core features (activated by default)
+│   │   ├── i18n.nix ......... Lang / Region settings
+│   │   └── doc.nix .......... Technical doc
+│   ├── console/(...) ........ CLI applications
+│   ├── graphic/(...) ........ X applications
+│   ├── service/(...) ........ Daemons
+│   ├── admin/ ............... Nix administration settings
+│   │   ├── nix.nix .......... Nix tools
+│   │   └── identity.nix ..... Identities and grocomplet du réseau local
 │   │   │   ├── backup.nix
 │   │   │   ├── homelab.nix
 │   │   │   └── builder.nix
@@ -61,35 +61,35 @@ lib/       <-- Projet library
 │   │   └── vm/
 │   │       ├── virtualbox.nix
 │   │       └── xen.nix
-│   └── user/          <-- User management (not home)
-│       ├── nix.nix    <-- Nix special user
-│       ├── build.nix  <-- Advanced user with development tools
-├── homes/                <-- User profiles configuration (.nix) + home profiles (dirs)
-│   ├── admin.nix         <-- Admin user profile configuration (extragroups, etc.)
-│   ├── admin/(...)       <-- Admin user profile home
-│   ├── developper(...)   <-- Advanced user with development tools
-│   ├── minimal(...)      <-- Easy environment
-│   ├── regular(...)      <-- Non-technical user
-│   ├── gamer(...)        <-- Optimized environment for gamers
-│   └── child(...)        <-- Kids softwares and settings
-└── hosts/                <-- Hosts and host-templates declarations
-    ├── desktop.nix       <-- A desktop host
-    ├── laptop.nix        <-- A laptop host
-    ├── server.nix        <-- A server host
-    ├── minimal.nix       <-- A minimal host
-    └── builder.nix       <-- Another host
-usr/               <-- Writable zone for local network project
-├── modules/(...)  <-- Local modules
-├── secrets/(...)  <-- Local secrets file
-├── homes/(...)    <-- Home profiles
-├── machines/(...) <-- Machine specific configuration by hostname
-├── hosts/(...)    <-- Host profiles
-└── config.yaml    <-- Local configuration used by the generator
+│   └── user/ ................ User management (not home)
+│       ├── nix.nix .......... Nix special user
+│       ├── build.nix ........ Advanced user with development tools
+├── homes/ ................... User profiles configuration (.nix) + home profiles (dirs)
+│   ├── admin.nix ............ Admin user profile configuration (extragroups, etc.)
+│   ├── admin/(...) .......... Admin user profile home
+│   ├── developper(...) ...... Advanced user with development tools
+│   ├── minimal(...) ......... Easy environment
+│   ├── regular(...) ......... Non-technical user
+│   ├── gamer(...) ........... Optimized environment for gamers
+│   └── child(...) ........... Kids softwares and settings
+└── hosts/ ................... Hosts and host-templates declarations
+    ├── desktop.nix .......... A desktop host
+    ├── laptop.nix ........... A laptop host
+    ├── server.nix ........... A server host
+    ├── minimal.nix .......... A minimal host
+    └── builder.nix .......... Another host
+usr/ ......................... Writable zone for local network project
+├── modules/(...) ............ Local modules
+├── secrets/(...) ............ Local secrets file
+├── homes/(...) .............. Home profiles
+├── machines/(...) ........... Machine specific configuration by hostname
+├── hosts/(...) .............. Host profiles
+└── config.yaml .............. Local configuration used by the generator
 var/
 ├── log/
-└── generated/    <-- Generated files
-    └── hosts.nix <-- Hosts to deploy
-src/(...)         <-- Generator sources
+└── generated/ ............... Generated files
+    └── hosts.nix ............ Hosts to deploy
+src/(...) .................... Generator sources
 ```
 
 > [!NOTE]
@@ -107,7 +107,7 @@ just fix
 
 ![Darkone NixOS Framework Generator](doc/arch.png)
 
-Son rôle est de générer une configuration statique pure à partir d'une définition de machines (hosts), utilisateurs et groupes en provenance de diverses sources (déclarations statiques, ldap, etc. configurées dans `usr/config.toml`). La configuration nix générée est intégrée au dépôt afin d'être fixée et utilisée par le flake.
+Son rôle est de générer une configuration statique pure à partir d'une définition de machines (hosts), utilisateurs et groupes en provenance de diverses sources (déclarations statiques, ldap, etc. configurées dans `usr/config.yaml`). La configuration nix générée est intégrée au dépôt afin d'être fixée et utilisée par le flake.
 
 ## Exemples
 
@@ -122,7 +122,7 @@ Configurer un template de poste bureautique complet se fera très simplement :
   # Activate all the necessary to have an office PC
   darkone.host.desktop.enable = true;
 
-  # Activate the "office" theme with themed softwares
+  # Activate the "office" theme with related softwares
   darkone.theme.office.enable = true;
 
   # Add obsidian to the previous configuration
@@ -288,6 +288,7 @@ Available recipes:
 - [ ] Intégration de [nixvim](https://nix-community.github.io/nixvim/).
 - [ ] Gestion du secure boot avec [lanzaboote](https://github.com/nix-community/lanzaboote).
 - [x] Générateur de configuration nix statique (wip).
+- [ ] Commandes d'introspection pour lister les hosts, users, modules activés par host, etc.
 - [ ] Tests unitaires (wip).
 
 ## Idées en cours d'étude
@@ -348,4 +349,20 @@ Master avec options :
     };
   };
 }
+```
+
+### Commandes d'introspection
+
+```shell
+# Host list with resume for each
+just host
+
+# Host details : settings, activated modules, user list...
+just host my-pc
+
+# User list with resume (name, mail, host count)
+just user
+
+# User details : content, feature list, host list...
+just user darkone
 ```
