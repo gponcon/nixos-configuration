@@ -14,6 +14,5 @@ in
     # Common packages features
     darkone.console.packages.enable = lib.mkDefault true;
     darkone.graphic.packages.enable = lib.mkDefault true;
-
   };
 }

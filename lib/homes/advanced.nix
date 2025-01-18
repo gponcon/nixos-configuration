@@ -1,4 +1,12 @@
 # Advanced user profile (computer scientists, developers, admins)
 
-{ pkgs, ... }:
-{ shell = pkgs.zsh; } // builtins.import ./minimal.nix { inherit pkgs; }
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+{
+  shell = lib.mkIf config.programs.zsh.enable pkgs.zsh;
+}
+// builtins.import ./minimal.nix { inherit pkgs; }

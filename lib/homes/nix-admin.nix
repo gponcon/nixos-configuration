@@ -1,4 +1,9 @@
 # Darkone Network administrator user profile
 
-{ pkgs, ... }:
-import ./admin.nix { inherit pkgs; }
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+import ./admin.nix { inherit pkgs lib config; }

@@ -11,7 +11,7 @@ let
     value = {
       isNormalUser = true;
       description = "${user.name}";
-    } // import ./../../../${user.profile}.nix { inherit pkgs; };
+    } // import ./../../../${user.profile}.nix { inherit pkgs lib config; };
   };
   cfg = config.darkone.user.build;
 in
