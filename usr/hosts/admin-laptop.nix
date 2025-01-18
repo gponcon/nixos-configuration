@@ -7,7 +7,10 @@
     # Based on laptop framework profile
     host.laptop.enable = true;
 
-    # Enable nix administration module
+    # Advanced user (developper / admin)
+    theme.advanced.enable = true;
+
+    # Nix administration features
     admin.nix.enable = true;
 
     # Hp printers
@@ -23,5 +26,6 @@
     host.isNode = false;
   };
 
+  # Host specific state version
   system.stateVersion = "24.05";
 }
