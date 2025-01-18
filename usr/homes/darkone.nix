@@ -1,3 +1,4 @@
 # A unique user profile
 
-{ } // import ./../../lib/homes/nix-admin.nix
+{ pkgs, ... }:
+import ./../../lib/homes/nix-admin.nix { inherit pkgs; }

@@ -1,3 +1,4 @@
 # A "normal" user profile
 
-{ } // builtins.import ./minimal.nix
+{ pkgs, ... }:
+import ./minimal.nix { inherit pkgs; }

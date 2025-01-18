@@ -11,15 +11,7 @@ let
     value = {
       isNormalUser = true;
       description = "${user.name}";
-
-      # To load with the right profile
-      shell = pkgs.zsh;
-      extraGroups = [
-        "networkmanager"
-        "wheel"
-        "corectrl"
-      ];
-    }; # NOT WORKING # // (import ./../../../${user.profile}.nix { inherit pkgs; });
+    } // import ./../../../${user.profile}.nix { inherit pkgs; };
   };
   cfg = config.darkone.user.build;
 in

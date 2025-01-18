@@ -1,5 +1,6 @@
 # Non-nix admin user profile
 
+{ pkgs, ... }:
 {
   extraGroups = [
     "networkmanager"
@@ -7,4 +8,4 @@
     "corectrl"
   ];
 }
-// import ./advanced.nix
+// import ./advanced.nix { inherit pkgs; }
