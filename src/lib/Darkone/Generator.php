@@ -26,10 +26,27 @@ class Generator
     }
 
     /**
+     * @throws NixException
+     */
+    public function generate(string $what): string
+    {
+        $what = ucfirst(strtolower($what));
+        if (!preg_match('/^[A-Z][a-z]+$/', $what)) {
+            throw new NixException('A valid generator item is required');
+        }
+        $method = 'generate' . $what;
+        if (!method_exists($this, $method)) {
+            throw new NixException('Unknown generator item "' . strtolower($what) . '"');
+        }
+
+        return $this->$method();
+    }
+
+    /**
      * Generate the hosts.nix file loaded by flake.nix
      * @throws NixException
      */
-    public function generate(): string
+    private function generateHosts(): string
     {
         $hosts = new NixList();
         foreach ($this->config->getHosts() as $host) {
@@ -41,17 +58,29 @@ class Generator
                     ->setString('name', $user->getName())
                     ->setString('profile', $user->getProfile());
                 }, $host->getUsers()));
-            $deployment = (new NixAttrSet())
-                ->set('tags', (new NixList())->populateStrings($this->extractTags($host)));
-            $colmena = (new NixAttrSet())->set('deployment', $deployment);
-            $this->setLocal($host, $colmena);
             $newHost = (new NixAttrSet())
                 ->setString('hostname', $host->getHostname())
                 ->setString('name', $host->getName())
                 ->setString('profile', $host->getProfile())
-                ->set('users', $users)
-                ->set('colmena', $colmena);
+                ->set('users', $users);
             $hosts->add($newHost);
+        }
+
+        return $hosts;
+    }
+
+    /**
+     * @throws NixException
+     */
+    private function generateColmena(): string
+    {
+        $hosts = new NixAttrSet();
+        foreach ($this->config->getHosts() as $host) {
+            $deployment = (new NixAttrSet())
+                ->set('tags', (new NixList())->populateStrings($this->extractTags($host)));
+            $this->setLocal($host, $deployment);
+            $colmena = (new NixAttrSet())->set('deployment', $deployment);
+            $hosts->set($host->getHostname(), $colmena);
         }
 
         return $hosts;

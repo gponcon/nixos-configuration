@@ -2,6 +2,11 @@
     "name": "darkone/nix-generator",
     "description": "Darkone NixOS Framework generator",
     "type": "library",
+    "config": {
+        "platform": {
+            "php": "8.3"
+        }
+    },
     "require": {
         "symfony/yaml": "v7.2.0"
     },

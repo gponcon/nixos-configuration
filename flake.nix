@@ -114,11 +114,6 @@
         };
       };
 
-      mkColmenaHost = host: {
-        name = host.hostname;
-        value = host.colmena;
-      };
-
     in
     {
       nixosConfigurations = builtins.listToAttrs (map mkNixosHost hosts);
@@ -134,6 +129,7 @@
       colmena =
         let
           conf = self.nixosConfigurations;
+          inherit hosts;
         in
         {
           meta = {
@@ -164,7 +160,7 @@
           };
 
         }
-        // builtins.listToAttrs (map mkColmenaHost hosts)
+        // import ./var/generated/colmena.nix
         // builtins.mapAttrs (_name: value: { imports = value._module.args.modules; }) conf;
 
       # Start images generators

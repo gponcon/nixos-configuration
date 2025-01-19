@@ -21,18 +21,6 @@
         profile = "lib/homes/normal";
       }
     ];
-    colmena = {
-      deployment = {
-        tags = [
-          "laptops"
-          "admin"
-          "group-admin"
-          "user-darkone"
-          "user-gponcon"
-        ];
-      };
-      allowLocalDeployment = true;
-    };
   }
   {
     hostname = "vbox-01";
@@ -46,11 +34,6 @@
         profile = "usr/homes/darkone";
       }
     ];
-    colmena = {
-      deployment = {
-        tags = [ "user-darkone" ];
-      };
-    };
   }
   {
     hostname = "vbox-02";
@@ -64,11 +47,6 @@
         profile = "usr/homes/darkone";
       }
     ];
-    colmena = {
-      deployment = {
-        tags = [ "user-darkone" ];
-      };
-    };
   }
   {
     hostname = "vbox-03";
@@ -82,10 +60,5 @@
         profile = "usr/homes/darkone";
       }
     ];
-    colmena = {
-      deployment = {
-        tags = [ "user-darkone" ];
-      };
-    };
   }
 ]
