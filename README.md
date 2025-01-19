@@ -13,11 +13,11 @@ Ce framework simplifie les choses grâce à&nbsp;:
 
 ## Fonctionnalités
 
-- **Déploiements multi-hosts** et multi-utilisateurs avec [colmena](https://github.com/zhaofengli/colmena) et [just](https://github.com/casey/just).
+- **Multi-hosts et multi-users**, déploiements avec [colmena](https://github.com/zhaofengli/colmena) et [just](https://github.com/casey/just).
 - **Profils de hosts** pour serveurs, conteneurs et machines de travail.
 - **Profils de users** proposant des confs types pour de nombreux utilisateurs.
 - **Modules complets** et 100% fonctionnels avec un simple `.enable = true`.
-- **Architecture extensible**, cohérente, personnalisable.
+- **Architecture extensible**, scalable, cohérente, personnalisable.
 - **Gestion des paramètres** utilisateur avec [home manager](https://github.com/nix-community/home-manager) + profils de homes.
 - **[Homepage](https://github.com/gethomepage/homepage) automatique** en fonction des services activés.
 - **Configuration transversale** pour assurer la cohérence du réseau.
@@ -36,40 +36,37 @@ A la racine :
 ```
 flake.nix .................... Main flake
 Justfile ..................... Project management
-lib/ ......................... Projet library
-├── modules/
+lib/ ......................... Projet library (framework)
+├── modules/ ................. Framework modules
 │   ├── default.nix .......... Auto-generated default (by Justfile)
-│   ├── system/ .............. System / Hardware configurations
-│   │   ├── core.nix ......... Core features (activated by default)
-│   │   ├── i18n.nix ......... Lang / Region settings
-│   │   └── doc.nix .......... Technical doc
+│   ├── system/(...) ......... System / Hardware configurations
+│   │   ├── core.nix
+│   │   ├── i18n.nix
+│   │   └── doc.nix
 │   ├── console/(...) ........ CLI applications
 │   ├── graphic/(...) ........ X applications
 │   ├── service/(...) ........ Daemons
-│   ├── admin/ ............... Nix administration settings
-│   │   ├── nix.nix .......... Nix tools
-│   │   └── identity.nix ..... Identities and grocomplet du réseau local
-│   │   │   ├── backup.nix
-│   │   │   ├── homelab.nix
-│   │   │   └── builder.nix
-│   │   ├── desktop/
-│   │   │   ├── office.nix
-│   │   │   └── administrator.nix
-│   │   ├── container/
-│   │   │   ├── docker.nix
-│   │   │   └── nix.nix
-│   │   └── vm/
-│   │       ├── virtualbox.nix
-│   │       └── xen.nix
-│   └── user/ ................ User management (not home)
-│       ├── nix.nix .......... Nix special user
-│       ├── build.nix ........ Advanced user with development tools
+│   ├── admin/(...) .......... Nix administration settings
+│   │   └── nix.nix .......... Nix tools
+│   ├── user/ ................ User management (not home)
+│   │   ├── nix.nix .......... Nix special user (for deployments)
+│   │   └── build.nix ........ Users builder
+│   ├── host/ ................ Host profiles (macro-modules)
+│   │   ├── desktop.nix
+│   │   ├── laptop.nix
+│   │   ├── server.nix
+│   │   ├── vm.nix
+│   │   └── minimal.nix
+│   └── themes / ............. Thematic features (macro-modules)
+│       ├── office.nix
+│       ├── advanced.nix
+│       └── student.nix
 ├── homes/ ................... User profiles configuration (.nix) + home profiles (dirs)
 │   ├── admin.nix ............ Admin user profile configuration (extragroups, etc.)
 │   ├── admin/(...) .......... Admin user profile home
-│   ├── developper(...) ...... Advanced user with development tools
+│   ├── advanced(...) ........ Advanced user with development tools
 │   ├── minimal(...) ......... Easy environment
-│   ├── regular(...) ......... Non-technical user
+│   ├── normal(...) .......... Non-technical user
 │   ├── gamer(...) ........... Optimized environment for gamers
 │   └── child(...) ........... Kids softwares and settings
 └── hosts/ ................... Hosts and host-templates declarations
