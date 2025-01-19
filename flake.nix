@@ -151,7 +151,7 @@
           # Default deployment settings
           defaults.deployment = {
             buildOnTarget = nixpkgs.lib.mkDefault false;
-            allowLocalDeployment = nixpkgs.lib.mkDefault false;
+            allowLocalDeployment = nixpkgs.lib.mkDefault true;
             targetUser = "nix";
 
             # TODO: not working, use "just install" instead

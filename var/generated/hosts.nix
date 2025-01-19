@@ -31,7 +31,6 @@
           "user-gponcon"
         ];
       };
-      allowLocalDeployment = true;
     };
   }
   {

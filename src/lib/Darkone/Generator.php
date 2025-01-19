@@ -44,7 +44,6 @@ class Generator
             $deployment = (new NixAttrSet())
                 ->set('tags', (new NixList())->populateStrings($this->extractTags($host)));
             $colmena = (new NixAttrSet())->set('deployment', $deployment);
-            $this->setLocal($host, $colmena);
             $newHost = (new NixAttrSet())
                 ->setString('hostname', $host->getHostname())
                 ->setString('name', $host->getName())
@@ -55,25 +54,6 @@ class Generator
         }
 
         return $hosts;
-    }
-
-    /**
-     * @param Host $host
-     * @param NixAttrSet $newHost
-     * @return void
-     * @throws NixException
-     */
-    public function setLocal(Host $host, NixAttrSet $newHost): void
-    {
-        if ($host->isLocal()) {
-            if ($this->localHost !== null) {
-                $msg = 'Only one host can be local. ';
-                $msg .= 'Conflit between "' . $this->localHost . '" and "' . $host->getHostname() . '".';
-                throw new NixException($msg);
-            }
-            $newHost->setBool('allowLocalDeployment', true);
-            $this->localHost = $host->getHostname();
-        }
     }
 
     private function extractTags(Host $host): array
