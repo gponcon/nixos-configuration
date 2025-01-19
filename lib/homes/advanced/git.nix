@@ -17,7 +17,8 @@ in
     userName = "${user.name}";
     userEmail = "${user.email}";
     aliases = {
-      amend = "!git add . && git commit --amend --no-edit && git push --force";
+      amend = "!git add . && git commit --amend --no-edit";
+      pf = "!git push --force";
     };
     ignores = [
       "*~"

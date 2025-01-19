@@ -25,6 +25,7 @@ in
       nixfmt-rfc-style
       php84
       php84Packages.composer
+      statix
     ];
 
     # Optimized switch (perl -> rust)

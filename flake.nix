@@ -39,7 +39,7 @@
 
       # Start img common configuration
       startImgParams = {
-        system = system;
+        inherit system;
         modules = [
           {
             # Pin nixpkgs to the flake input, so that the packages installed
@@ -94,7 +94,7 @@
                   users = builtins.listToAttrs (map mkHome host.users);
 
                   extraSpecialArgs = {
-                    host = host;
+                    inherit host;
 
                     # This hack must be set to allow unfree packages
                     # in home manager configurations.
@@ -123,7 +123,7 @@
       nixpkgs = {
         config = {
           allowUnfree = true;
-          allowUnfreePredicate = (_: true);
+          allowUnfreePredicate = _: true;
         };
       };
 
@@ -138,7 +138,7 @@
             nixpkgs = import nixpkgs {
               system = "x86_64-linux";
               allowUnfree = true;
-              allowUnfreePredicate = (_: true);
+              allowUnfreePredicate = _: true;
               overlays = [ ];
             };
             nodeNixpkgs = builtins.mapAttrs (_name: value: value.pkgs) conf;

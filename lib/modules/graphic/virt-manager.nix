@@ -7,7 +7,7 @@
 let
   cfg = config.darkone.graphic.virt-manager;
   all-users = builtins.attrNames config.users.users;
-  normal-users = builtins.filter (user: config.users.users.${user}.isNormalUser == true) all-users;
+  normal-users = builtins.filter (user: config.users.users.${user}.isNormalUser) all-users;
 in
 {
   options = {

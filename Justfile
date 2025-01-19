@@ -38,7 +38,7 @@ install:
 
 # format (nixfmt) + generate + check (deadnix)
 [group('_main')]
-fix: format generate check
+clean: fix format generate check
 
 # Recursive deadnix on nix files
 [group('check')]
@@ -48,8 +48,13 @@ check:
 
 # Check the main flake
 [group('check')]
-flake-check:
+check-flake:
 	nix flake check
+
+# Check with statix
+[group('check')]
+check-statix:
+	statix check .
 
 # Recursive nixfmt on all nix files
 [group('touch')]
@@ -60,6 +65,11 @@ format:
 # Update the nix generated files
 [group('touch')]
 generate: _gen-default-modules _gen-default-overlays _gen-hosts
+
+# Fix with statix
+[group('touch')]
+fix:
+	statix fix .
 
 # Generate default.nix of lib/modules dir
 _gen-default-modules: (_gen-default "lib/modules")
