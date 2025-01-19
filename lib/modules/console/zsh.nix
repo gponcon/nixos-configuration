@@ -13,6 +13,8 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+
+    # ZSH additional packages
     environment.systemPackages = with pkgs; [
       zsh
       zsh-powerlevel10k
@@ -30,14 +32,23 @@ in
         ll = "ls -l";
         vz = "vim `fzf`";
         nx = "cd /etc/nixos";
-        nf = "nixfmt";
-        nd = "deadnix";
+        nf = "nixfmt -s"; # Nix Format
+        nc = "deadnix"; # Nix Check
         update = "sudo nixos-rebuild switch";
       };
       promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
       shellInit = ''
         export MANPAGER="less -M -R -i --use-color -Dd+R -Du+B -DHkC -j5";
+        bindkey "^A" beginning-of-line
+        bindkey "^E" end-of-line
+        bindkey "^R" history-incremental-search-backward
       '';
     };
+
+    # Prevent the new user dialog in zsh
+    system.userActivationScripts.zshrc = "touch .zshrc";
+
+    # Set zsh as the default shell
+    users.defaultUserShell = pkgs.zsh;
   };
 }

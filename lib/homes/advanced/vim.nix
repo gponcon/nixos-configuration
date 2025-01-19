@@ -114,7 +114,7 @@
       autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | call feedkeys(":quit\<CR>:\<BS>") | endif
 
       " Nix format
-      nnoremap <F2> :%!nixfmt<cr>
+      nnoremap <F2> :%!nixfmt -s<cr>
 
       " Map <Space> to / (search) and <Ctrl>+<Space> to ? (backwards search)
       map <space> /

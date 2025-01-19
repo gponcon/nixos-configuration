@@ -75,9 +75,9 @@ _gen-default dir:
 	echo "# DO NOT EDIT, this is a generated file." > default.nix
 	echo >> default.nix 
 	echo "{ imports = [" >> default.nix
-	find . -name "*.nix" | grep -v default.nix >> default.nix
+	find . -name "*.nix" | sort | grep -v default.nix >> default.nix
 	echo "];}" >> default.nix
-	nixfmt default.nix
+	nixfmt -s default.nix
 
 
 # Generate var/generated/hosts.nix
@@ -90,7 +90,7 @@ _gen-hosts:
 	echo "# --> DO NOT EDIT <--" >> "{{generatedHostFile}}"
 	echo >> "{{generatedHostFile}}"
 	php ./src/generator.php >> "{{generatedHostFile}}"
-	nixfmt "{{generatedHostFile}}"
+	nixfmt -s "{{generatedHostFile}}"
 
 # Copy local id on a new node (wip)
 [group('utils')]

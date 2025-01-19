@@ -30,5 +30,7 @@
   networking.useDHCP = lib.mkDefault true;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
-  system.stateVersion = "25.05";
+  # Avoid the stateVersion warning.
+  # State based on the system nixos release.
+  system.stateVersion = config.system.nixos.release;
 }

@@ -2,35 +2,35 @@
 
 {
   imports = [
-    ./user/build.nix
-    ./user/nix.nix
     ./admin/nix.nix
-    ./system/i18n.nix
-    ./system/documentation.nix
-    ./system/core.nix
-    ./system/hardware.nix
-    ./graphic/gnome.nix
-    ./graphic/education.nix
-    ./graphic/virt-manager.nix
-    ./graphic/virtualbox.nix
-    ./graphic/packages.nix
-    ./graphic/obsidian.nix
-    ./host/vm.nix
-    ./host/laptop.nix
-    ./host/server.nix
-    ./host/minimal.nix
-    ./host/portable.nix
-    ./host/desktop.nix
+    ./console/git.nix
+    ./console/packages.nix
     ./console/pandoc.nix
     ./console/zsh.nix
-    ./console/packages.nix
-    ./console/git.nix
-    ./service/printing.nix
+    ./graphic/education.nix
+    ./graphic/gnome.nix
+    ./graphic/obsidian.nix
+    ./graphic/packages.nix
+    ./graphic/virt-manager.nix
+    ./graphic/virtualbox.nix
+    ./host/desktop.nix
+    ./host/laptop.nix
+    ./host/minimal.nix
+    ./host/portable.nix
+    ./host/server.nix
+    ./host/vm.nix
     ./service/audio.nix
     ./service/httpd.nix
-    ./theme/children.nix
-    ./theme/teenager.nix
-    ./theme/office.nix
+    ./service/printing.nix
+    ./system/core.nix
+    ./system/documentation.nix
+    ./system/hardware.nix
+    ./system/i18n.nix
     ./theme/advanced.nix
+    ./theme/children.nix
+    ./theme/office.nix
+    ./theme/teenager.nix
+    ./user/build.nix
+    ./user/nix.nix
   ];
 }
