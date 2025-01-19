@@ -57,7 +57,7 @@ lib/ ......................... Projet library (framework)
 │   │   ├── server.nix
 │   │   ├── vm.nix
 │   │   └── minimal.nix
-│   └── themes / ............. Thematic features (macro-modules)
+│   └── theme/ ............... Thematic features (macro-modules)
 │       ├── office.nix
 │       ├── advanced.nix
 │       └── student.nix
