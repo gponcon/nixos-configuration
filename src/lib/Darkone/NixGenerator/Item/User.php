@@ -6,8 +6,6 @@ use Darkone\NixGenerator\NixException;
 
 class User
 {
-    use ItemTrait;
-
     private const PROFILE_PATHS = [
         'usr/homes/%s',
         'lib/homes/%s',
@@ -42,8 +40,36 @@ class User
      */
     public function setProfile(string $profile): User
     {
-        $this->profile = $this->filterProfile($profile, 'user');
+        $this->profile = $this->filterProfile($profile);
         return $this;
+    }
+
+    /**
+     * @throws NixException
+     */
+    public function filterProfile(string $profile): string
+    {
+        static $validProfiles = [];
+
+        $found = false;
+        foreach (self::PROFILE_PATHS as $path) {
+            $profilePath = sprintf($path, $profile);
+            if (in_array($profilePath, $validProfiles)) {
+                $found = true;
+                break;
+            }
+            if (file_exists(NIX_PROJECT_ROOT . '/' . $profilePath)) {
+                $validProfiles[] = $profilePath;
+                $found = true;
+                break;
+            }
+        }
+        $found || throw new NixException(
+            'No user profile path found for profile "' . $profile . '" in usr and lib declarations.'
+        );
+        isset($profilePath) || throw new NixException('Profile path is not set');
+
+        return $profilePath;
     }
 
     public function setGroups(array $groups): User

@@ -7,8 +7,6 @@ use Darkone\NixGenerator\NixException;
 
 class Host
 {
-    use ItemTrait;
-
     private const PROFILE_PATHS = [
         'usr/hosts/%s.nix',
         'lib/hosts/%s.nix',
@@ -79,12 +77,9 @@ class Host
         return $this;
     }
 
-    /**
-     * @throws NixException
-     */
     public function setProfile(string $profile): Host
     {
-        $this->profile = $this->filterProfile($profile, 'host');
+        $this->profile = $profile;
         return $this;
     }
 

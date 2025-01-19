@@ -75,11 +75,14 @@
         name = host.hostname;
         value = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit host; };
+          specialArgs = {
+            inherit host;
+            imgFormat = "iso";
+          };
           modules =
             [
               ./lib/modules
-              ./${host.profile}
+              ./usr/modules
               home-manager.nixosModules.home-manager
               {
                 home-manager = {

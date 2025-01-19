@@ -18,8 +18,10 @@
     ./host/minimal.nix
     ./host/portable.nix
     ./host/server.nix
+    ./host/start-img.nix
     ./host/vm.nix
     ./service/audio.nix
+    ./service/home-assistant.nix
     ./service/httpd.nix
     ./service/printing.nix
     ./system/core.nix

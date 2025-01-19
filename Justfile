@@ -43,7 +43,8 @@ clean: fix format generate check
 # Recursive deadnix on nix files
 [group('check')]
 check:
-	@echo "Checking nix files with deadnix..."
+	#!/usr/bin/env bash
+	echo "-> Checking nix files with deadnix..."
 	find . -name "*.nix" -exec deadnix -eq {} \;
 
 # Check the main flake
@@ -59,20 +60,26 @@ check-statix:
 # Recursive nixfmt on all nix files
 [group('touch')]
 format:
-	@echo "Formatting nix files with nixfmt..."
+	#!/usr/bin/env bash
+	echo "-> Formatting nix files with nixfmt..."
 	find . -name "*.nix" -exec nixfmt -s {} \;
-
-# Update the nix generated files
-[group('touch')]
-generate: _gen-default-modules _gen-default-overlays _gen-hosts
 
 # Fix with statix
 [group('touch')]
 fix:
+	#!/usr/bin/env bash
+	echo "-> Fixing source code with statix..."
 	statix fix .
 
+# Update the nix generated files
+[group('touch')]
+generate: _gen-default-lib-modules _gen-default-usr-modules _gen-default-overlays _gen-hosts
+
 # Generate default.nix of lib/modules dir
-_gen-default-modules: (_gen-default "lib/modules")
+_gen-default-lib-modules: (_gen-default "lib/modules")
+
+# Generate default.nix of usr/modules dir
+_gen-default-usr-modules: (_gen-default "usr/modules")
 
 # Generate default.nix of lib/overlays
 _gen-default-overlays: (_gen-default "lib/overlays")

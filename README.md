@@ -61,20 +61,14 @@ lib/ ......................... Projet library (framework)
 │       ├── office.nix
 │       ├── advanced.nix
 │       └── student.nix
-├── homes/ ................... User profiles configuration (.nix) + home profiles (dirs)
-│   ├── admin.nix ............ Admin user profile configuration (extragroups, etc.)
-│   ├── admin/(...) .......... Admin user profile home
-│   ├── advanced(...) ........ Advanced user with development tools
-│   ├── minimal(...) ......... Easy environment
-│   ├── normal(...) .......... Non-technical user
-│   ├── gamer(...) ........... Optimized environment for gamers
-│   └── child(...) ........... Kids softwares and settings
-└── hosts/ ................... Hosts and host-templates declarations
-    ├── desktop.nix .......... A desktop host
-    ├── laptop.nix ........... A laptop host
-    ├── server.nix ........... A server host
-    ├── minimal.nix .......... A minimal host
-    └── builder.nix .......... Another host
+└── homes/ ................... User profiles configuration (.nix) + home profiles (dirs)
+    ├── admin.nix ............ Admin user profile configuration (extragroups, etc.)
+    ├── admin/(...) .......... Admin user profile home
+    ├── advanced(...) ........ Advanced user with development tools
+    ├── minimal(...) ......... Easy environment
+    ├── normal(...) .......... Non-technical user
+    ├── gamer(...) ........... Optimized environment for gamers
+    └── child(...) ........... Kids softwares and settings
 usr/ ......................... Writable zone for local network project
 ├── modules/(...) ............ Local modules
 ├── secrets/(...) ............ Local secrets file
@@ -246,14 +240,16 @@ nixos-rebuild switch --flake path:.#gateway --target-host admin@gateway --build-
 ❯ just
 Available recipes:
     [_main]
-    fix              # format (nixfmt) + generate + check (deadnix)
+    clean            # format (nixfmt) + generate + check (deadnix)
     install          # Framework installation (wip)
 
     [check]
     check            # Recursive deadnix on nix files
-    flake-check      # Check the main flake
+    check-flake      # Check the main flake
+    check-statix     # Check with statix
 
     [touch]
+    fix              # Fix with statix
     format           # Recursive nixfmt on all nix files
     generate         # Update the nix generated files
 

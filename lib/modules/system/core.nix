@@ -52,6 +52,9 @@ in
       allowedUDPPorts = [ ];
     };
 
+    # Enable the host profile
+    darkone.host.${host.profile}.enable = true;
+
     # Overclocking & performance optimisations (WIP)
     programs.corectrl = lib.mkIf cfg.enableBoost {
       enable = true;

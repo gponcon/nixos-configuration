@@ -5,14 +5,14 @@ let
   cfg = config.darkone.host;
 in
 {
-  options = {
-    darkone.host.minimal.enable = lib.mkEnableOption "Minimal host configuration";
+  options.darkone.host = {
+    minimal.enable = lib.mkEnableOption "Minimal host configuration";
 
     # Securefull configuration
-    darkone.host.secure = lib.mkEnableOption "Prefer more secure options";
+    secure = lib.mkEnableOption "Prefer more secure options";
 
     # Host is a darkone network host by default
-    darkone.host.isNode = lib.mkOption {
+    isNode = lib.mkOption {
       type = lib.types.bool;
       default = true;
       example = false;
@@ -23,10 +23,15 @@ in
   config = lib.mkIf cfg.minimal.enable {
 
     # Darkone main modules
+    # TODO: put timezone in the configuration
     darkone.system = {
-      core.enable = lib.mkDefault true;
-      core.enableFirewall = lib.mkDefault true;
-      i18n.enable = lib.mkDefault true;
+      core = {
+        enableFirewall = lib.mkDefault true;
+      };
+      i18n = {
+        enable = lib.mkDefault true;
+        timeZone = "America/Miquelon";
+      };
     };
 
     # Minimum console features

@@ -6,7 +6,7 @@
   {
     hostname = "nlt";
     name = "Darkone Laptop";
-    profile = "usr/hosts/admin-laptop.nix";
+    profile = "admin-laptop";
     users = [
       {
         login = "darkone";
@@ -37,7 +37,7 @@
   {
     hostname = "vbox-01";
     name = "Virtual 01";
-    profile = "usr/hosts/vbox.nix";
+    profile = "vbox";
     users = [
       {
         login = "darkone";
@@ -55,7 +55,7 @@
   {
     hostname = "vbox-02";
     name = "Virtual 02";
-    profile = "usr/hosts/vbox.nix";
+    profile = "vbox";
     users = [
       {
         login = "darkone";
@@ -73,7 +73,7 @@
   {
     hostname = "vbox-03";
     name = "Virtual 03";
-    profile = "usr/hosts/vbox.nix";
+    profile = "vbox";
     users = [
       {
         login = "darkone";
