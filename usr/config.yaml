@@ -1,8 +1,13 @@
 # Nix generator configuration file for Darkone NixOS Framework
 
-# Global configuration is converted in lists / attSets to be used in nix conf.
-global:
+# Global network configuration is converted in lists / attSets to be used in 
+# your nix configuration through "network" special arg. Common configuration
+# for all hosts.
+network:
     domain: "arthur.lan"
+    gateway:
+        hostname: "gateway"
+        ip: "192.168.0.1"
 
 #------------------------------------------------------------------------------
 # Nix DNF static hosts (nested hosts.<type>) (wip)

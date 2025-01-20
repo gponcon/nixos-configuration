@@ -79,7 +79,8 @@ usr/ ......................... Writable zone for local network project
 var/
 ├── log/
 └── generated/ ............... Generated files
-    └── hosts.nix ............ Hosts to deploy
+    ├── hosts.nix ............ Hosts to deploy
+    └── network.nix .......... Global network configuration
 src/(...) .................... Generator sources
 ```
 

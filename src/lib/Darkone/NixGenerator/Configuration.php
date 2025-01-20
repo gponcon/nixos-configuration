@@ -35,6 +35,7 @@ class Configuration extends NixAttrSet
      * @var Host[]
      */
     private array $hosts = [];
+    private array $networkConfig = [];
 
     /**
      * Load nix configuration
@@ -47,6 +48,7 @@ class Configuration extends NixAttrSet
         $this->loadHosts($config);
         $this->loadFormatter($config);
         $this->loadLldapProvider($config);
+        $this->setNetworkConfig($config['network'] ?? []);
         return $this;
     }
 
@@ -297,5 +299,16 @@ class Configuration extends NixAttrSet
     public function getHosts(): array
     {
         return $this->hosts;
+    }
+
+    public function setNetworkConfig(array $networkConfig): Configuration
+    {
+        $this->networkConfig = $networkConfig;
+        return $this;
+    }
+
+    public function getNetworkConfig(): array
+    {
+        return $this->networkConfig;
     }
 }

@@ -16,7 +16,7 @@
       }
       {
         login = "gponcon";
-        email = "gponcon@arthur.lan";
+        email = "gponcon@darkone.lan";
         name = "G. Ponçon";
         profile = "lib/homes/normal";
       }

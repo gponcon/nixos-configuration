@@ -4,15 +4,15 @@ namespace Darkone;
 
 use Darkone\NixGenerator\Configuration;
 use Darkone\NixGenerator\Item\Host;
+use Darkone\NixGenerator\NixBuilder;
 use Darkone\NixGenerator\NixException;
 use Darkone\NixGenerator\Token\NixAttrSet;
 use Darkone\NixGenerator\Token\NixList;
+use UnhandledMatchError;
 
-class Generator
+class Generate
 {
     private Configuration $config;
-
-    private ?string $localHost = null;
 
     /**
      * @throws NixException
@@ -26,10 +26,25 @@ class Generator
     }
 
     /**
+     * @throws NixException
+     */
+    public function generate(string $what): string
+    {
+        try {
+            return match ($what) {
+                'hosts' => $this->generateHosts(),
+                'network' => $this->generateNetworkConfig()
+            };
+        } catch (UnhandledMatchError $e) {
+            throw new NixException('Unknown item "' . $what . '", unable to generate');
+        }
+    }
+
+    /**
      * Generate the hosts.nix file loaded by flake.nix
      * @throws NixException
      */
-    public function generate(): string
+    private function generateHosts(): string
     {
         $hosts = new NixList();
         foreach ($this->config->getHosts() as $host) {
@@ -63,5 +78,14 @@ class Generator
             array_map(fn (string $group): string => 'group-' . $group, $host->getGroups()),
             array_map(fn (string $group): string => 'user-' . $group, $host->getUsers())
         );
+    }
+
+    /**
+     * Generate the hosts.nix file loaded by flake.nix
+     * @throws NixException
+     */
+    private function generateNetworkConfig(): string
+    {
+        return (string) NixBuilder::arrayToNix($this->config->getNetworkConfig());
     }
 }

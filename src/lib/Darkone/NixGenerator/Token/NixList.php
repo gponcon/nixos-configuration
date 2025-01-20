@@ -26,16 +26,25 @@ class NixList implements NixItemInterface, Iterator
         return $this;
     }
 
+    /**
+     * @throws NixException
+     */
     public function addInt(int|string|float $value): NixList
     {
         return $this->add((new NixValue($value))->forceInt());
     }
 
+    /**
+     * @throws NixException
+     */
     public function addFloat(int|string|float $value): NixList
     {
         return $this->add((new NixValue($value))->forceFloat());
     }
 
+    /**
+     * @throws NixException
+     */
     public function addString(int|string|float $value): NixList
     {
         return $this->add((new NixValue($value))->forceString());

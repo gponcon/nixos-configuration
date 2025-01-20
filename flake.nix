@@ -55,6 +55,9 @@
       # The hosts.nix generated file (just generate)
       hosts = import ./var/generated/hosts.nix;
 
+      # Global network configuration
+      network = import ./var/generated/network.nix;
+
       mkHome = user: {
         name = user.login;
         value = {
@@ -73,6 +76,7 @@
         name = host.hostname;
         value = {
           "host" = host;
+          "network" = network;
           "imgFormat" = nixpkgs.lib.mkDefault "iso";
         };
       };

@@ -2,6 +2,8 @@
 
 namespace Darkone\NixGenerator\Token;
 
+use Darkone\NixGenerator\NixException;
+
 /**
  * Nix elementary value
  */
@@ -9,9 +11,16 @@ class NixValue implements NixItemInterface
 {
     private mixed $value = null;
 
+    /**
+     * @throws NixException
+     */
     public function __construct(mixed $value)
     {
-        $this->value = $value;
+        if (is_int($value) || is_bool($value) || is_float($value) || is_string($value)) {
+            $this->value = $value;
+        } else {
+            throw new NixException('Value type ' . gettype($value) . ' is not allowed for an elementary nix value.');
+        }
     }
 
     public function forceInt(): NixValue
