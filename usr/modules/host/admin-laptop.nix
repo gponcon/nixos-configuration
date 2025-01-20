@@ -30,6 +30,9 @@ in
       # Virtualbox
       graphic.virtualbox.enable = true;
 
+      # Music creation
+      graphic.music.enable = true;
+
       # I'm the master, not a node
       host.isNode = false;
     };

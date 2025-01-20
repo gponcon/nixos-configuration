@@ -162,7 +162,7 @@
                 hostname = "ndf-start-iso";
                 name = "Darkone Network Start ISO";
                 profile = "start-img";
-                users = [];
+                users = [ ];
               };
             };
           }
@@ -177,7 +177,7 @@
                 hostname = "ndf-start-vbox";
                 name = "Darkone Network Start Virtualbox IMG";
                 profile = "start-img";
-                users = [];
+                users = [ ];
               };
             };
           }

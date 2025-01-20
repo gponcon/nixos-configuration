@@ -9,6 +9,7 @@
     ./console/zsh.nix
     ./graphic/education.nix
     ./graphic/gnome.nix
+    ./graphic/music.nix
     ./graphic/obsidian.nix
     ./graphic/packages.nix
     ./graphic/virt-manager.nix
