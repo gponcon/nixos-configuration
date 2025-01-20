@@ -71,6 +71,44 @@
         };
       };
 
+      mkHost = host: {
+        name = host.hostname;
+        value = {
+          imports =
+            [
+              ./lib/modules
+              ./usr/modules
+              home-manager.nixosModules.home-manager
+              {
+                home-manager = {
+
+                  # Use global packages from nixpkgs
+                  useGlobalPkgs = true;
+
+                  # Install in /etc/profiles instead of ~/nix-profiles.
+                  useUserPackages = true;
+
+                  # Load users profiles
+                  users = builtins.listToAttrs (map mkHome host.users);
+
+                  extraSpecialArgs = {
+                    inherit host;
+
+                    # This hack must be set to allow unfree packages
+                    # in home manager configurations.
+                    # useGlobalPkgs with allowUnfree nixpkgs do not works.
+                    pkgs = import nixpkgs {
+                      inherit system;
+                      config.allowUnfree = true;
+                    };
+                  };
+                };
+              }
+            ]
+            ++ nixpkgs.lib.optional (builtins.pathExists ./usr/machines/${host.hostname}) ./usr/machines/${host.hostname};
+        };
+      };
+
       mkNixosHost = host: {
         name = host.hostname;
         value = nixpkgs.lib.nixosSystem {
@@ -116,19 +154,8 @@
 
     in
     {
-      nixosConfigurations = builtins.listToAttrs (map mkNixosHost hosts);
-
-      nixpkgs = {
-        config = {
-          allowUnfree = true;
-          allowUnfreePredicate = _: true;
-        };
-      };
-
-      # https://github.com/zhaofengli/colmena/issues/60#issuecomment-1510496861
       colmena =
         let
-          conf = self.nixosConfigurations;
           inherit hosts;
         in
         {
@@ -140,8 +167,10 @@
               allowUnfreePredicate = _: true;
               overlays = [ ];
             };
-            nodeNixpkgs = builtins.mapAttrs (_name: value: value.pkgs) conf;
-            nodeSpecialArgs = builtins.mapAttrs (_name: value: value._module.specialArgs) conf;
+
+            # Override the default for this target host
+            # Profiles are declared on darkone config before
+            deployment.replaceUnknownProfiles = false;
           };
 
           # Default deployment settings
@@ -149,19 +178,13 @@
             buildOnTarget = nixpkgs.lib.mkDefault false;
             allowLocalDeployment = nixpkgs.lib.mkDefault false;
             targetUser = "nix";
-
-            # TODO: not working, use "just install" instead
-            # Deployment with the project ssh keys
-            #sshOptions = [
-            #  "-i"
-            #  "/etc/nixos/var/security/ssh/id_ed25519_nix"
-            #];
-
+            sshOptions = [
+              "-i"
+              "/etc/nixos/var/security/ssh/id_ed25519_nix"
+            ];
           };
-
         }
-        // import ./var/generated/colmena.nix
-        // builtins.mapAttrs (_name: value: { imports = value._module.args.modules; }) conf;
+        // builtins.listToAttrs (map mkHost hosts);
 
       # Start images generators
       packages.x86_64-linux = {
