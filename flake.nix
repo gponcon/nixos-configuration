@@ -49,7 +49,6 @@
             virtualisation.diskSize = 20 * 1024;
           }
           ./lib/modules
-          ./lib/hosts/start-img.nix
         ];
       };
 
@@ -81,12 +80,6 @@
       mkHost = host: {
         name = host.hostname;
         value = host.colmena // {
-          #nixpkgs.lib.nixosSystem {
-          #inherit system;
-          #specialArgs = {
-          #  inherit host;
-          #  imgFormat = "iso";
-          #};
           imports =
             [
               ./lib/modules
@@ -153,6 +146,7 @@
       } // builtins.listToAttrs (map mkHost hosts);
 
       # Start images generators
+      # TODO: factorize
       packages.x86_64-linux = {
         start-img-iso = nixos-generators.nixosGenerate (
           startImgParams
@@ -160,7 +154,12 @@
             format = "iso";
             specialArgs = {
               imgFormat = "iso";
-              hostname = "ndf-start-iso";
+              host = {
+                hostname = "ndf-start-iso";
+                name = "Darkone Network Start ISO";
+                profile = "start-img";
+                users = [];
+              };
             };
           }
         );
@@ -170,13 +169,15 @@
             format = "virtualbox";
             specialArgs = {
               imgFormat = "vbox";
-              hostname = "ndf-start-vbox";
+              host = {
+                hostname = "ndf-start-vbox";
+                name = "Darkone Network Start Virtualbox IMG";
+                profile = "start-img";
+                users = [];
+              };
             };
           }
         );
-        start-img-qcow = nixos-generators.nixosGenerate startImgParams // {
-          format = "qcow";
-        };
       };
 
     }; # outputs
