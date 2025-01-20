@@ -24,7 +24,6 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       home-manager,
       colmena,
@@ -71,15 +70,24 @@
         };
       };
 
-      mkNixosHost = host: {
+      mkNodeSpecialArgs = host: {
         name = host.hostname;
-        value = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit host;
-            imgFormat = "iso";
-          };
-          modules =
+        value = {
+          "host" = host;
+          "imgFormat" = nixpkgs.lib.mkDefault "iso";
+        };
+      };
+
+      mkHost = host: {
+        name = host.hostname;
+        value = host.colmena // {
+          #nixpkgs.lib.nixosSystem {
+          #inherit system;
+          #specialArgs = {
+          #  inherit host;
+          #  imgFormat = "iso";
+          #};
+          imports =
             [
               ./lib/modules
               ./usr/modules
@@ -114,58 +122,35 @@
         };
       };
 
-      mkColmenaHost = host: {
-        name = host.hostname;
-        value = host.colmena;
-      };
-
     in
     {
-      nixosConfigurations = builtins.listToAttrs (map mkNixosHost hosts);
-
-      nixpkgs = {
-        config = {
-          allowUnfree = true;
-          allowUnfreePredicate = _: true;
+      colmena = {
+        meta = {
+          description = "Darkone Framework Network";
+          nixpkgs = import nixpkgs {
+            system = "x86_64-linux";
+            allowUnfree = true;
+            allowUnfreePredicate = _: true;
+            overlays = [ ];
+          };
+          nodeSpecialArgs = builtins.listToAttrs (map mkNodeSpecialArgs hosts);
         };
-      };
 
-      # https://github.com/zhaofengli/colmena/issues/60#issuecomment-1510496861
-      colmena =
-        let
-          conf = self.nixosConfigurations;
-        in
-        {
-          meta = {
-            description = "Darkone Framework Network";
-            nixpkgs = import nixpkgs {
-              system = "x86_64-linux";
-              allowUnfree = true;
-              allowUnfreePredicate = _: true;
-              overlays = [ ];
-            };
-            nodeNixpkgs = builtins.mapAttrs (_name: value: value.pkgs) conf;
-            nodeSpecialArgs = builtins.mapAttrs (_name: value: value._module.specialArgs) conf;
-          };
+        # Default deployment settings
+        defaults.deployment = {
+          buildOnTarget = nixpkgs.lib.mkDefault false;
+          allowLocalDeployment = nixpkgs.lib.mkDefault true;
+          targetUser = "nix";
+          #sshOptions = [
+          #  "-i"
+          #  "/etc/nixos/var/security/ssh/id_ed25519_nix"
+          #];
 
-          # Default deployment settings
-          defaults.deployment = {
-            buildOnTarget = nixpkgs.lib.mkDefault false;
-            allowLocalDeployment = nixpkgs.lib.mkDefault true;
-            targetUser = "nix";
-
-            # TODO: not working, use "just install" instead
-            # Deployment with the project ssh keys
-            #sshOptions = [
-            #  "-i"
-            #  "/etc/nixos/var/security/ssh/id_ed25519_nix"
-            #];
-
-          };
-
-        }
-        // builtins.listToAttrs (map mkColmenaHost hosts)
-        // builtins.mapAttrs (_name: value: { imports = value._module.args.modules; }) conf;
+          # Override the default for this target host
+          # Darkone framework : declare the new host before apply
+          replaceUnknownProfiles = false;
+        };
+      } // builtins.listToAttrs (map mkHost hosts);
 
       # Start images generators
       packages.x86_64-linux = {
