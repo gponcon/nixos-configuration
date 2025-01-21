@@ -15,12 +15,14 @@
     users = [
       {
         login = "darkone";
+        uid = 1000;
         email = "darkone@darkone.yt";
         name = "Darkone Linux";
         profile = "usr/homes/darkone";
       }
       {
         login = "gponcon";
+        uid = 1001;
         email = "gponcon@darkone.lan";
         name = "G. Ponçon";
         profile = "lib/homes/normal";
@@ -49,6 +51,7 @@
     users = [
       {
         login = "darkone";
+        uid = 1000;
         email = "darkone@darkone.yt";
         name = "Darkone Linux";
         profile = "usr/homes/darkone";
@@ -72,6 +75,7 @@
     users = [
       {
         login = "darkone";
+        uid = 1000;
         email = "darkone@darkone.yt";
         name = "Darkone Linux";
         profile = "usr/homes/darkone";
@@ -95,6 +99,7 @@
     users = [
       {
         login = "darkone";
+        uid = 1000;
         email = "darkone@darkone.yt";
         name = "Darkone Linux";
         profile = "usr/homes/darkone";
@@ -123,99 +128,115 @@
     users = [
       {
         login = "diego";
+        uid = 1107;
         email = "diego@darkone.lan";
         name = "Diego";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "mathieu";
+        uid = 1108;
         email = "mathieu@darkone.lan";
         name = "Mathieu";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "brice";
+        uid = 1109;
         email = "brice@darkone.lan";
         name = "Brice";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "nolann";
+        uid = 1110;
         email = "nolann@darkone.lan";
         name = "Nolann";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "baptiste";
+        uid = 1111;
         email = "baptiste@darkone.lan";
         name = "Baptiste";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "evan";
+        uid = 1112;
         email = "evan@darkone.lan";
         name = "Evan";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "tiesto";
+        uid = 1113;
         email = "tiesto@darkone.lan";
         name = "Tiesto";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "titouan";
+        uid = 1114;
         email = "titouan@darkone.lan";
         name = "Titouan";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "kilic";
+        uid = 1103;
         email = "kilic@darkone.lan";
         name = "Kilic";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "mathys";
+        uid = 1104;
         email = "mathys@darkone.lan";
         name = "Mathys";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "julien";
+        uid = 1105;
         email = "julien@darkone.lan";
         name = "Julien";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "esteban";
+        uid = 1106;
         email = "esteban@darkone.lan";
         name = "Esteban";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "ethan";
+        uid = 1101;
         email = "ethan@darkone.lan";
         name = "Ethan";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "nathael";
+        uid = 1102;
         email = "nathael@darkone.lan";
         name = "Nathaël";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "gponcon";
+        uid = 1001;
         email = "gponcon@darkone.lan";
         name = "G. Ponçon";
         profile = "lib/homes/normal";
       }
       {
         login = "tserveau";
+        uid = 1100;
         email = "tserveau@darkone.lan";
         name = "T. Serveau";
-        profile = "lib/homes/admin";
+        profile = "usr/homes/sn-user";
       }
     ];
     colmena = {
@@ -260,99 +281,115 @@
     users = [
       {
         login = "diego";
+        uid = 1107;
         email = "diego@darkone.lan";
         name = "Diego";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "mathieu";
+        uid = 1108;
         email = "mathieu@darkone.lan";
         name = "Mathieu";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "brice";
+        uid = 1109;
         email = "brice@darkone.lan";
         name = "Brice";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "nolann";
+        uid = 1110;
         email = "nolann@darkone.lan";
         name = "Nolann";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "baptiste";
+        uid = 1111;
         email = "baptiste@darkone.lan";
         name = "Baptiste";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "evan";
+        uid = 1112;
         email = "evan@darkone.lan";
         name = "Evan";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "tiesto";
+        uid = 1113;
         email = "tiesto@darkone.lan";
         name = "Tiesto";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "titouan";
+        uid = 1114;
         email = "titouan@darkone.lan";
         name = "Titouan";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "kilic";
+        uid = 1103;
         email = "kilic@darkone.lan";
         name = "Kilic";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "mathys";
+        uid = 1104;
         email = "mathys@darkone.lan";
         name = "Mathys";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "julien";
+        uid = 1105;
         email = "julien@darkone.lan";
         name = "Julien";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "esteban";
+        uid = 1106;
         email = "esteban@darkone.lan";
         name = "Esteban";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "ethan";
+        uid = 1101;
         email = "ethan@darkone.lan";
         name = "Ethan";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "nathael";
+        uid = 1102;
         email = "nathael@darkone.lan";
         name = "Nathaël";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "gponcon";
+        uid = 1001;
         email = "gponcon@darkone.lan";
         name = "G. Ponçon";
         profile = "lib/homes/normal";
       }
       {
         login = "tserveau";
+        uid = 1100;
         email = "tserveau@darkone.lan";
         name = "T. Serveau";
-        profile = "lib/homes/admin";
+        profile = "usr/homes/sn-user";
       }
     ];
     colmena = {
@@ -397,99 +434,115 @@
     users = [
       {
         login = "diego";
+        uid = 1107;
         email = "diego@darkone.lan";
         name = "Diego";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "mathieu";
+        uid = 1108;
         email = "mathieu@darkone.lan";
         name = "Mathieu";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "brice";
+        uid = 1109;
         email = "brice@darkone.lan";
         name = "Brice";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "nolann";
+        uid = 1110;
         email = "nolann@darkone.lan";
         name = "Nolann";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "baptiste";
+        uid = 1111;
         email = "baptiste@darkone.lan";
         name = "Baptiste";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "evan";
+        uid = 1112;
         email = "evan@darkone.lan";
         name = "Evan";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "tiesto";
+        uid = 1113;
         email = "tiesto@darkone.lan";
         name = "Tiesto";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "titouan";
+        uid = 1114;
         email = "titouan@darkone.lan";
         name = "Titouan";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "kilic";
+        uid = 1103;
         email = "kilic@darkone.lan";
         name = "Kilic";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "mathys";
+        uid = 1104;
         email = "mathys@darkone.lan";
         name = "Mathys";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "julien";
+        uid = 1105;
         email = "julien@darkone.lan";
         name = "Julien";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "esteban";
+        uid = 1106;
         email = "esteban@darkone.lan";
         name = "Esteban";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "ethan";
+        uid = 1101;
         email = "ethan@darkone.lan";
         name = "Ethan";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "nathael";
+        uid = 1102;
         email = "nathael@darkone.lan";
         name = "Nathaël";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "gponcon";
+        uid = 1001;
         email = "gponcon@darkone.lan";
         name = "G. Ponçon";
         profile = "lib/homes/normal";
       }
       {
         login = "tserveau";
+        uid = 1100;
         email = "tserveau@darkone.lan";
         name = "T. Serveau";
-        profile = "lib/homes/admin";
+        profile = "usr/homes/sn-user";
       }
     ];
     colmena = {
@@ -534,99 +587,115 @@
     users = [
       {
         login = "diego";
+        uid = 1107;
         email = "diego@darkone.lan";
         name = "Diego";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "mathieu";
+        uid = 1108;
         email = "mathieu@darkone.lan";
         name = "Mathieu";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "brice";
+        uid = 1109;
         email = "brice@darkone.lan";
         name = "Brice";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "nolann";
+        uid = 1110;
         email = "nolann@darkone.lan";
         name = "Nolann";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "baptiste";
+        uid = 1111;
         email = "baptiste@darkone.lan";
         name = "Baptiste";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "evan";
+        uid = 1112;
         email = "evan@darkone.lan";
         name = "Evan";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "tiesto";
+        uid = 1113;
         email = "tiesto@darkone.lan";
         name = "Tiesto";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "titouan";
+        uid = 1114;
         email = "titouan@darkone.lan";
         name = "Titouan";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "kilic";
+        uid = 1103;
         email = "kilic@darkone.lan";
         name = "Kilic";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "mathys";
+        uid = 1104;
         email = "mathys@darkone.lan";
         name = "Mathys";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "julien";
+        uid = 1105;
         email = "julien@darkone.lan";
         name = "Julien";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "esteban";
+        uid = 1106;
         email = "esteban@darkone.lan";
         name = "Esteban";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "ethan";
+        uid = 1101;
         email = "ethan@darkone.lan";
         name = "Ethan";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "nathael";
+        uid = 1102;
         email = "nathael@darkone.lan";
         name = "Nathaël";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "gponcon";
+        uid = 1001;
         email = "gponcon@darkone.lan";
         name = "G. Ponçon";
         profile = "lib/homes/normal";
       }
       {
         login = "tserveau";
+        uid = 1100;
         email = "tserveau@darkone.lan";
         name = "T. Serveau";
-        profile = "lib/homes/admin";
+        profile = "usr/homes/sn-user";
       }
     ];
     colmena = {
@@ -671,99 +740,115 @@
     users = [
       {
         login = "diego";
+        uid = 1107;
         email = "diego@darkone.lan";
         name = "Diego";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "mathieu";
+        uid = 1108;
         email = "mathieu@darkone.lan";
         name = "Mathieu";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "brice";
+        uid = 1109;
         email = "brice@darkone.lan";
         name = "Brice";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "nolann";
+        uid = 1110;
         email = "nolann@darkone.lan";
         name = "Nolann";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "baptiste";
+        uid = 1111;
         email = "baptiste@darkone.lan";
         name = "Baptiste";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "evan";
+        uid = 1112;
         email = "evan@darkone.lan";
         name = "Evan";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "tiesto";
+        uid = 1113;
         email = "tiesto@darkone.lan";
         name = "Tiesto";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "titouan";
+        uid = 1114;
         email = "titouan@darkone.lan";
         name = "Titouan";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "kilic";
+        uid = 1103;
         email = "kilic@darkone.lan";
         name = "Kilic";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "mathys";
+        uid = 1104;
         email = "mathys@darkone.lan";
         name = "Mathys";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "julien";
+        uid = 1105;
         email = "julien@darkone.lan";
         name = "Julien";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "esteban";
+        uid = 1106;
         email = "esteban@darkone.lan";
         name = "Esteban";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "ethan";
+        uid = 1101;
         email = "ethan@darkone.lan";
         name = "Ethan";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "nathael";
+        uid = 1102;
         email = "nathael@darkone.lan";
         name = "Nathaël";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "gponcon";
+        uid = 1001;
         email = "gponcon@darkone.lan";
         name = "G. Ponçon";
         profile = "lib/homes/normal";
       }
       {
         login = "tserveau";
+        uid = 1100;
         email = "tserveau@darkone.lan";
         name = "T. Serveau";
-        profile = "lib/homes/admin";
+        profile = "usr/homes/sn-user";
       }
     ];
     colmena = {
@@ -808,99 +893,115 @@
     users = [
       {
         login = "diego";
+        uid = 1107;
         email = "diego@darkone.lan";
         name = "Diego";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "mathieu";
+        uid = 1108;
         email = "mathieu@darkone.lan";
         name = "Mathieu";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "brice";
+        uid = 1109;
         email = "brice@darkone.lan";
         name = "Brice";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "nolann";
+        uid = 1110;
         email = "nolann@darkone.lan";
         name = "Nolann";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "baptiste";
+        uid = 1111;
         email = "baptiste@darkone.lan";
         name = "Baptiste";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "evan";
+        uid = 1112;
         email = "evan@darkone.lan";
         name = "Evan";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "tiesto";
+        uid = 1113;
         email = "tiesto@darkone.lan";
         name = "Tiesto";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "titouan";
+        uid = 1114;
         email = "titouan@darkone.lan";
         name = "Titouan";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "kilic";
+        uid = 1103;
         email = "kilic@darkone.lan";
         name = "Kilic";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "mathys";
+        uid = 1104;
         email = "mathys@darkone.lan";
         name = "Mathys";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "julien";
+        uid = 1105;
         email = "julien@darkone.lan";
         name = "Julien";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "esteban";
+        uid = 1106;
         email = "esteban@darkone.lan";
         name = "Esteban";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "ethan";
+        uid = 1101;
         email = "ethan@darkone.lan";
         name = "Ethan";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "nathael";
+        uid = 1102;
         email = "nathael@darkone.lan";
         name = "Nathaël";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "gponcon";
+        uid = 1001;
         email = "gponcon@darkone.lan";
         name = "G. Ponçon";
         profile = "lib/homes/normal";
       }
       {
         login = "tserveau";
+        uid = 1100;
         email = "tserveau@darkone.lan";
         name = "T. Serveau";
-        profile = "lib/homes/admin";
+        profile = "usr/homes/sn-user";
       }
     ];
     colmena = {
@@ -945,99 +1046,115 @@
     users = [
       {
         login = "diego";
+        uid = 1107;
         email = "diego@darkone.lan";
         name = "Diego";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "mathieu";
+        uid = 1108;
         email = "mathieu@darkone.lan";
         name = "Mathieu";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "brice";
+        uid = 1109;
         email = "brice@darkone.lan";
         name = "Brice";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "nolann";
+        uid = 1110;
         email = "nolann@darkone.lan";
         name = "Nolann";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "baptiste";
+        uid = 1111;
         email = "baptiste@darkone.lan";
         name = "Baptiste";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "evan";
+        uid = 1112;
         email = "evan@darkone.lan";
         name = "Evan";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "tiesto";
+        uid = 1113;
         email = "tiesto@darkone.lan";
         name = "Tiesto";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "titouan";
+        uid = 1114;
         email = "titouan@darkone.lan";
         name = "Titouan";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "kilic";
+        uid = 1103;
         email = "kilic@darkone.lan";
         name = "Kilic";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "mathys";
+        uid = 1104;
         email = "mathys@darkone.lan";
         name = "Mathys";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "julien";
+        uid = 1105;
         email = "julien@darkone.lan";
         name = "Julien";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "esteban";
+        uid = 1106;
         email = "esteban@darkone.lan";
         name = "Esteban";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "ethan";
+        uid = 1101;
         email = "ethan@darkone.lan";
         name = "Ethan";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "nathael";
+        uid = 1102;
         email = "nathael@darkone.lan";
         name = "Nathaël";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "gponcon";
+        uid = 1001;
         email = "gponcon@darkone.lan";
         name = "G. Ponçon";
         profile = "lib/homes/normal";
       }
       {
         login = "tserveau";
+        uid = 1100;
         email = "tserveau@darkone.lan";
         name = "T. Serveau";
-        profile = "lib/homes/admin";
+        profile = "usr/homes/sn-user";
       }
     ];
     colmena = {
@@ -1082,99 +1199,115 @@
     users = [
       {
         login = "diego";
+        uid = 1107;
         email = "diego@darkone.lan";
         name = "Diego";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "mathieu";
+        uid = 1108;
         email = "mathieu@darkone.lan";
         name = "Mathieu";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "brice";
+        uid = 1109;
         email = "brice@darkone.lan";
         name = "Brice";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "nolann";
+        uid = 1110;
         email = "nolann@darkone.lan";
         name = "Nolann";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "baptiste";
+        uid = 1111;
         email = "baptiste@darkone.lan";
         name = "Baptiste";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "evan";
+        uid = 1112;
         email = "evan@darkone.lan";
         name = "Evan";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "tiesto";
+        uid = 1113;
         email = "tiesto@darkone.lan";
         name = "Tiesto";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "titouan";
+        uid = 1114;
         email = "titouan@darkone.lan";
         name = "Titouan";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "kilic";
+        uid = 1103;
         email = "kilic@darkone.lan";
         name = "Kilic";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "mathys";
+        uid = 1104;
         email = "mathys@darkone.lan";
         name = "Mathys";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "julien";
+        uid = 1105;
         email = "julien@darkone.lan";
         name = "Julien";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "esteban";
+        uid = 1106;
         email = "esteban@darkone.lan";
         name = "Esteban";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "ethan";
+        uid = 1101;
         email = "ethan@darkone.lan";
         name = "Ethan";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "nathael";
+        uid = 1102;
         email = "nathael@darkone.lan";
         name = "Nathaël";
-        profile = "lib/homes/student";
+        profile = "usr/homes/sn-user";
       }
       {
         login = "gponcon";
+        uid = 1001;
         email = "gponcon@darkone.lan";
         name = "G. Ponçon";
         profile = "lib/homes/normal";
       }
       {
         login = "tserveau";
+        uid = 1100;
         email = "tserveau@darkone.lan";
         name = "T. Serveau";
-        profile = "lib/homes/admin";
+        profile = "usr/homes/sn-user";
       }
     ];
     colmena = {

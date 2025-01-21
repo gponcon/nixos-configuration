@@ -66,7 +66,7 @@
           # Home profiles loading
           home = {
             username = user.login;
-            homeDirectory = nixpkgs.lib.mkForce "/home/${user.login}";
+            homeDirectory = nixpkgs.lib.mkDefault "/home/${user.login}";
             stateVersion = "25.05";
           };
         };

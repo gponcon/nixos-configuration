@@ -12,7 +12,7 @@ class Configuration extends NixAttrSet
     private const TYPE_STRING = 'string';
     private const TYPE_BOOL = 'boolean';
     private const TYPE_ARRAY = 'array';
-    private const TYPE_INT = 'int';
+    private const TYPE_INT = 'integer';
 
     private const MAX_RANGE_BOUND = 1000;
 
@@ -104,12 +104,13 @@ class Configuration extends NixAttrSet
         $this->assert(self::TYPE_ARRAY, $config['users'] ?? null, "Users not found in configuration");
         foreach ($config['users'] as $login => $user) {
             $this->assert(self::TYPE_STRING, $login, "A user name is required", self::REGEX_LOGIN);
+            $this->assert(self::TYPE_INT, $user['uid'] ?? '', "A valid uid is required for " . $login);
             $this->assert(self::TYPE_STRING, $user['email'] ?? '', "Bad email type for " . $login); // TODO email validation
             $this->assert(self::TYPE_STRING, $user['name'] ?? null, "A valid user name is required for " . $login, self::REGEX_NAME);
             $this->assert(self::TYPE_STRING, $user['profile'] ?? null, "A valid user profile is required for " . $login, self::REGEX_NAME);
             $this->assert(self::TYPE_ARRAY, $user['groups'] ?? [], "Bad user group type for " . $login);
             $this->users[$login] = (new User())
-                ->setLogin($login)
+                ->setUidAndLogin($user['uid'], $login)
                 ->setEmail($user['email'] ?? $login . '@' . self::DEFAULT_NETWORK_DOMAIN)
                 ->setName($user['name'])
                 ->setProfile($user['profile'] ?? self::DEFAULT_PROFILE)

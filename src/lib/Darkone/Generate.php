@@ -52,6 +52,7 @@ class Generate
                 $user = $this->config->getUser($login);
                 return (new NixAttrSet())
                     ->setString('login', $user->getLogin())
+                    ->setInt('uid', $user->getUid())
                     ->setString('email', $user->getEmail())
                     ->setString('name', $user->getName())
                     ->setString('profile', $user->getProfile());

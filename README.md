@@ -301,6 +301,9 @@ Available recipes:
 - [x] Multi-réseaux.
 - [ ] Attributions d'emails automatiques par réseaux.
 - [ ] Serveur de mails.
+- [x] Fixer les UIDs.
+- [ ] Générateur / gestionnaire d'UIDs (pour les grands réseaux).
+- [ ] Normaliser les données générées en séparant hosts et users.
 
 ## Idées en cours d'étude
 

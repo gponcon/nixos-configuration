@@ -29,93 +29,114 @@ users:
 
   # Darkone
   darkone:
+    uid: 1000
     name: "Darkone Linux"
     email: "darkone@darkone.yt"
     profile: "darkone"
     groups: [ "admin", "media", "common" ]
   gponcon:
+    uid: 1001
     name: "G. Ponçon"
     profile: "normal"
     groups: [ "admin", "sn-admin", "sn" ]
 
   # Arthur
   anso:
+    uid: 1002
     name: "Anso"
     profile: "normal"
     groups: [ "common" ]
   charlie:
+    uid: 1003
     name: "Charlie"
     profile: "teenager"
     groups: [ "kids", "common" ]
   axelle:
+    uid: 1004
     name: "Axelle"
     profile: "children"
     groups: [ "kids", "common" ]
   tristan:
+    uid: 1005
     name: "Tristan"
     profile: "children"
     groups: [ "kids", "common" ]
 
   # SN
   tserveau:
+    uid: 1100
     name: "T. Serveau"
-    profile: "admin"
+    profile: "sn-user"
     groups: [ "sn", "sn-admin" ]
   ethan:
+    uid: 1101
     name: "Ethan"
-    profile: "student"
+    profile: "sn-user"
     groups: [ "sn", "tsn" ]
   nathael:
+    uid: 1102
     name: "Nathaël"
-    profile: "student"
+    profile: "sn-user"
     groups: [ "sn", "tsn" ]
   kilic:
+    uid: 1103
     name: "Kilic"
-    profile: "student"
+    profile: "sn-user"
     groups: [ "sn", "1ciel" ]
   mathys:
+    uid: 1104
     name: "Mathys"
-    profile: "student"
+    profile: "sn-user"
     groups: [ "sn", "1ciel" ]
   julien:
+    uid: 1105
     name: "Julien"
-    profile: "student"
+    profile: "sn-user"
     groups: [ "sn", "1ciel" ]
   esteban:
+    uid: 1106
     name: "Esteban"
-    profile: "student"
+    profile: "sn-user"
     groups: [ "sn", "1ciel" ]
   diego:
+    uid: 1107
     name: "Diego"
-    profile: "student"
+    profile: "sn-user"
     groups: [ "sn", "2mtne" ]
   mathieu:
+    uid: 1108
     name: "Mathieu"
-    profile: "student"
+    profile: "sn-user"
     groups: [ "sn", "2mtne" ]
   brice:
+    uid: 1109
     name: "Brice"
-    profile: "student"
+    profile: "sn-user"
     groups: [ "sn", "2mtne" ]
   nolann:
+    uid: 1110
     name: "Nolann"
-    profile: "student"
+    profile: "sn-user"
     groups: [ "sn", "2mtne" ]
   baptiste:
+    uid: 1111
     name: "Baptiste"
-    profile: "student"
+    profile: "sn-user"
     groups: [ "sn", "2mtne" ]
   evan:
+    uid: 1112
     name: "Evan"
-    profile: "student"
+    profile: "sn-user"
     groups: [ "sn", "2mtne" ]
   tiesto:
+    uid: 1113
     name: "Tiesto"
-    profile: "student"
+    profile: "sn-user"
     groups: [ "sn", "2mtne" ]
   titouan:
+    uid: 1114
     name: "Titouan"
-    profile: "student"
+    profile: "sn-user"
     groups: [ "sn", "2mtne" ]
 
 # Hosts declaration

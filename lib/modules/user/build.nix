@@ -10,6 +10,7 @@ let
     name = user.login;
     value = {
       isNormalUser = true;
+      uid = "${user.uid}";
       description = "${user.name}";
     } // import ./../../../${user.profile}.nix { inherit pkgs lib config; };
   };
