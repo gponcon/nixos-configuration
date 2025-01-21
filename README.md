@@ -299,6 +299,8 @@ Available recipes:
 - [ ] Commandes d'introspection pour lister les hosts, users, modules activés par host, etc.
 - [ ] Tests unitaires (wip).
 - [x] Multi-réseaux.
+- [ ] Attributions d'emails automatiques par réseaux.
+- [ ] Serveur de mails.
 
 ## Idées en cours d'étude
 

@@ -97,6 +97,7 @@ class Configuration extends NixAttrSet
 
     /**
      * @throws NixException
+     * @todo Auto e-mail by network
      */
     private function loadUsers(array $config): void
     {
@@ -109,7 +110,7 @@ class Configuration extends NixAttrSet
             $this->assert(self::TYPE_ARRAY, $user['groups'] ?? [], "Bad user group type for " . $login);
             $this->users[$login] = (new User())
                 ->setLogin($login)
-                ->setEmail($user['email'] ?? $login . '@' . ($config['global']['domain'] ?? self::DEFAULT_NETWORK_DOMAIN))
+                ->setEmail($user['email'] ?? $login . '@' . self::DEFAULT_NETWORK_DOMAIN)
                 ->setName($user['name'])
                 ->setProfile($user['profile'] ?? self::DEFAULT_PROFILE)
                 ->setGroups($user['groups'] ?? []);
