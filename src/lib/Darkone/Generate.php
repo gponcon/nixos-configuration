@@ -33,7 +33,7 @@ class Generate
         try {
             return match ($what) {
                 'hosts' => $this->generateHosts(),
-                'network' => $this->generateNetworkConfig()
+                'networks' => $this->generateNetworksConfig()
             };
         } catch (UnhandledMatchError $e) {
             throw new NixException('Unknown item "' . $what . '", unable to generate');
@@ -84,8 +84,8 @@ class Generate
      * Generate the hosts.nix file loaded by flake.nix
      * @throws NixException
      */
-    private function generateNetworkConfig(): string
+    private function generateNetworksConfig(): string
     {
-        return (string) NixBuilder::arrayToNix($this->config->getNetworkConfig());
+        return (string) NixBuilder::arrayToNix($this->config->getNetworksConfig());
     }
 }

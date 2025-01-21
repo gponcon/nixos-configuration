@@ -1,16 +1,25 @@
-# Nix generator configuration file for Darkone NixOS Framework
+# Nix generator configuration file for Darkone NixOS Framework (common file)
 
 # Global network configuration is converted in lists / attSets to be used in 
-# your nix configuration through "network" special arg. Common configuration
-# for all hosts.
-network:
+# your nix configuration through "networks.<network>" special arg.
+networks:
+
+  # The default network
+  default:
     domain: "arthur.lan"
     gateway:
-        hostname: "gateway"
-        ip: "192.168.0.1"
+      hostname: "gateway"
+      ip: "192.168.0.1"
+
+  # Another network (optional)
+  sn:
+    domain: "sn-pm.lan"
+    gateway:
+      hostname: "sn-network"
+      ip: "192.168.11.1"
 
 #------------------------------------------------------------------------------
-# Nix DNF static hosts (nested hosts.<type>) (wip)
+# Nix DNF static hosts (nested hosts.<type>)
 #------------------------------------------------------------------------------
 
 # Static users
@@ -18,31 +27,96 @@ network:
 # -> groups is used to select related hosts
 users:
 
-    darkone:
-        name: "Darkone Linux"
-        email: "darkone@darkone.yt"
-        profile: "darkone"
-        groups: [ "admin", "media", "common" ]
-    gponcon:
-        name: "G. Ponçon"
-        profile: "normal"
-        groups: [ "admin" ]
-    anso:
-        name: "Anso"
-        profile: "normal"
-        groups: [ "common" ]
-    charlie:
-        name: "Charlie"
-        profile: "teenager"
-        groups: [ "kids", "common" ]
-    axelle:
-        name: "Axelle"
-        profile: "children"
-        groups: [ "kids", "common" ]
-    tristan:
-        name: "Tristan"
-        profile: "children"
-        groups: [ "kids", "common" ]
+  # Darkone
+  darkone:
+    name: "Darkone Linux"
+    email: "darkone@darkone.yt"
+    profile: "darkone"
+    groups: [ "admin", "media", "common" ]
+  gponcon:
+    name: "G. Ponçon"
+    profile: "normal"
+    groups: [ "admin", "sn-admin", "sn" ]
+
+  # Arthur
+  anso:
+    name: "Anso"
+    profile: "normal"
+    groups: [ "common" ]
+  charlie:
+    name: "Charlie"
+    profile: "teenager"
+    groups: [ "kids", "common" ]
+  axelle:
+    name: "Axelle"
+    profile: "children"
+    groups: [ "kids", "common" ]
+  tristan:
+    name: "Tristan"
+    profile: "children"
+    groups: [ "kids", "common" ]
+
+  # SN
+  tserveau:
+    name: "T. Serveau"
+    profile: "admin"
+    groups: [ "sn", "sn-admin" ]
+  ethan:
+    name: "Ethan"
+    profile: "student"
+    groups: [ "sn", "tsn" ]
+  nathael:
+    name: "Nathaël"
+    profile: "student"
+    groups: [ "sn", "tsn" ]
+  kilic:
+    name: "Kilic"
+    profile: "student"
+    groups: [ "sn", "1ciel" ]
+  mathys:
+    name: "Mathys"
+    profile: "student"
+    groups: [ "sn", "1ciel" ]
+  julien:
+    name: "Julien"
+    profile: "student"
+    groups: [ "sn", "1ciel" ]
+  esteban:
+    name: "Esteban"
+    profile: "student"
+    groups: [ "sn", "1ciel" ]
+  diego:
+    name: "Diego"
+    profile: "student"
+    groups: [ "sn", "2mtne" ]
+  mathieu:
+    name: "Mathieu"
+    profile: "student"
+    groups: [ "sn", "2mtne" ]
+  brice:
+    name: "Brice"
+    profile: "student"
+    groups: [ "sn", "2mtne" ]
+  nolann:
+    name: "Nolann"
+    profile: "student"
+    groups: [ "sn", "2mtne" ]
+  baptiste:
+    name: "Baptiste"
+    profile: "student"
+    groups: [ "sn", "2mtne" ]
+  evan:
+    name: "Evan"
+    profile: "student"
+    groups: [ "sn", "2mtne" ]
+  tiesto:
+    name: "Tiesto"
+    profile: "student"
+    groups: [ "sn", "2mtne" ]
+  titouan:
+    name: "Titouan"
+    profile: "student"
+    groups: [ "sn", "2mtne" ]
 
 # Hosts declaration
 # -> users are explicit users
@@ -51,49 +125,61 @@ users:
 # -> local: true is only for the local (master) machine.
 hosts:
 
-    # Static hosts
-    static:
+  # Static hosts
+  static:
 
-        - hostname: "nlt"
-          name: "Darkone Laptop"
-          profile: "admin-laptop"
-          users: [ "darkone" ]
-          groups: [ "admin" ]
-          tags: [ "laptops", "admin" ]
-          local: true
-#        - hostname: "gateway"
-#          name: "Home Gateway & HomeLab"
-#          profile: "gateway"
-#          groups: [ "admin" ]
-#        - hostname: "charlie"
-#          name: "Cle USB Charlie"
-#          profile: "child-key"
-#          users: [ "charlie" ]
-#        - hostname: "axelle"
-#          name: "Cle USB Axelle"
-#          profile: "child-key"
-#          users: [ "axelle" ]
+    # Darkone (multi-network)
+    - hostname: "nlt"
+      name: "Darkone Laptop"
+      profile: "admin-laptop"
+      users: [ "darkone" ]
+      groups: [ "admin" ]
+      networks: [ "default", "sn" ]
+      tags: [ "laptops", "admin" ]
+      local: true
 
-    # Host groups by range
-    range:
+    # Default network
+    # NOTE: if no "networks" is specified, hosts are linked to "default" network
+    - hostname: "gateway"
+      enable: false
+      name: "Home Gateway & HomeLab"
+      profile: "gateway"
+      groups: [ "admin" ]
+    - hostname: "charlie"
+      enable: false
+      name: "Cle USB Charlie"
+      profile: "child-key"
+      users: [ "charlie" ]
+    - hostname: "axelle"
+      enable: false
+      name: "Cle USB Axelle"
+      profile: "child-key"
+      users: [ "axelle" ]
 
-        # 3 hosts vbox-01, vbox-02 and vbox-03
-        - hostname: "vbox-%'02s"
-          name: "Virtual %'02s"
-          profile: "vbox"
-          range: [ 1, 3 ]
-          users: [ "darkone" ]
+    # SN gateway
+    - hostname: "sn-network"
+      name: "SN Network Gateway"
+      profile: "sn-network"
+      networks: [ "sn" ]
+      groups: [ "sn-admin" ]
 
-    # Host groups by list of hostnames
-#    list:
-#
-#        - hostname: "laptop-%s" # optional
-#          name: "Ordi portable %s" # optional
-#          profile: "laptop"
-#          hosts:
-#              darktwo: "Darktwo"
-#              kids: "Kids"
-#          groups: [ "common" ]
+  # Host groups by range (generated from min to max)
+  range:
+
+    # Virtualbox hosts for tests
+    - hostname: "vbox-%'02s"
+      name: "Virtual %'02s"
+      profile: "vbox"
+      range: [ 1, 3 ]
+      users: [ "darkone" ]
+
+    # SN NixOS work computers
+    - hostname: "SN-20-%'02s"
+      name: "pc%d"
+      profile: "sn-pc"
+      range: [ 1, 8 ]
+      networks: [ "sn" ]
+      groups: [ "2mtne", "1ciel", "tsn", "sn" ]
 
 #------------------------------------------------------------------------------
 # Nix DNF hosts from LLDAP (wip)
@@ -102,13 +188,13 @@ hosts:
 #------------------------------------------------------------------------------
 
 hostProvider:
-    lldap:
-        enabled: false
+  lldap:
+    enabled: false
 
-        # Use nsswitch to login users, otherwise user configurations are
-        # generated in the nix configuration
-        #nss: false # Not implemented yet
-        url: "ldap://localhost:3890"
-        bind:
-            user: "admin"
-            passwordFile: "usr/secrets/lldap"
+    # Use nsswitch to login users, otherwise user configurations are
+    # generated in the nix configuration
+    #nss: false # Not implemented yet
+    url: "ldap://localhost:3890"
+    bind:
+      user: "admin"
+      passwordFile: "lldap" # located in usr/secrets

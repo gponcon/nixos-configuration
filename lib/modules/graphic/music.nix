@@ -40,7 +40,7 @@ in
         ncmpcpp
         soundfont-fluid
         timidity
-        vlc-bin
+        vlc
       ]
       ++ (
         if cfg.enablePro then

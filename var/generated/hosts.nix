@@ -34,6 +34,98 @@
     };
   }
   {
+    hostname = "gateway";
+    name = "Home Gateway & HomeLab";
+    profile = "gateway";
+    users = [
+      {
+        login = "darkone";
+        email = "darkone@darkone.yt";
+        name = "Darkone Linux";
+        profile = "usr/homes/darkone";
+      }
+      {
+        login = "gponcon";
+        email = "gponcon@darkone.lan";
+        name = "G. Ponçon";
+        profile = "lib/homes/normal";
+      }
+    ];
+    colmena = {
+      deployment = {
+        tags = [
+          "group-admin"
+          "user-darkone"
+          "user-gponcon"
+        ];
+      };
+    };
+  }
+  {
+    hostname = "charlie";
+    name = "Cle USB Charlie";
+    profile = "child-key";
+    users = [
+      {
+        login = "charlie";
+        email = "charlie@darkone.lan";
+        name = "Charlie";
+        profile = "lib/homes/teenager";
+      }
+    ];
+    colmena = {
+      deployment = {
+        tags = [ "user-charlie" ];
+      };
+    };
+  }
+  {
+    hostname = "axelle";
+    name = "Cle USB Axelle";
+    profile = "child-key";
+    users = [
+      {
+        login = "axelle";
+        email = "axelle@darkone.lan";
+        name = "Axelle";
+        profile = "lib/homes/children";
+      }
+    ];
+    colmena = {
+      deployment = {
+        tags = [ "user-axelle" ];
+      };
+    };
+  }
+  {
+    hostname = "sn-network";
+    name = "SN Network Gateway";
+    profile = "sn-network";
+    users = [
+      {
+        login = "gponcon";
+        email = "gponcon@darkone.lan";
+        name = "G. Ponçon";
+        profile = "lib/homes/normal";
+      }
+      {
+        login = "tserveau";
+        email = "tserveau@darkone.lan";
+        name = "T. Serveau";
+        profile = "lib/homes/admin";
+      }
+    ];
+    colmena = {
+      deployment = {
+        tags = [
+          "group-sn-admin"
+          "user-gponcon"
+          "user-tserveau"
+        ];
+      };
+    };
+  }
+  {
     hostname = "vbox-01";
     name = "Virtual 01";
     profile = "vbox";
@@ -84,6 +176,1038 @@
     colmena = {
       deployment = {
         tags = [ "user-darkone" ];
+      };
+    };
+  }
+  {
+    hostname = "SN-20-01";
+    name = "pc1";
+    profile = "sn-pc";
+    users = [
+      {
+        login = "diego";
+        email = "diego@darkone.lan";
+        name = "Diego";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "mathieu";
+        email = "mathieu@darkone.lan";
+        name = "Mathieu";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "brice";
+        email = "brice@darkone.lan";
+        name = "Brice";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "nolann";
+        email = "nolann@darkone.lan";
+        name = "Nolann";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "baptiste";
+        email = "baptiste@darkone.lan";
+        name = "Baptiste";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "evan";
+        email = "evan@darkone.lan";
+        name = "Evan";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "tiesto";
+        email = "tiesto@darkone.lan";
+        name = "Tiesto";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "titouan";
+        email = "titouan@darkone.lan";
+        name = "Titouan";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "kilic";
+        email = "kilic@darkone.lan";
+        name = "Kilic";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "mathys";
+        email = "mathys@darkone.lan";
+        name = "Mathys";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "julien";
+        email = "julien@darkone.lan";
+        name = "Julien";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "esteban";
+        email = "esteban@darkone.lan";
+        name = "Esteban";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "ethan";
+        email = "ethan@darkone.lan";
+        name = "Ethan";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "nathael";
+        email = "nathael@darkone.lan";
+        name = "Nathaël";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "gponcon";
+        email = "gponcon@darkone.lan";
+        name = "G. Ponçon";
+        profile = "lib/homes/normal";
+      }
+      {
+        login = "tserveau";
+        email = "tserveau@darkone.lan";
+        name = "T. Serveau";
+        profile = "lib/homes/admin";
+      }
+    ];
+    colmena = {
+      deployment = {
+        tags = [
+          "group-2mtne"
+          "group-1ciel"
+          "group-tsn"
+          "group-sn"
+          "user-diego"
+          "user-mathieu"
+          "user-brice"
+          "user-nolann"
+          "user-baptiste"
+          "user-evan"
+          "user-tiesto"
+          "user-titouan"
+          "user-kilic"
+          "user-mathys"
+          "user-julien"
+          "user-esteban"
+          "user-ethan"
+          "user-nathael"
+          "user-gponcon"
+          "user-tserveau"
+        ];
+      };
+    };
+  }
+  {
+    hostname = "SN-20-02";
+    name = "pc2";
+    profile = "sn-pc";
+    users = [
+      {
+        login = "diego";
+        email = "diego@darkone.lan";
+        name = "Diego";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "mathieu";
+        email = "mathieu@darkone.lan";
+        name = "Mathieu";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "brice";
+        email = "brice@darkone.lan";
+        name = "Brice";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "nolann";
+        email = "nolann@darkone.lan";
+        name = "Nolann";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "baptiste";
+        email = "baptiste@darkone.lan";
+        name = "Baptiste";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "evan";
+        email = "evan@darkone.lan";
+        name = "Evan";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "tiesto";
+        email = "tiesto@darkone.lan";
+        name = "Tiesto";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "titouan";
+        email = "titouan@darkone.lan";
+        name = "Titouan";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "kilic";
+        email = "kilic@darkone.lan";
+        name = "Kilic";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "mathys";
+        email = "mathys@darkone.lan";
+        name = "Mathys";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "julien";
+        email = "julien@darkone.lan";
+        name = "Julien";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "esteban";
+        email = "esteban@darkone.lan";
+        name = "Esteban";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "ethan";
+        email = "ethan@darkone.lan";
+        name = "Ethan";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "nathael";
+        email = "nathael@darkone.lan";
+        name = "Nathaël";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "gponcon";
+        email = "gponcon@darkone.lan";
+        name = "G. Ponçon";
+        profile = "lib/homes/normal";
+      }
+      {
+        login = "tserveau";
+        email = "tserveau@darkone.lan";
+        name = "T. Serveau";
+        profile = "lib/homes/admin";
+      }
+    ];
+    colmena = {
+      deployment = {
+        tags = [
+          "group-2mtne"
+          "group-1ciel"
+          "group-tsn"
+          "group-sn"
+          "user-diego"
+          "user-mathieu"
+          "user-brice"
+          "user-nolann"
+          "user-baptiste"
+          "user-evan"
+          "user-tiesto"
+          "user-titouan"
+          "user-kilic"
+          "user-mathys"
+          "user-julien"
+          "user-esteban"
+          "user-ethan"
+          "user-nathael"
+          "user-gponcon"
+          "user-tserveau"
+        ];
+      };
+    };
+  }
+  {
+    hostname = "SN-20-03";
+    name = "pc3";
+    profile = "sn-pc";
+    users = [
+      {
+        login = "diego";
+        email = "diego@darkone.lan";
+        name = "Diego";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "mathieu";
+        email = "mathieu@darkone.lan";
+        name = "Mathieu";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "brice";
+        email = "brice@darkone.lan";
+        name = "Brice";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "nolann";
+        email = "nolann@darkone.lan";
+        name = "Nolann";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "baptiste";
+        email = "baptiste@darkone.lan";
+        name = "Baptiste";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "evan";
+        email = "evan@darkone.lan";
+        name = "Evan";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "tiesto";
+        email = "tiesto@darkone.lan";
+        name = "Tiesto";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "titouan";
+        email = "titouan@darkone.lan";
+        name = "Titouan";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "kilic";
+        email = "kilic@darkone.lan";
+        name = "Kilic";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "mathys";
+        email = "mathys@darkone.lan";
+        name = "Mathys";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "julien";
+        email = "julien@darkone.lan";
+        name = "Julien";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "esteban";
+        email = "esteban@darkone.lan";
+        name = "Esteban";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "ethan";
+        email = "ethan@darkone.lan";
+        name = "Ethan";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "nathael";
+        email = "nathael@darkone.lan";
+        name = "Nathaël";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "gponcon";
+        email = "gponcon@darkone.lan";
+        name = "G. Ponçon";
+        profile = "lib/homes/normal";
+      }
+      {
+        login = "tserveau";
+        email = "tserveau@darkone.lan";
+        name = "T. Serveau";
+        profile = "lib/homes/admin";
+      }
+    ];
+    colmena = {
+      deployment = {
+        tags = [
+          "group-2mtne"
+          "group-1ciel"
+          "group-tsn"
+          "group-sn"
+          "user-diego"
+          "user-mathieu"
+          "user-brice"
+          "user-nolann"
+          "user-baptiste"
+          "user-evan"
+          "user-tiesto"
+          "user-titouan"
+          "user-kilic"
+          "user-mathys"
+          "user-julien"
+          "user-esteban"
+          "user-ethan"
+          "user-nathael"
+          "user-gponcon"
+          "user-tserveau"
+        ];
+      };
+    };
+  }
+  {
+    hostname = "SN-20-04";
+    name = "pc4";
+    profile = "sn-pc";
+    users = [
+      {
+        login = "diego";
+        email = "diego@darkone.lan";
+        name = "Diego";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "mathieu";
+        email = "mathieu@darkone.lan";
+        name = "Mathieu";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "brice";
+        email = "brice@darkone.lan";
+        name = "Brice";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "nolann";
+        email = "nolann@darkone.lan";
+        name = "Nolann";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "baptiste";
+        email = "baptiste@darkone.lan";
+        name = "Baptiste";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "evan";
+        email = "evan@darkone.lan";
+        name = "Evan";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "tiesto";
+        email = "tiesto@darkone.lan";
+        name = "Tiesto";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "titouan";
+        email = "titouan@darkone.lan";
+        name = "Titouan";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "kilic";
+        email = "kilic@darkone.lan";
+        name = "Kilic";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "mathys";
+        email = "mathys@darkone.lan";
+        name = "Mathys";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "julien";
+        email = "julien@darkone.lan";
+        name = "Julien";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "esteban";
+        email = "esteban@darkone.lan";
+        name = "Esteban";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "ethan";
+        email = "ethan@darkone.lan";
+        name = "Ethan";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "nathael";
+        email = "nathael@darkone.lan";
+        name = "Nathaël";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "gponcon";
+        email = "gponcon@darkone.lan";
+        name = "G. Ponçon";
+        profile = "lib/homes/normal";
+      }
+      {
+        login = "tserveau";
+        email = "tserveau@darkone.lan";
+        name = "T. Serveau";
+        profile = "lib/homes/admin";
+      }
+    ];
+    colmena = {
+      deployment = {
+        tags = [
+          "group-2mtne"
+          "group-1ciel"
+          "group-tsn"
+          "group-sn"
+          "user-diego"
+          "user-mathieu"
+          "user-brice"
+          "user-nolann"
+          "user-baptiste"
+          "user-evan"
+          "user-tiesto"
+          "user-titouan"
+          "user-kilic"
+          "user-mathys"
+          "user-julien"
+          "user-esteban"
+          "user-ethan"
+          "user-nathael"
+          "user-gponcon"
+          "user-tserveau"
+        ];
+      };
+    };
+  }
+  {
+    hostname = "SN-20-05";
+    name = "pc5";
+    profile = "sn-pc";
+    users = [
+      {
+        login = "diego";
+        email = "diego@darkone.lan";
+        name = "Diego";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "mathieu";
+        email = "mathieu@darkone.lan";
+        name = "Mathieu";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "brice";
+        email = "brice@darkone.lan";
+        name = "Brice";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "nolann";
+        email = "nolann@darkone.lan";
+        name = "Nolann";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "baptiste";
+        email = "baptiste@darkone.lan";
+        name = "Baptiste";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "evan";
+        email = "evan@darkone.lan";
+        name = "Evan";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "tiesto";
+        email = "tiesto@darkone.lan";
+        name = "Tiesto";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "titouan";
+        email = "titouan@darkone.lan";
+        name = "Titouan";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "kilic";
+        email = "kilic@darkone.lan";
+        name = "Kilic";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "mathys";
+        email = "mathys@darkone.lan";
+        name = "Mathys";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "julien";
+        email = "julien@darkone.lan";
+        name = "Julien";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "esteban";
+        email = "esteban@darkone.lan";
+        name = "Esteban";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "ethan";
+        email = "ethan@darkone.lan";
+        name = "Ethan";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "nathael";
+        email = "nathael@darkone.lan";
+        name = "Nathaël";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "gponcon";
+        email = "gponcon@darkone.lan";
+        name = "G. Ponçon";
+        profile = "lib/homes/normal";
+      }
+      {
+        login = "tserveau";
+        email = "tserveau@darkone.lan";
+        name = "T. Serveau";
+        profile = "lib/homes/admin";
+      }
+    ];
+    colmena = {
+      deployment = {
+        tags = [
+          "group-2mtne"
+          "group-1ciel"
+          "group-tsn"
+          "group-sn"
+          "user-diego"
+          "user-mathieu"
+          "user-brice"
+          "user-nolann"
+          "user-baptiste"
+          "user-evan"
+          "user-tiesto"
+          "user-titouan"
+          "user-kilic"
+          "user-mathys"
+          "user-julien"
+          "user-esteban"
+          "user-ethan"
+          "user-nathael"
+          "user-gponcon"
+          "user-tserveau"
+        ];
+      };
+    };
+  }
+  {
+    hostname = "SN-20-06";
+    name = "pc6";
+    profile = "sn-pc";
+    users = [
+      {
+        login = "diego";
+        email = "diego@darkone.lan";
+        name = "Diego";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "mathieu";
+        email = "mathieu@darkone.lan";
+        name = "Mathieu";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "brice";
+        email = "brice@darkone.lan";
+        name = "Brice";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "nolann";
+        email = "nolann@darkone.lan";
+        name = "Nolann";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "baptiste";
+        email = "baptiste@darkone.lan";
+        name = "Baptiste";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "evan";
+        email = "evan@darkone.lan";
+        name = "Evan";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "tiesto";
+        email = "tiesto@darkone.lan";
+        name = "Tiesto";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "titouan";
+        email = "titouan@darkone.lan";
+        name = "Titouan";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "kilic";
+        email = "kilic@darkone.lan";
+        name = "Kilic";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "mathys";
+        email = "mathys@darkone.lan";
+        name = "Mathys";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "julien";
+        email = "julien@darkone.lan";
+        name = "Julien";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "esteban";
+        email = "esteban@darkone.lan";
+        name = "Esteban";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "ethan";
+        email = "ethan@darkone.lan";
+        name = "Ethan";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "nathael";
+        email = "nathael@darkone.lan";
+        name = "Nathaël";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "gponcon";
+        email = "gponcon@darkone.lan";
+        name = "G. Ponçon";
+        profile = "lib/homes/normal";
+      }
+      {
+        login = "tserveau";
+        email = "tserveau@darkone.lan";
+        name = "T. Serveau";
+        profile = "lib/homes/admin";
+      }
+    ];
+    colmena = {
+      deployment = {
+        tags = [
+          "group-2mtne"
+          "group-1ciel"
+          "group-tsn"
+          "group-sn"
+          "user-diego"
+          "user-mathieu"
+          "user-brice"
+          "user-nolann"
+          "user-baptiste"
+          "user-evan"
+          "user-tiesto"
+          "user-titouan"
+          "user-kilic"
+          "user-mathys"
+          "user-julien"
+          "user-esteban"
+          "user-ethan"
+          "user-nathael"
+          "user-gponcon"
+          "user-tserveau"
+        ];
+      };
+    };
+  }
+  {
+    hostname = "SN-20-07";
+    name = "pc7";
+    profile = "sn-pc";
+    users = [
+      {
+        login = "diego";
+        email = "diego@darkone.lan";
+        name = "Diego";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "mathieu";
+        email = "mathieu@darkone.lan";
+        name = "Mathieu";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "brice";
+        email = "brice@darkone.lan";
+        name = "Brice";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "nolann";
+        email = "nolann@darkone.lan";
+        name = "Nolann";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "baptiste";
+        email = "baptiste@darkone.lan";
+        name = "Baptiste";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "evan";
+        email = "evan@darkone.lan";
+        name = "Evan";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "tiesto";
+        email = "tiesto@darkone.lan";
+        name = "Tiesto";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "titouan";
+        email = "titouan@darkone.lan";
+        name = "Titouan";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "kilic";
+        email = "kilic@darkone.lan";
+        name = "Kilic";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "mathys";
+        email = "mathys@darkone.lan";
+        name = "Mathys";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "julien";
+        email = "julien@darkone.lan";
+        name = "Julien";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "esteban";
+        email = "esteban@darkone.lan";
+        name = "Esteban";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "ethan";
+        email = "ethan@darkone.lan";
+        name = "Ethan";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "nathael";
+        email = "nathael@darkone.lan";
+        name = "Nathaël";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "gponcon";
+        email = "gponcon@darkone.lan";
+        name = "G. Ponçon";
+        profile = "lib/homes/normal";
+      }
+      {
+        login = "tserveau";
+        email = "tserveau@darkone.lan";
+        name = "T. Serveau";
+        profile = "lib/homes/admin";
+      }
+    ];
+    colmena = {
+      deployment = {
+        tags = [
+          "group-2mtne"
+          "group-1ciel"
+          "group-tsn"
+          "group-sn"
+          "user-diego"
+          "user-mathieu"
+          "user-brice"
+          "user-nolann"
+          "user-baptiste"
+          "user-evan"
+          "user-tiesto"
+          "user-titouan"
+          "user-kilic"
+          "user-mathys"
+          "user-julien"
+          "user-esteban"
+          "user-ethan"
+          "user-nathael"
+          "user-gponcon"
+          "user-tserveau"
+        ];
+      };
+    };
+  }
+  {
+    hostname = "SN-20-08";
+    name = "pc8";
+    profile = "sn-pc";
+    users = [
+      {
+        login = "diego";
+        email = "diego@darkone.lan";
+        name = "Diego";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "mathieu";
+        email = "mathieu@darkone.lan";
+        name = "Mathieu";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "brice";
+        email = "brice@darkone.lan";
+        name = "Brice";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "nolann";
+        email = "nolann@darkone.lan";
+        name = "Nolann";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "baptiste";
+        email = "baptiste@darkone.lan";
+        name = "Baptiste";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "evan";
+        email = "evan@darkone.lan";
+        name = "Evan";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "tiesto";
+        email = "tiesto@darkone.lan";
+        name = "Tiesto";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "titouan";
+        email = "titouan@darkone.lan";
+        name = "Titouan";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "kilic";
+        email = "kilic@darkone.lan";
+        name = "Kilic";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "mathys";
+        email = "mathys@darkone.lan";
+        name = "Mathys";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "julien";
+        email = "julien@darkone.lan";
+        name = "Julien";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "esteban";
+        email = "esteban@darkone.lan";
+        name = "Esteban";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "ethan";
+        email = "ethan@darkone.lan";
+        name = "Ethan";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "nathael";
+        email = "nathael@darkone.lan";
+        name = "Nathaël";
+        profile = "lib/homes/student";
+      }
+      {
+        login = "gponcon";
+        email = "gponcon@darkone.lan";
+        name = "G. Ponçon";
+        profile = "lib/homes/normal";
+      }
+      {
+        login = "tserveau";
+        email = "tserveau@darkone.lan";
+        name = "T. Serveau";
+        profile = "lib/homes/admin";
+      }
+    ];
+    colmena = {
+      deployment = {
+        tags = [
+          "group-2mtne"
+          "group-1ciel"
+          "group-tsn"
+          "group-sn"
+          "user-diego"
+          "user-mathieu"
+          "user-brice"
+          "user-nolann"
+          "user-baptiste"
+          "user-evan"
+          "user-tiesto"
+          "user-titouan"
+          "user-kilic"
+          "user-mathys"
+          "user-julien"
+          "user-esteban"
+          "user-ethan"
+          "user-nathael"
+          "user-gponcon"
+          "user-tserveau"
+        ];
       };
     };
   }

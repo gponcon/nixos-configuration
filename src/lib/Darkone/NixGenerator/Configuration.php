@@ -35,7 +35,7 @@ class Configuration extends NixAttrSet
      * @var Host[]
      */
     private array $hosts = [];
-    private array $networkConfig = [];
+    private array $networksConfig = [];
 
     /**
      * Load nix configuration
@@ -48,7 +48,7 @@ class Configuration extends NixAttrSet
         $this->loadHosts($config);
         $this->loadFormatter($config);
         $this->loadLldapProvider($config);
-        $this->setNetworkConfig($config['network'] ?? []);
+        $this->setNetworksConfig($config['networks'] ?? []);
         return $this;
     }
 
@@ -79,9 +79,9 @@ class Configuration extends NixAttrSet
             $this->assert(self::TYPE_STRING, $lldapConfig['url'] ?? null, "A valid lldap url is required", '#^ldap://.+$#');
             $this->assert(self::TYPE_STRING, $lldapConfig['bind']['user'] ?? null, "A valid lldap bind user is required", '#^[a-zA-Z][a-zA-Z0-9_-]+$#');
             $this->assert(self::TYPE_STRING, $lldapConfig['bind']['passwordFile'] ?? null, "A valid lldap password file is required");
-            $pwdFile = (NIX_PROJECT_ROOT ? NIX_PROJECT_ROOT . '/' : '') . $lldapConfig['bind']['passwordFile'];
+            $pwdFile = (NIX_PROJECT_ROOT ? NIX_PROJECT_ROOT . '/usr/secrets/' : '') . $lldapConfig['bind']['passwordFile'];
             if (!file_exists($pwdFile)) {
-                throw new NixException('Lldap password file "' . $pwdFile . '" not found.');
+                throw new NixException('LLDAP password file "' . $pwdFile . '" not found.');
             }
         }
     }
@@ -301,14 +301,19 @@ class Configuration extends NixAttrSet
         return $this->hosts;
     }
 
-    public function setNetworkConfig(array $networkConfig): Configuration
+    public function setNetworksConfig(array $networksConfig): Configuration
     {
-        $this->networkConfig = $networkConfig;
+        array_map(fn (mixed $key)
+            => preg_match('/^[a-z0-9][a-z0-9_-]{0,63}$/', $key)
+                || throw new NixException('Bad network key syntax "' . $key  . '".'),
+            array_keys($networksConfig)
+        );
+        $this->networksConfig = $networksConfig;
         return $this;
     }
 
-    public function getNetworkConfig(): array
+    public function getNetworksConfig(): array
     {
-        return $this->networkConfig;
+        return $this->networksConfig;
     }
 }

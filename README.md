@@ -1,6 +1,6 @@
 # Darkone NixOS Framework
 
-Une configuration NixOS pensée pour devenir un framework pour la création et la gestion d'un réseau multi-host et multi-utilisateur avec NixOS.
+Un framework de configuration NixOS multi-utilisateur, multi-host (et multi-réseau).
 
 > [!WARNING]  
 > Projet en cours de développement.
@@ -21,7 +21,8 @@ Ce framework simplifie les choses grâce à&nbsp;:
 - **Gestion des paramètres** utilisateur avec [home manager](https://github.com/nix-community/home-manager) + profils de homes.
 - **[Homepage](https://github.com/gethomepage/homepage) automatique** en fonction des services activés.
 - **Configuration transversale** pour assurer la cohérence du réseau.
-- **Sécurisation facile et fiable**, un seul mdp pour déverouiller, avec [sops](https://github.com/Mic92/sops-nix).
+- **Sécurisation facile et fiable**, un seul mdp pour déverrouiller, avec [sops](https://github.com/Mic92/sops-nix).
+- **Multi-réseau**, possibilité de déclarer plusieurs réseaux en une configuration.
 
 ## Organisation
 
