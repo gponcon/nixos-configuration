@@ -145,6 +145,7 @@ class Configuration extends NixAttrSet
                 ->setLocal($host['local'] ?? false)
                 ->setUsers($this->extractAllUsers($host['users'] ?? [], $host['groups'] ?? []))
                 ->setGroups($host['groups'] ?? [])
+                ->setNetworks($host['networks'] ?? ['default'])
                 ->setTags($host['tags'] ?? []);
         }, $staticHosts);
     }
@@ -196,6 +197,7 @@ class Configuration extends NixAttrSet
                 'profile' => $rangeHostGroup['profile'],
                 'users' => $rangeHostGroup['users'] ?? [],
                 'groups' => $rangeHostGroup['groups'] ?? [],
+                'networks' => $rangeHostGroup['networks'] ?? null,
                 'tags' => $rangeHostGroup['tags'] ?? [],
             ];
         }
@@ -223,6 +225,7 @@ class Configuration extends NixAttrSet
                 'profile' => $listHostGroup['profile'],
                 'users' => $listHostGroup['users'] ?? [],
                 'groups' => $listHostGroup['groups'] ?? [],
+                'networks' => $listHostGroup['networks'] ?? null,
                 'tags' => $listHostGroup['tags'] ?? [],
             ];
         }

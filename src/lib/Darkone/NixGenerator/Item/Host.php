@@ -28,6 +28,11 @@ class Host
     private array $groups = [];
 
     /**
+     * Networks
+     */
+    private array $networks = [];
+
+    /**
      * Host tags (for colmena deployments)
      */
     private array $tags = [];
@@ -75,6 +80,17 @@ class Host
     {
         $this->groups = $groups;
         return $this;
+    }
+
+    public function setNetworks(array $networks): Host
+    {
+        $this->networks = $networks;
+        return $this;
+    }
+
+    public function getNetworks(): array
+    {
+        return $this->networks;
     }
 
     public function setProfile(string $profile): Host

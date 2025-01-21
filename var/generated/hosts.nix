@@ -7,6 +7,11 @@
     hostname = "nlt";
     name = "Darkone Laptop";
     profile = "admin-laptop";
+    groups = [ "admin" ];
+    networks = [
+      "default"
+      "sn"
+    ];
     users = [
       {
         login = "darkone";
@@ -29,98 +34,8 @@
           "group-admin"
           "user-darkone"
           "user-gponcon"
-        ];
-      };
-    };
-  }
-  {
-    hostname = "gateway";
-    name = "Home Gateway & HomeLab";
-    profile = "gateway";
-    users = [
-      {
-        login = "darkone";
-        email = "darkone@darkone.yt";
-        name = "Darkone Linux";
-        profile = "usr/homes/darkone";
-      }
-      {
-        login = "gponcon";
-        email = "gponcon@darkone.lan";
-        name = "G. Ponçon";
-        profile = "lib/homes/normal";
-      }
-    ];
-    colmena = {
-      deployment = {
-        tags = [
-          "group-admin"
-          "user-darkone"
-          "user-gponcon"
-        ];
-      };
-    };
-  }
-  {
-    hostname = "charlie";
-    name = "Cle USB Charlie";
-    profile = "child-key";
-    users = [
-      {
-        login = "charlie";
-        email = "charlie@darkone.lan";
-        name = "Charlie";
-        profile = "lib/homes/teenager";
-      }
-    ];
-    colmena = {
-      deployment = {
-        tags = [ "user-charlie" ];
-      };
-    };
-  }
-  {
-    hostname = "axelle";
-    name = "Cle USB Axelle";
-    profile = "child-key";
-    users = [
-      {
-        login = "axelle";
-        email = "axelle@darkone.lan";
-        name = "Axelle";
-        profile = "lib/homes/children";
-      }
-    ];
-    colmena = {
-      deployment = {
-        tags = [ "user-axelle" ];
-      };
-    };
-  }
-  {
-    hostname = "sn-network";
-    name = "SN Network Gateway";
-    profile = "sn-network";
-    users = [
-      {
-        login = "gponcon";
-        email = "gponcon@darkone.lan";
-        name = "G. Ponçon";
-        profile = "lib/homes/normal";
-      }
-      {
-        login = "tserveau";
-        email = "tserveau@darkone.lan";
-        name = "T. Serveau";
-        profile = "lib/homes/admin";
-      }
-    ];
-    colmena = {
-      deployment = {
-        tags = [
-          "group-sn-admin"
-          "user-gponcon"
-          "user-tserveau"
+          "network-default"
+          "network-sn"
         ];
       };
     };
@@ -129,6 +44,8 @@
     hostname = "vbox-01";
     name = "Virtual 01";
     profile = "vbox";
+    groups = [ ];
+    networks = [ "default" ];
     users = [
       {
         login = "darkone";
@@ -139,7 +56,10 @@
     ];
     colmena = {
       deployment = {
-        tags = [ "user-darkone" ];
+        tags = [
+          "user-darkone"
+          "network-default"
+        ];
       };
     };
   }
@@ -147,6 +67,8 @@
     hostname = "vbox-02";
     name = "Virtual 02";
     profile = "vbox";
+    groups = [ ];
+    networks = [ "default" ];
     users = [
       {
         login = "darkone";
@@ -157,7 +79,10 @@
     ];
     colmena = {
       deployment = {
-        tags = [ "user-darkone" ];
+        tags = [
+          "user-darkone"
+          "network-default"
+        ];
       };
     };
   }
@@ -165,6 +90,8 @@
     hostname = "vbox-03";
     name = "Virtual 03";
     profile = "vbox";
+    groups = [ ];
+    networks = [ "default" ];
     users = [
       {
         login = "darkone";
@@ -175,7 +102,10 @@
     ];
     colmena = {
       deployment = {
-        tags = [ "user-darkone" ];
+        tags = [
+          "user-darkone"
+          "network-default"
+        ];
       };
     };
   }
@@ -183,6 +113,13 @@
     hostname = "SN-20-01";
     name = "pc1";
     profile = "sn-pc";
+    groups = [
+      "2mtne"
+      "1ciel"
+      "tsn"
+      "sn"
+    ];
+    networks = [ "sn" ];
     users = [
       {
         login = "diego";
@@ -304,6 +241,7 @@
           "user-nathael"
           "user-gponcon"
           "user-tserveau"
+          "network-sn"
         ];
       };
     };
@@ -312,6 +250,13 @@
     hostname = "SN-20-02";
     name = "pc2";
     profile = "sn-pc";
+    groups = [
+      "2mtne"
+      "1ciel"
+      "tsn"
+      "sn"
+    ];
+    networks = [ "sn" ];
     users = [
       {
         login = "diego";
@@ -433,6 +378,7 @@
           "user-nathael"
           "user-gponcon"
           "user-tserveau"
+          "network-sn"
         ];
       };
     };
@@ -441,6 +387,13 @@
     hostname = "SN-20-03";
     name = "pc3";
     profile = "sn-pc";
+    groups = [
+      "2mtne"
+      "1ciel"
+      "tsn"
+      "sn"
+    ];
+    networks = [ "sn" ];
     users = [
       {
         login = "diego";
@@ -562,6 +515,7 @@
           "user-nathael"
           "user-gponcon"
           "user-tserveau"
+          "network-sn"
         ];
       };
     };
@@ -570,6 +524,13 @@
     hostname = "SN-20-04";
     name = "pc4";
     profile = "sn-pc";
+    groups = [
+      "2mtne"
+      "1ciel"
+      "tsn"
+      "sn"
+    ];
+    networks = [ "sn" ];
     users = [
       {
         login = "diego";
@@ -691,6 +652,7 @@
           "user-nathael"
           "user-gponcon"
           "user-tserveau"
+          "network-sn"
         ];
       };
     };
@@ -699,6 +661,13 @@
     hostname = "SN-20-05";
     name = "pc5";
     profile = "sn-pc";
+    groups = [
+      "2mtne"
+      "1ciel"
+      "tsn"
+      "sn"
+    ];
+    networks = [ "sn" ];
     users = [
       {
         login = "diego";
@@ -820,6 +789,7 @@
           "user-nathael"
           "user-gponcon"
           "user-tserveau"
+          "network-sn"
         ];
       };
     };
@@ -828,6 +798,13 @@
     hostname = "SN-20-06";
     name = "pc6";
     profile = "sn-pc";
+    groups = [
+      "2mtne"
+      "1ciel"
+      "tsn"
+      "sn"
+    ];
+    networks = [ "sn" ];
     users = [
       {
         login = "diego";
@@ -949,6 +926,7 @@
           "user-nathael"
           "user-gponcon"
           "user-tserveau"
+          "network-sn"
         ];
       };
     };
@@ -957,6 +935,13 @@
     hostname = "SN-20-07";
     name = "pc7";
     profile = "sn-pc";
+    groups = [
+      "2mtne"
+      "1ciel"
+      "tsn"
+      "sn"
+    ];
+    networks = [ "sn" ];
     users = [
       {
         login = "diego";
@@ -1078,6 +1063,7 @@
           "user-nathael"
           "user-gponcon"
           "user-tserveau"
+          "network-sn"
         ];
       };
     };
@@ -1086,6 +1072,13 @@
     hostname = "SN-20-08";
     name = "pc8";
     profile = "sn-pc";
+    groups = [
+      "2mtne"
+      "1ciel"
+      "tsn"
+      "sn"
+    ];
+    networks = [ "sn" ];
     users = [
       {
         login = "diego";
@@ -1207,6 +1200,7 @@
           "user-nathael"
           "user-gponcon"
           "user-tserveau"
+          "network-sn"
         ];
       };
     };

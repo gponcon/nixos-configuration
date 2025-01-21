@@ -140,28 +140,25 @@ hosts:
 
     # Default network
     # NOTE: if no "networks" is specified, hosts are linked to "default" network
-    - hostname: "gateway"
-      enable: false
-      name: "Home Gateway & HomeLab"
-      profile: "gateway"
-      groups: [ "admin" ]
-    - hostname: "charlie"
-      enable: false
-      name: "Cle USB Charlie"
-      profile: "child-key"
-      users: [ "charlie" ]
-    - hostname: "axelle"
-      enable: false
-      name: "Cle USB Axelle"
-      profile: "child-key"
-      users: [ "axelle" ]
+#    - hostname: "gateway"
+#      name: "Home Gateway & HomeLab"
+#      profile: "gateway"
+#      groups: [ "admin" ]
+#    - hostname: "charlie"
+#      name: "Cle USB Charlie"
+#      profile: "child-key"
+#      users: [ "charlie" ]
+#    - hostname: "axelle"
+#      name: "Cle USB Axelle"
+#      profile: "child-key"
+#      users: [ "axelle" ]
 
     # SN gateway
-    - hostname: "sn-network"
-      name: "SN Network Gateway"
-      profile: "sn-network"
-      networks: [ "sn" ]
-      groups: [ "sn-admin" ]
+#    - hostname: "sn-network"
+#      name: "SN Network Gateway"
+#      profile: "sn-network"
+#      networks: [ "sn" ]
+#      groups: [ "sn-admin" ]
 
   # Host groups by range (generated from min to max)
   range:
@@ -198,3 +195,4 @@ hostProvider:
     bind:
       user: "admin"
       passwordFile: "lldap" # located in usr/secrets
+

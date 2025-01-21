@@ -63,6 +63,8 @@ class Generate
                 ->setString('hostname', $host->getHostname())
                 ->setString('name', $host->getName())
                 ->setString('profile', $host->getProfile())
+                ->set('groups', (new NixList())->populateStrings($host->getGroups()))
+                ->set('networks', (new NixList())->populateStrings($host->getNetworks()))
                 ->set('users', $users)
                 ->set('colmena', $colmena);
             $hosts->add($newHost);
@@ -76,7 +78,8 @@ class Generate
         return array_merge(
             $host->getTags(),
             array_map(fn (string $group): string => 'group-' . $group, $host->getGroups()),
-            array_map(fn (string $group): string => 'user-' . $group, $host->getUsers())
+            array_map(fn (string $group): string => 'user-' . $group, $host->getUsers()),
+            array_map(fn (string $group): string => 'network-' . $group, $host->getNetworks())
         );
     }
 
