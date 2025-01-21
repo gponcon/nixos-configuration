@@ -1,6 +1,6 @@
 # Darkone NixOS Framework
 
-Un framework de configuration NixOS multi-utilisateur, multi-host (et multi-réseau).
+Une configuration NixOS multi-utilisateur, multi-host, multi-réseaux.
 
 > [!WARNING]  
 > Projet en cours de développement.
@@ -22,7 +22,7 @@ Ce framework simplifie les choses grâce à&nbsp;:
 - **[Homepage](https://github.com/gethomepage/homepage) automatique** en fonction des services activés.
 - **Configuration transversale** pour assurer la cohérence du réseau.
 - **Sécurisation facile et fiable**, un seul mdp pour déverrouiller, avec [sops](https://github.com/Mic92/sops-nix).
-- **Multi-réseau**, possibilité de déclarer plusieurs réseaux en une configuration.
+- **Multi-réseaux**, possibilité de déclarer plusieurs réseaux en une configuration.
 
 ## Organisation
 
@@ -81,7 +81,7 @@ var/
 ├── log/
 └── generated/ ............... Generated files
     ├── hosts.nix ............ Hosts to deploy
-    └── network.nix .......... Global network configuration
+    └── networks.nix ......... Networks configuration
 src/(...) .................... Generator sources
 ```
 
@@ -95,19 +95,19 @@ src/(...) .................... Generator sources
 just generate
 
 # Génération + formattages + checks
-just fix
+just clean
 ```
 
-![Darkone NixOS Framework Generator](doc/arch.png)
+![Darkone NixOS Framework Generator](doc/arch.webp)
 
 Son rôle est de générer une configuration statique pure à partir d'une définition de machines (hosts), utilisateurs et groupes en provenance de diverses sources (déclarations statiques, ldap, etc. configurées dans `usr/config.yaml`). La configuration nix générée est intégrée au dépôt afin d'être fixée et utilisée par le flake.
 
 ## Exemples
 
 > [!CAUTION]
-> Ces exemples ne sont pas encore fonctionnels. Ces configurations et commandes pourront différer dans la future version stable du projet.
+> Ces exemples ne sont pas encore complement fonctionnels et pourront différer dans la future version stable du projet.
 
-Configurer un template de poste bureautique complet se fera très simplement :
+Configurer un template de poste bureautique complet se fait très simplement :
 
 ```nix
 # usr/hosts/desktop-office.nix
@@ -134,13 +134,18 @@ hosts:
           users: [ "darkone" "john" ]
 ```
 
-- Le profile `desktop-office` fait référence à `usr/hosts/desktop-office.nix`.
-- Il existe aussi des profils de hosts pré-configurés dans `lib/hosts`.
+- Le profile `desktop-office` fait référence à `usr/modules/host/desktop-office.nix`.
+- Il existe aussi des profils de hosts pré-configurés dans `lib/modules/host`.
 - Les utilisateurs liés au host sont déclarés via `users` et/ou `groups`.
 - Utilisateurs et groupes peuvent être déclarés dans la configuration ou dans LDAP.
 
 > [!NOTE]
-> Pour créer un poste, le plus simple est d'installer l'iso d'initialisation, même si ça fonctionne avec un poste contenant déjà un linux.
+> Pour créer un poste, le plus simple est d'installer l'iso d'initialisation.
+>
+> ```sh
+> # Création de l'iso d'installation
+> nix build .#start-img-iso
+> ```
 > 
 > Création du poste et mises à jour (commandes simplifiées et optimisées) :
 >
@@ -174,12 +179,23 @@ hosts:
 Version minimale :
 
 ```nix
+# usr/modules/host/server-gateway.nix
+
+{ lib, config, ... }:
+let
+  cfg = config.darkone.host.server-gateway;
+in
 {
-  # usr/hosts/server-gateway.nix
-  darkone.host.gateway = {
-    enable = true;
-    wan.interface = "eth0";
-    lan.interfaces = [ "eth1" "eth2" ];
+  options = {
+    darkone.host.server-gateway.enable = lib.mkEnableOption "My gateway host profile";
+  };
+
+  config = lib.mkIf cfg.enable {
+    darkone.host.gateway = {
+      enable = true;
+      wan.interface = "eth0";
+      lan.interfaces = [ "eth1" "eth2" ];
+    };
   };
 }
 ```
@@ -187,43 +203,43 @@ Version minimale :
 Version plus complète :
 
 ```nix
-{
-  # usr/hosts/server-gateway.nix
-  darkone.host.gateway = {
-    enable = true;
-    wan = {
-      interface = "eth0";
-      gateway = "192.168.0.1"; # optional
-    };
-    lan = {
-      interfaces = [ "wlan0" "enu1u4" ]; # wlan must be an AP
-      bridgeIp = "192.168.1.1";
-      domain = "arthur.lan"; # optional (default is <hostname>.lan)
-      dhcp = { # optional
-        enable = true;
-        range = "192.168.1.100,192.168.1.230,24h";
-        hosts = [
-          "e8:ff:1e:d0:44:82,192.168.1.2,darkone,infinite"
-          "f0:1f:af:13:62:a5,192.168.1.3,laptop,infinite"
-        ];
-        extraOptions = [
-          "option:ntp-server,191.168.1.1"
-        ];
-      };
-      accessPoints = [
-        {
-          wlan0 = {
-            ssid = "Mon AP";
-            passphrase = "Un password";
-          };
-        }
+# usr/modules/host/server-gateway.nix
+# ...
+darkone.host.gateway = {
+  enable = true;
+  wan = {
+    interface = "eth0";
+    gateway = "192.168.0.1"; # optional
+  };
+  lan = {
+    interfaces = [ "wlan0" "enu1u4" ]; # wlan must be an AP
+    bridgeIp = "192.168.1.1";
+    domain = "arthur.lan"; # optional (default is <hostname>.lan)
+    dhcp = { # optional
+      enable = true;
+      range = "192.168.1.100,192.168.1.230,24h";
+      hosts = [
+        "e8:ff:1e:d0:44:82,192.168.1.2,darkone,infinite"
+        "f0:1f:af:13:62:a5,192.168.1.3,laptop,infinite"
+      ];
+      extraOptions = [
+        "option:ntp-server,191.168.1.1"
       ];
     };
+    accessPoints = [
+      {
+        wlan0 = {
+          ssid = "Mon AP";
+          passphrase = "Un password";
+        };
+      }
+    ];
   };
-}
+};
+# ...
 ```
 
-Déploiement (3 possibilités) :
+Déploiement (2 possibilités) :
 
 ```sh
 # Simple and optimal
@@ -231,9 +247,6 @@ just apply gateway
 
 # Colmena
 colmena apply --on gateway switch
-
-# Regular
-nixos-rebuild switch --flake path:.#gateway --target-host admin@gateway --build-host gateway --fast --use-remote-sudo
 ```
 
 ## Justfile
@@ -285,6 +298,7 @@ Available recipes:
 - [x] Générateur de configuration nix statique (wip).
 - [ ] Commandes d'introspection pour lister les hosts, users, modules activés par host, etc.
 - [ ] Tests unitaires (wip).
+- [x] Multi-réseaux.
 
 ## Idées en cours d'étude
 
