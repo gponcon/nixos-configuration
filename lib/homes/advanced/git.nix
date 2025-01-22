@@ -1,4 +1,9 @@
-{ config, users, ... }:
+{
+  config,
+  users,
+  network,
+  ...
+}:
 let
 
   # Extraction of current user from host configuration
@@ -10,7 +15,10 @@ in
     enable = true;
     userName = "${user.name}";
     userEmail =
-      if (builtins.hasAttr "email" user) then "${user.email}" else "${config.home.username}@darkone.lan";
+      if (builtins.hasAttr "email" user) then
+        "${user.email}"
+      else
+        "${config.home.username}@${network.domain}";
     aliases = {
       amend = "!git add . && git commit --amend --no-edit";
       pf = "!git push --force";

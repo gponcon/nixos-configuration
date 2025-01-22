@@ -140,9 +140,12 @@ users:
     groups: [ "sn", "2mtne" ]
 
 # Hosts declaration
-# -> users are explicit users
-# -> groups are used to select related users
-# -> tags are added to colmena tags for deployment filtering.
+# -> name: human readable name or description
+# -> profile: the host profile related to this host
+# -> users: a list of existing user logins
+# -> groups: used to select related users
+# -> networks: the first one is the default (to auto-generate email for example)
+# -> tags: added to colmena tags for deployment filtering.
 # -> local: true is only for the local (master) machine.
 hosts:
 
