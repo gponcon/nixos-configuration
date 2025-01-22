@@ -19,8 +19,7 @@ class Configuration extends NixAttrSet
     public const REGEX_HOSTNAME = '/^[a-zA-Z][a-zA-Z0-9_-]{2,59}$/';
     public const REGEX_LOGIN = '/^[a-zA-Z][a-zA-Z0-9_-]{2,59}$/';
     public const REGEX_NAME = '/^.{3,128}$/';
-
-    private const DEFAULT_NETWORK_DOMAIN = 'darkone.lan';
+    
     private const DEFAULT_PROFILE = 'minimal';
 
     private string $formatter = 'nixfmt';
@@ -111,7 +110,7 @@ class Configuration extends NixAttrSet
             $this->assert(self::TYPE_ARRAY, $user['groups'] ?? [], "Bad user group type for " . $login);
             $this->users[$login] = (new User())
                 ->setUidAndLogin($user['uid'], $login)
-                ->setEmail($user['email'] ?? $login . '@' . self::DEFAULT_NETWORK_DOMAIN)
+                ->setEmail($user['email'] ?? null)
                 ->setName($user['name'])
                 ->setProfile($user['profile'] ?? self::DEFAULT_PROFILE)
                 ->setGroups($user['groups'] ?? []);

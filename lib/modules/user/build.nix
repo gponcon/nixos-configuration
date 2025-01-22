@@ -3,16 +3,17 @@
   config,
   host,
   pkgs,
+  users,
   ...
 }:
 let
-  mkUser = user: {
-    name = user.login;
+  mkUser = login: {
+    name = login;
     value = {
       isNormalUser = true;
-      inherit (user) uid;
-      description = "${user.name}";
-    } // import ./../../../${user.profile}.nix { inherit pkgs lib config; };
+      inherit (users.${login}) uid;
+      description = "${users.${login}.name}";
+    } // import ./../../../${users.${login}.profile}.nix { inherit pkgs lib config; };
   };
   cfg = config.darkone.user.build;
 in

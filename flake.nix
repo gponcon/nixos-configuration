@@ -52,21 +52,22 @@
         ];
       };
 
-      # The hosts.nix generated file (just generate)
+      # Users and hosts generated files (just generate)
       hosts = import ./var/generated/hosts.nix;
+      users = import ./var/generated/users.nix;
 
       # Networks configuration
       networks = import ./var/generated/networks.nix;
 
-      mkHome = user: {
-        name = user.login;
+      mkHome = login: {
+        name = login;
         value = {
-          imports = [ (import ./${user.profile}) ];
+          imports = [ (import ./${users.${login}.profile}) ];
 
           # Home profiles loading
           home = {
-            username = user.login;
-            homeDirectory = nixpkgs.lib.mkDefault "/home/${user.login}";
+            username = login;
+            homeDirectory = nixpkgs.lib.mkDefault "/home/${login}";
             stateVersion = "25.05";
           };
         };
@@ -75,9 +76,10 @@
       mkNodeSpecialArgs = host: {
         name = host.hostname;
         value = {
-          "host" = host;
-          "networks" = networks;
-          "imgFormat" = nixpkgs.lib.mkDefault "iso";
+          inherit host;
+          inherit users;
+          inherit networks;
+          imgFormat = nixpkgs.lib.mkDefault "iso";
         };
       };
 
@@ -103,6 +105,7 @@
 
                   extraSpecialArgs = {
                     inherit host;
+                    inherit users;
 
                     # This hack must be set to allow unfree packages
                     # in home manager configurations.

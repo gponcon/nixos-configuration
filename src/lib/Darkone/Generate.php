@@ -17,12 +17,12 @@ class Generate
     /**
      * @throws NixException
      */
-    public function __construct(string $tomlConfigFile)
+    public function __construct(string $yamlConfigFile)
     {
         if (!defined('NIX_PROJECT_ROOT')) {
             throw new NixException('NIX_PROJECT_ROOT must be defined');
         }
-        $this->config = (new Configuration())->loadYamlFile($tomlConfigFile);
+        $this->config = (new Configuration())->loadYamlFile($yamlConfigFile);
     }
 
     /**
@@ -33,9 +33,10 @@ class Generate
         try {
             return match ($what) {
                 'hosts' => $this->generateHosts(),
+                'users' => $this->generateUsers(),
                 'networks' => $this->generateNetworksConfig()
             };
-        } catch (UnhandledMatchError $e) {
+        } catch (UnhandledMatchError) {
             throw new NixException('Unknown item "' . $what . '", unable to generate');
         }
     }
@@ -48,15 +49,6 @@ class Generate
     {
         $hosts = new NixList();
         foreach ($this->config->getHosts() as $host) {
-            $users = (new NixList())->populate(array_map(function (string $login) {
-                $user = $this->config->getUser($login);
-                return (new NixAttrSet())
-                    ->setString('login', $user->getLogin())
-                    ->setInt('uid', $user->getUid())
-                    ->setString('email', $user->getEmail())
-                    ->setString('name', $user->getName())
-                    ->setString('profile', $user->getProfile());
-                }, $host->getUsers()));
             $deployment = (new NixAttrSet())
                 ->set('tags', (new NixList())->populateStrings($this->extractTags($host)));
             $colmena = (new NixAttrSet())->set('deployment', $deployment);
@@ -66,12 +58,31 @@ class Generate
                 ->setString('profile', $host->getProfile())
                 ->set('groups', (new NixList())->populateStrings($host->getGroups()))
                 ->set('networks', (new NixList())->populateStrings($host->getNetworks()))
-                ->set('users', $users)
+                ->set('users', (new NixList())->populateStrings($host->getUsers()))
                 ->set('colmena', $colmena);
             $hosts->add($newHost);
         }
 
         return $hosts;
+    }
+
+    /**
+     * Generate the hosts.nix file loaded by flake.nix
+     * @throws NixException
+     */
+    private function generateUsers(): string
+    {
+        $users = new NixAttrSet();
+        foreach ($this->config->getUsers() as $user) {
+            $users->set($user->getLogin(), (new NixAttrSet())
+                ->setInt('uid', $user->getUid())
+                ->setString('email', $user->getEmail())
+                ->setString('name', $user->getName())
+                ->setString('profile', $user->getProfile())
+                ->set('groups', (new NixList())->populateStrings($user->getGroups())));
+        }
+
+        return $users;
     }
 
     private function extractTags(Host $host): array

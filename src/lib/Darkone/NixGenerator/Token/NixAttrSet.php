@@ -3,6 +3,7 @@
 namespace Darkone\NixGenerator\Token;
 
 use ArrayIterator;
+use Darkone\NixGenerator\NixException;
 use Iterator;
 
 /**
@@ -26,21 +27,36 @@ class NixAttrSet implements NixItemInterface, Iterator
         return $this;
     }
 
+    /**
+     * @throws NixException
+     */
     public function setInt(string $key, int|string|float|bool $value): NixAttrSet
     {
         return $this->set($key, (new NixValue($value))->forceInt());
     }
 
+    /**
+     * @throws NixException
+     */
     public function setFloat(string $key, int|string|float|bool $value): NixAttrSet
     {
         return $this->set($key, (new NixValue($value))->forceFloat());
     }
 
-    public function setString(string $key, int|string|float|bool $value): NixAttrSet
+    /**
+     * @throws NixException
+     */
+    public function setString(string $key, null|int|string|float|bool $value): NixAttrSet
     {
+        if (is_null($value)) {
+            return $this;
+        }
         return $this->set($key, (new NixValue($value))->forceString());
     }
 
+    /**
+     * @throws NixException
+     */
     public function setBool(string $key, int|string|float|bool $value): NixAttrSet
     {
         return $this->set($key, (new NixValue($value))->forceBool());

@@ -72,7 +72,10 @@ fix:
 
 # Update the nix generated files
 [group('touch')]
-generate: _gen-default-lib-modules _gen-default-usr-modules _gen-default-overlays (_gen "hosts" "var/generated/hosts.nix") (_gen "networks" "var/generated/networks.nix")
+generate: _gen-default-lib-modules _gen-default-usr-modules _gen-default-overlays \
+		(_gen "users" "var/generated/users.nix") \
+		(_gen "hosts" "var/generated/hosts.nix") \
+		(_gen "networks" "var/generated/networks.nix")
 
 # Generate default.nix of lib/modules dir
 _gen-default-lib-modules: (_gen-default "lib/modules")

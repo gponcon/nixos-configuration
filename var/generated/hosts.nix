@@ -13,20 +13,8 @@
       "sn"
     ];
     users = [
-      {
-        login = "darkone";
-        uid = 1000;
-        email = "darkone@darkone.yt";
-        name = "Darkone Linux";
-        profile = "usr/homes/darkone";
-      }
-      {
-        login = "gponcon";
-        uid = 1001;
-        email = "gponcon@darkone.lan";
-        name = "G. Ponçon";
-        profile = "lib/homes/normal";
-      }
+      "darkone"
+      "gponcon"
     ];
     colmena = {
       deployment = {
@@ -48,15 +36,7 @@
     profile = "vbox";
     groups = [ ];
     networks = [ "default" ];
-    users = [
-      {
-        login = "darkone";
-        uid = 1000;
-        email = "darkone@darkone.yt";
-        name = "Darkone Linux";
-        profile = "usr/homes/darkone";
-      }
-    ];
+    users = [ "darkone" ];
     colmena = {
       deployment = {
         tags = [
@@ -72,15 +52,7 @@
     profile = "vbox";
     groups = [ ];
     networks = [ "default" ];
-    users = [
-      {
-        login = "darkone";
-        uid = 1000;
-        email = "darkone@darkone.yt";
-        name = "Darkone Linux";
-        profile = "usr/homes/darkone";
-      }
-    ];
+    users = [ "darkone" ];
     colmena = {
       deployment = {
         tags = [
@@ -96,15 +68,7 @@
     profile = "vbox";
     groups = [ ];
     networks = [ "default" ];
-    users = [
-      {
-        login = "darkone";
-        uid = 1000;
-        email = "darkone@darkone.yt";
-        name = "Darkone Linux";
-        profile = "usr/homes/darkone";
-      }
-    ];
+    users = [ "darkone" ];
     colmena = {
       deployment = {
         tags = [
@@ -126,118 +90,22 @@
     ];
     networks = [ "sn" ];
     users = [
-      {
-        login = "diego";
-        uid = 1107;
-        email = "diego@darkone.lan";
-        name = "Diego";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "mathieu";
-        uid = 1108;
-        email = "mathieu@darkone.lan";
-        name = "Mathieu";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "brice";
-        uid = 1109;
-        email = "brice@darkone.lan";
-        name = "Brice";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "nolann";
-        uid = 1110;
-        email = "nolann@darkone.lan";
-        name = "Nolann";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "baptiste";
-        uid = 1111;
-        email = "baptiste@darkone.lan";
-        name = "Baptiste";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "evan";
-        uid = 1112;
-        email = "evan@darkone.lan";
-        name = "Evan";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "tiesto";
-        uid = 1113;
-        email = "tiesto@darkone.lan";
-        name = "Tiesto";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "titouan";
-        uid = 1114;
-        email = "titouan@darkone.lan";
-        name = "Titouan";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "kilic";
-        uid = 1103;
-        email = "kilic@darkone.lan";
-        name = "Kilic";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "mathys";
-        uid = 1104;
-        email = "mathys@darkone.lan";
-        name = "Mathys";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "julien";
-        uid = 1105;
-        email = "julien@darkone.lan";
-        name = "Julien";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "esteban";
-        uid = 1106;
-        email = "esteban@darkone.lan";
-        name = "Esteban";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "ethan";
-        uid = 1101;
-        email = "ethan@darkone.lan";
-        name = "Ethan";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "nathael";
-        uid = 1102;
-        email = "nathael@darkone.lan";
-        name = "Nathaël";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "gponcon";
-        uid = 1001;
-        email = "gponcon@darkone.lan";
-        name = "G. Ponçon";
-        profile = "lib/homes/normal";
-      }
-      {
-        login = "tserveau";
-        uid = 1100;
-        email = "tserveau@darkone.lan";
-        name = "T. Serveau";
-        profile = "usr/homes/sn-user";
-      }
+      "diego"
+      "mathieu"
+      "brice"
+      "nolann"
+      "baptiste"
+      "evan"
+      "tiesto"
+      "titouan"
+      "kilic"
+      "mathys"
+      "julien"
+      "esteban"
+      "ethan"
+      "nathael"
+      "gponcon"
+      "tserveau"
     ];
     colmena = {
       deployment = {
@@ -279,118 +147,22 @@
     ];
     networks = [ "sn" ];
     users = [
-      {
-        login = "diego";
-        uid = 1107;
-        email = "diego@darkone.lan";
-        name = "Diego";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "mathieu";
-        uid = 1108;
-        email = "mathieu@darkone.lan";
-        name = "Mathieu";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "brice";
-        uid = 1109;
-        email = "brice@darkone.lan";
-        name = "Brice";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "nolann";
-        uid = 1110;
-        email = "nolann@darkone.lan";
-        name = "Nolann";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "baptiste";
-        uid = 1111;
-        email = "baptiste@darkone.lan";
-        name = "Baptiste";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "evan";
-        uid = 1112;
-        email = "evan@darkone.lan";
-        name = "Evan";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "tiesto";
-        uid = 1113;
-        email = "tiesto@darkone.lan";
-        name = "Tiesto";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "titouan";
-        uid = 1114;
-        email = "titouan@darkone.lan";
-        name = "Titouan";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "kilic";
-        uid = 1103;
-        email = "kilic@darkone.lan";
-        name = "Kilic";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "mathys";
-        uid = 1104;
-        email = "mathys@darkone.lan";
-        name = "Mathys";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "julien";
-        uid = 1105;
-        email = "julien@darkone.lan";
-        name = "Julien";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "esteban";
-        uid = 1106;
-        email = "esteban@darkone.lan";
-        name = "Esteban";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "ethan";
-        uid = 1101;
-        email = "ethan@darkone.lan";
-        name = "Ethan";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "nathael";
-        uid = 1102;
-        email = "nathael@darkone.lan";
-        name = "Nathaël";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "gponcon";
-        uid = 1001;
-        email = "gponcon@darkone.lan";
-        name = "G. Ponçon";
-        profile = "lib/homes/normal";
-      }
-      {
-        login = "tserveau";
-        uid = 1100;
-        email = "tserveau@darkone.lan";
-        name = "T. Serveau";
-        profile = "usr/homes/sn-user";
-      }
+      "diego"
+      "mathieu"
+      "brice"
+      "nolann"
+      "baptiste"
+      "evan"
+      "tiesto"
+      "titouan"
+      "kilic"
+      "mathys"
+      "julien"
+      "esteban"
+      "ethan"
+      "nathael"
+      "gponcon"
+      "tserveau"
     ];
     colmena = {
       deployment = {
@@ -432,118 +204,22 @@
     ];
     networks = [ "sn" ];
     users = [
-      {
-        login = "diego";
-        uid = 1107;
-        email = "diego@darkone.lan";
-        name = "Diego";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "mathieu";
-        uid = 1108;
-        email = "mathieu@darkone.lan";
-        name = "Mathieu";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "brice";
-        uid = 1109;
-        email = "brice@darkone.lan";
-        name = "Brice";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "nolann";
-        uid = 1110;
-        email = "nolann@darkone.lan";
-        name = "Nolann";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "baptiste";
-        uid = 1111;
-        email = "baptiste@darkone.lan";
-        name = "Baptiste";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "evan";
-        uid = 1112;
-        email = "evan@darkone.lan";
-        name = "Evan";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "tiesto";
-        uid = 1113;
-        email = "tiesto@darkone.lan";
-        name = "Tiesto";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "titouan";
-        uid = 1114;
-        email = "titouan@darkone.lan";
-        name = "Titouan";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "kilic";
-        uid = 1103;
-        email = "kilic@darkone.lan";
-        name = "Kilic";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "mathys";
-        uid = 1104;
-        email = "mathys@darkone.lan";
-        name = "Mathys";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "julien";
-        uid = 1105;
-        email = "julien@darkone.lan";
-        name = "Julien";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "esteban";
-        uid = 1106;
-        email = "esteban@darkone.lan";
-        name = "Esteban";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "ethan";
-        uid = 1101;
-        email = "ethan@darkone.lan";
-        name = "Ethan";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "nathael";
-        uid = 1102;
-        email = "nathael@darkone.lan";
-        name = "Nathaël";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "gponcon";
-        uid = 1001;
-        email = "gponcon@darkone.lan";
-        name = "G. Ponçon";
-        profile = "lib/homes/normal";
-      }
-      {
-        login = "tserveau";
-        uid = 1100;
-        email = "tserveau@darkone.lan";
-        name = "T. Serveau";
-        profile = "usr/homes/sn-user";
-      }
+      "diego"
+      "mathieu"
+      "brice"
+      "nolann"
+      "baptiste"
+      "evan"
+      "tiesto"
+      "titouan"
+      "kilic"
+      "mathys"
+      "julien"
+      "esteban"
+      "ethan"
+      "nathael"
+      "gponcon"
+      "tserveau"
     ];
     colmena = {
       deployment = {
@@ -585,118 +261,22 @@
     ];
     networks = [ "sn" ];
     users = [
-      {
-        login = "diego";
-        uid = 1107;
-        email = "diego@darkone.lan";
-        name = "Diego";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "mathieu";
-        uid = 1108;
-        email = "mathieu@darkone.lan";
-        name = "Mathieu";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "brice";
-        uid = 1109;
-        email = "brice@darkone.lan";
-        name = "Brice";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "nolann";
-        uid = 1110;
-        email = "nolann@darkone.lan";
-        name = "Nolann";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "baptiste";
-        uid = 1111;
-        email = "baptiste@darkone.lan";
-        name = "Baptiste";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "evan";
-        uid = 1112;
-        email = "evan@darkone.lan";
-        name = "Evan";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "tiesto";
-        uid = 1113;
-        email = "tiesto@darkone.lan";
-        name = "Tiesto";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "titouan";
-        uid = 1114;
-        email = "titouan@darkone.lan";
-        name = "Titouan";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "kilic";
-        uid = 1103;
-        email = "kilic@darkone.lan";
-        name = "Kilic";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "mathys";
-        uid = 1104;
-        email = "mathys@darkone.lan";
-        name = "Mathys";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "julien";
-        uid = 1105;
-        email = "julien@darkone.lan";
-        name = "Julien";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "esteban";
-        uid = 1106;
-        email = "esteban@darkone.lan";
-        name = "Esteban";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "ethan";
-        uid = 1101;
-        email = "ethan@darkone.lan";
-        name = "Ethan";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "nathael";
-        uid = 1102;
-        email = "nathael@darkone.lan";
-        name = "Nathaël";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "gponcon";
-        uid = 1001;
-        email = "gponcon@darkone.lan";
-        name = "G. Ponçon";
-        profile = "lib/homes/normal";
-      }
-      {
-        login = "tserveau";
-        uid = 1100;
-        email = "tserveau@darkone.lan";
-        name = "T. Serveau";
-        profile = "usr/homes/sn-user";
-      }
+      "diego"
+      "mathieu"
+      "brice"
+      "nolann"
+      "baptiste"
+      "evan"
+      "tiesto"
+      "titouan"
+      "kilic"
+      "mathys"
+      "julien"
+      "esteban"
+      "ethan"
+      "nathael"
+      "gponcon"
+      "tserveau"
     ];
     colmena = {
       deployment = {
@@ -738,118 +318,22 @@
     ];
     networks = [ "sn" ];
     users = [
-      {
-        login = "diego";
-        uid = 1107;
-        email = "diego@darkone.lan";
-        name = "Diego";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "mathieu";
-        uid = 1108;
-        email = "mathieu@darkone.lan";
-        name = "Mathieu";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "brice";
-        uid = 1109;
-        email = "brice@darkone.lan";
-        name = "Brice";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "nolann";
-        uid = 1110;
-        email = "nolann@darkone.lan";
-        name = "Nolann";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "baptiste";
-        uid = 1111;
-        email = "baptiste@darkone.lan";
-        name = "Baptiste";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "evan";
-        uid = 1112;
-        email = "evan@darkone.lan";
-        name = "Evan";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "tiesto";
-        uid = 1113;
-        email = "tiesto@darkone.lan";
-        name = "Tiesto";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "titouan";
-        uid = 1114;
-        email = "titouan@darkone.lan";
-        name = "Titouan";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "kilic";
-        uid = 1103;
-        email = "kilic@darkone.lan";
-        name = "Kilic";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "mathys";
-        uid = 1104;
-        email = "mathys@darkone.lan";
-        name = "Mathys";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "julien";
-        uid = 1105;
-        email = "julien@darkone.lan";
-        name = "Julien";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "esteban";
-        uid = 1106;
-        email = "esteban@darkone.lan";
-        name = "Esteban";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "ethan";
-        uid = 1101;
-        email = "ethan@darkone.lan";
-        name = "Ethan";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "nathael";
-        uid = 1102;
-        email = "nathael@darkone.lan";
-        name = "Nathaël";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "gponcon";
-        uid = 1001;
-        email = "gponcon@darkone.lan";
-        name = "G. Ponçon";
-        profile = "lib/homes/normal";
-      }
-      {
-        login = "tserveau";
-        uid = 1100;
-        email = "tserveau@darkone.lan";
-        name = "T. Serveau";
-        profile = "usr/homes/sn-user";
-      }
+      "diego"
+      "mathieu"
+      "brice"
+      "nolann"
+      "baptiste"
+      "evan"
+      "tiesto"
+      "titouan"
+      "kilic"
+      "mathys"
+      "julien"
+      "esteban"
+      "ethan"
+      "nathael"
+      "gponcon"
+      "tserveau"
     ];
     colmena = {
       deployment = {
@@ -891,118 +375,22 @@
     ];
     networks = [ "sn" ];
     users = [
-      {
-        login = "diego";
-        uid = 1107;
-        email = "diego@darkone.lan";
-        name = "Diego";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "mathieu";
-        uid = 1108;
-        email = "mathieu@darkone.lan";
-        name = "Mathieu";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "brice";
-        uid = 1109;
-        email = "brice@darkone.lan";
-        name = "Brice";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "nolann";
-        uid = 1110;
-        email = "nolann@darkone.lan";
-        name = "Nolann";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "baptiste";
-        uid = 1111;
-        email = "baptiste@darkone.lan";
-        name = "Baptiste";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "evan";
-        uid = 1112;
-        email = "evan@darkone.lan";
-        name = "Evan";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "tiesto";
-        uid = 1113;
-        email = "tiesto@darkone.lan";
-        name = "Tiesto";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "titouan";
-        uid = 1114;
-        email = "titouan@darkone.lan";
-        name = "Titouan";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "kilic";
-        uid = 1103;
-        email = "kilic@darkone.lan";
-        name = "Kilic";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "mathys";
-        uid = 1104;
-        email = "mathys@darkone.lan";
-        name = "Mathys";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "julien";
-        uid = 1105;
-        email = "julien@darkone.lan";
-        name = "Julien";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "esteban";
-        uid = 1106;
-        email = "esteban@darkone.lan";
-        name = "Esteban";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "ethan";
-        uid = 1101;
-        email = "ethan@darkone.lan";
-        name = "Ethan";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "nathael";
-        uid = 1102;
-        email = "nathael@darkone.lan";
-        name = "Nathaël";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "gponcon";
-        uid = 1001;
-        email = "gponcon@darkone.lan";
-        name = "G. Ponçon";
-        profile = "lib/homes/normal";
-      }
-      {
-        login = "tserveau";
-        uid = 1100;
-        email = "tserveau@darkone.lan";
-        name = "T. Serveau";
-        profile = "usr/homes/sn-user";
-      }
+      "diego"
+      "mathieu"
+      "brice"
+      "nolann"
+      "baptiste"
+      "evan"
+      "tiesto"
+      "titouan"
+      "kilic"
+      "mathys"
+      "julien"
+      "esteban"
+      "ethan"
+      "nathael"
+      "gponcon"
+      "tserveau"
     ];
     colmena = {
       deployment = {
@@ -1044,118 +432,22 @@
     ];
     networks = [ "sn" ];
     users = [
-      {
-        login = "diego";
-        uid = 1107;
-        email = "diego@darkone.lan";
-        name = "Diego";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "mathieu";
-        uid = 1108;
-        email = "mathieu@darkone.lan";
-        name = "Mathieu";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "brice";
-        uid = 1109;
-        email = "brice@darkone.lan";
-        name = "Brice";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "nolann";
-        uid = 1110;
-        email = "nolann@darkone.lan";
-        name = "Nolann";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "baptiste";
-        uid = 1111;
-        email = "baptiste@darkone.lan";
-        name = "Baptiste";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "evan";
-        uid = 1112;
-        email = "evan@darkone.lan";
-        name = "Evan";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "tiesto";
-        uid = 1113;
-        email = "tiesto@darkone.lan";
-        name = "Tiesto";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "titouan";
-        uid = 1114;
-        email = "titouan@darkone.lan";
-        name = "Titouan";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "kilic";
-        uid = 1103;
-        email = "kilic@darkone.lan";
-        name = "Kilic";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "mathys";
-        uid = 1104;
-        email = "mathys@darkone.lan";
-        name = "Mathys";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "julien";
-        uid = 1105;
-        email = "julien@darkone.lan";
-        name = "Julien";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "esteban";
-        uid = 1106;
-        email = "esteban@darkone.lan";
-        name = "Esteban";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "ethan";
-        uid = 1101;
-        email = "ethan@darkone.lan";
-        name = "Ethan";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "nathael";
-        uid = 1102;
-        email = "nathael@darkone.lan";
-        name = "Nathaël";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "gponcon";
-        uid = 1001;
-        email = "gponcon@darkone.lan";
-        name = "G. Ponçon";
-        profile = "lib/homes/normal";
-      }
-      {
-        login = "tserveau";
-        uid = 1100;
-        email = "tserveau@darkone.lan";
-        name = "T. Serveau";
-        profile = "usr/homes/sn-user";
-      }
+      "diego"
+      "mathieu"
+      "brice"
+      "nolann"
+      "baptiste"
+      "evan"
+      "tiesto"
+      "titouan"
+      "kilic"
+      "mathys"
+      "julien"
+      "esteban"
+      "ethan"
+      "nathael"
+      "gponcon"
+      "tserveau"
     ];
     colmena = {
       deployment = {
@@ -1197,118 +489,22 @@
     ];
     networks = [ "sn" ];
     users = [
-      {
-        login = "diego";
-        uid = 1107;
-        email = "diego@darkone.lan";
-        name = "Diego";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "mathieu";
-        uid = 1108;
-        email = "mathieu@darkone.lan";
-        name = "Mathieu";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "brice";
-        uid = 1109;
-        email = "brice@darkone.lan";
-        name = "Brice";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "nolann";
-        uid = 1110;
-        email = "nolann@darkone.lan";
-        name = "Nolann";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "baptiste";
-        uid = 1111;
-        email = "baptiste@darkone.lan";
-        name = "Baptiste";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "evan";
-        uid = 1112;
-        email = "evan@darkone.lan";
-        name = "Evan";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "tiesto";
-        uid = 1113;
-        email = "tiesto@darkone.lan";
-        name = "Tiesto";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "titouan";
-        uid = 1114;
-        email = "titouan@darkone.lan";
-        name = "Titouan";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "kilic";
-        uid = 1103;
-        email = "kilic@darkone.lan";
-        name = "Kilic";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "mathys";
-        uid = 1104;
-        email = "mathys@darkone.lan";
-        name = "Mathys";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "julien";
-        uid = 1105;
-        email = "julien@darkone.lan";
-        name = "Julien";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "esteban";
-        uid = 1106;
-        email = "esteban@darkone.lan";
-        name = "Esteban";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "ethan";
-        uid = 1101;
-        email = "ethan@darkone.lan";
-        name = "Ethan";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "nathael";
-        uid = 1102;
-        email = "nathael@darkone.lan";
-        name = "Nathaël";
-        profile = "usr/homes/sn-user";
-      }
-      {
-        login = "gponcon";
-        uid = 1001;
-        email = "gponcon@darkone.lan";
-        name = "G. Ponçon";
-        profile = "lib/homes/normal";
-      }
-      {
-        login = "tserveau";
-        uid = 1100;
-        email = "tserveau@darkone.lan";
-        name = "T. Serveau";
-        profile = "usr/homes/sn-user";
-      }
+      "diego"
+      "mathieu"
+      "brice"
+      "nolann"
+      "baptiste"
+      "evan"
+      "tiesto"
+      "titouan"
+      "kilic"
+      "mathys"
+      "julien"
+      "esteban"
+      "ethan"
+      "nathael"
+      "gponcon"
+      "tserveau"
     ];
     colmena = {
       deployment = {

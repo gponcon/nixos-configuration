@@ -6,7 +6,7 @@ use Darkone\NixGenerator\NixException;
 
 class User
 {
-    static private $uids = [];
+    static private array $uids = [];
 
     private const PROFILE_PATHS = [
         'usr/homes/%s',
@@ -16,7 +16,7 @@ class User
     private string $login;
     private int $uid;
     private string $name;
-    private string $email;
+    private ?string $email = null;
     private string $profile;
     private array $groups = [];
 
@@ -40,9 +40,9 @@ class User
         return $this;
     }
 
-    public function setEmail(string $email): User
+    public function setEmail(?string $email): User
     {
-        $this->email = $email;
+        is_null($email) || $this->email = $email;
         return $this;
     }
 
@@ -104,7 +104,7 @@ class User
         return $this->name;
     }
 
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
