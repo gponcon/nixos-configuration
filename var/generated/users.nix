@@ -3,6 +3,12 @@
 # --> DO NOT EDIT <--
 
 {
+  nixos = {
+    uid = 10000;
+    name = "NixOS User";
+    profile = "lib/homes/nix-admin";
+    groups = [ "sn-admin" ];
+  };
   darkone = {
     uid = 1000;
     email = "darkone@darkone.yt";
@@ -20,7 +26,6 @@
     profile = "lib/homes/normal";
     groups = [
       "admin"
-      "sn-admin"
       "sn"
     ];
   };

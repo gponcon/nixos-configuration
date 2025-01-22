@@ -31,6 +31,27 @@
     };
   }
   {
+    hostname = "sn-network";
+    name = "SN Network Gateway";
+    profile = "sn-network";
+    groups = [ "sn-admin" ];
+    networks = [ "sn" ];
+    users = [
+      "nixos"
+      "tserveau"
+    ];
+    colmena = {
+      deployment = {
+        tags = [
+          "group-sn-admin"
+          "user-nixos"
+          "user-tserveau"
+          "network-sn"
+        ];
+      };
+    };
+  }
+  {
     hostname = "vbox-01";
     name = "Virtual 01";
     profile = "vbox";

@@ -27,6 +27,13 @@ networks:
 # -> groups is used to select related hosts
 users:
 
+  # Generic
+  nixos:
+    uid: 10000
+    name: "NixOS User"
+    profile: "nix-admin"
+    groups: [ "sn-admin" ]
+
   # Darkone
   darkone:
     uid: 1000
@@ -38,7 +45,7 @@ users:
     uid: 1001
     name: "G. Ponçon"
     profile: "normal"
-    groups: [ "admin", "sn-admin", "sn" ]
+    groups: [ "admin", "sn" ]
 
   # Arthur
   anso:
@@ -178,11 +185,11 @@ hosts:
 #      users: [ "axelle" ]
 
     # SN gateway
-#    - hostname: "sn-network"
-#      name: "SN Network Gateway"
-#      profile: "sn-network"
-#      networks: [ "sn" ]
-#      groups: [ "sn-admin" ]
+    - hostname: "sn-network"
+      name: "SN Network Gateway"
+      profile: "sn-network"
+      networks: [ "sn" ]
+      groups: [ "sn-admin" ]
 
   # Host groups by range (generated from min to max)
   range:
