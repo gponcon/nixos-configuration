@@ -24,6 +24,14 @@ in
     boot.kernelModules = [ "coretemp" ];
     environment.systemPackages = with pkgs; [ lm_sensors ];
 
+    # suspend, sleep, hibernates are deactivated by default, we force activation
+    systemd.targets = {
+      sleep.enable = true;
+      suspend.enable = true;
+      hibernate.enable = true;
+      hybrid-sleep.enable = true;
+    };
+
     # WIP
     #hardware.fancontrol.enable = true;
 

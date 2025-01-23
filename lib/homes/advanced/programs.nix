@@ -6,12 +6,15 @@
     bat
     btop
     ccrypt
+    dos2unix
     duf
+    gawk
     htop
     jq
     lsof
     psmisc # killall, pstree, pslog, fuser...
     pv
+    rename
     rsync
     strace
     zellij
