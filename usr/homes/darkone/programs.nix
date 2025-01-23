@@ -25,10 +25,11 @@
     duf
     findutils # locate
     gparted
+    nodejs_23
     python3Full
     vscode
     zellij
-    nodejs_23
+    jetbrains.idea-ultimate
 
     # Réseau
     #nettools
