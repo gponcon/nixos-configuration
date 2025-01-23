@@ -4,6 +4,7 @@
   imports = [
     ./../minimal
     ./git.nix
+    ./programs.nix
     ./vim.nix
   ];
 }

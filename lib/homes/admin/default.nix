@@ -1,3 +1,8 @@
 # Darkone Network administrator
 
-{ imports = [ ./../advanced ]; }
+{
+  imports = [
+    ./../advanced
+    ./programs.nix
+  ];
+}
