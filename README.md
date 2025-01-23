@@ -274,36 +274,46 @@ Available recipes:
 
 ## Liste TODO
 
+### In progress
+
+- [ ] Création de noeuds avec [nixos-anywhere](https://github.com/nix-community/nixos-anywhere) + [disko](https://github.com/nix-community/disko) (wip).
+- [ ] Homepage automatique en fonction des services activés (wip).
+- [ ] Chaîne CI / CD pour la gestion de ce développement (wip).
+- [ ] Tests unitaires (wip).
+- [ ] Documentation FR et EN (wip).
+
+### TODO
+
+- [ ] Déploiements avec Just (build regular + apply colmena).
+- [ ] Passerelle type (dhcp, dns, ap, firewall, adguard, AD, VPN).
+- [ ] Services pré-configurés pour serveurs (nextcloud, etc.).
+- [ ] Gestion centralisée des utilisateurs avec [lldap](https://github.com/lldap/lldap).
+- [ ] Refactoring des commentaires de code en anglais.
+- [ ] Intégration de [nixvim](https://nix-community.github.io/nixvim/).
+- [ ] Gestion du secure boot avec [lanzaboote](https://github.com/nix-community/lanzaboote).
+- [ ] Commandes d'introspection pour lister les hosts, users, modules activés par host, etc.
+- [ ] Attributions d'emails automatiques par réseaux.
+- [ ] Serveur de mails.
+- [ ] Générateur / gestionnaire d'UIDs (pour les grands réseaux).
+- [ ] Générateur automatique de documentation à partir des sources.
+- [ ] just clean: détecter les fails, les afficher et s'arrêter.
+
+### DONE
+
 - [x] Architecture modulaire.
 - [x] Configuration colmena.
-- [ ] Déploiements avec Just (build regular + apply colmena).
+- [x] Configuration transversale générale.
+- [x] Générateur de configuration nix statique.
 - [x] Modules système de base (hardware, i18n, doc, network, performances).
 - [x] Modules console de base (zsh, git, shell).
 - [x] Modules graphic de base (gnome, jeux de paquetages).
 - [x] Hosts préconfigurés : minimal, serveur, desktop, laptop.
 - [x] [Justfile](https://github.com/casey/just) pour checker et fixer les sources.
-- [ ] Création de noeuds avec [nixos-anywhere](https://github.com/nix-community/nixos-anywhere) + [disko](https://github.com/nix-community/disko) (wip).
-- [ ] Homepage automatique en fonction des services activés (wip).
-- [x] Configuration transversale générale (wip).
-- [ ] Chaîne CI / CD pour la gestion de ce développement (wip).
-- [ ] Passerelle type (dhcp, dns, ap, firewall, adguard, AD, VPN).
 - [x] Postes types (bureautique, développeur, administrateur, enfant).
-- [ ] Services pré-configurés pour serveurs (nextcloud, etc.).
-- [ ] Gestion centralisée des utilisateurs avec [lldap](https://github.com/lldap/lldap).
 - [x] Builder d'[ISOs d'installation](https://github.com/nix-community/nixos-generators) pour les machines à intégrer.
-- [ ] Refactoring des commentaires de code en anglais.
-- [ ] Documentation FR et EN (wip).
-- [ ] Intégration de [nixvim](https://nix-community.github.io/nixvim/).
-- [ ] Gestion du secure boot avec [lanzaboote](https://github.com/nix-community/lanzaboote).
-- [x] Générateur de configuration nix statique (wip).
-- [ ] Commandes d'introspection pour lister les hosts, users, modules activés par host, etc.
-- [ ] Tests unitaires (wip).
 - [x] Multi-réseaux.
-- [ ] Attributions d'emails automatiques par réseaux.
-- [ ] Serveur de mails.
-- [x] Fixer les UIDs.
-- [ ] Générateur / gestionnaire d'UIDs (pour les grands réseaux).
-- [ ] Normaliser les données générées en séparant hosts et users.
+- [x] Fixer les UIDs (des users).
+- [x] Normaliser les données générées en séparant hosts et users.
 
 ## Idées en cours d'étude
 
