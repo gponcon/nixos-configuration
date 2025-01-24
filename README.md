@@ -98,7 +98,7 @@ just generate
 just clean
 ```
 
-![Darkone NixOS Framework Generator](doc/arch.webp)
+![Darkone NixOS Framework Generator](doc/src/assets/arch.webp)
 
 Son rôle est de générer une configuration statique pure à partir d'une définition de machines (hosts), utilisateurs et groupes en provenance de diverses sources (déclarations statiques, ldap, etc. configurées dans `usr/config.yaml`). La configuration nix générée est intégrée au dépôt afin d'être fixée et utilisée par le flake.
 
